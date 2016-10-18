@@ -1,6 +1,7 @@
 
 function MySceneGraph(filename, scene) {
 	this.loadedOk = null;
+	
 
 	// Establish bidirectional references between scene and graph
 	this.scene = scene;
@@ -12,12 +13,13 @@ function MySceneGraph(filename, scene) {
 	this.illumination;
 	this.omni = [];
 	this.spot = [];
-	this.texture = [];
-	this.material = [];
-	this.transformations = [];
+	this.texture = {};
+	this.material = {};
+	this.transformations = {};
 	this.primitives = [];
 	this.components = [];
-	this.nodes = {};
+	this.node = {};
+	
 		
 	// File reading 
 	this.reader = new CGFXMLreader();
@@ -39,44 +41,96 @@ MySceneGraph.prototype.onXMLReady=function(){
 	var rootElement = this.reader.xmlDoc.documentElement;
 	
 	// Here should go the calls for different functions to parse the various blocks
-	this.parseScene(rootElement);
-	this.parseViews(rootElement);
-	this.parseIllumination(rootElement);
-	this.parseLights(rootElement);
-	this.parseTextures(rootElement);
-	this.parseMaterial(rootElement);
-	this.parseTransformations(rootElement);
-	this.parsePrimitives(rootElement);
-	this.parseComponents(rootElement);
-	//this.readGraph();
+	if(this.correctOrder(rootElement))
+		return;
 	
-	this.loadedOk=true;
+	if(this.parseScene(rootElement))
+		return;
+	
+	if(this.parseViews(rootElement))
+		return ;
+	
+	if(this.parseIllumination(rootElement))
+		return;
+	
+	if(this.parseLights(rootElement))
+		return;
+	
+	if(this.parseTextures(rootElement))
+		return;
+	
+	if(this.parseMaterial(rootElement))
+		return;
+	
+	if(this.parseTransformations(rootElement))
+		return;
+	
+	if(this.parsePrimitives(rootElement))
+		return;
+	
+	if(this.parseComponents(rootElement))
+		return;
 	
 	// As the graph loaded ok, signal the scene so that any additional initialization depending on the graph can take place
 	
 	this.scene.onGraphLoaded();
-	
+	this.loadedOk=true;
 };
 	
 /*
  * Callback to be executed on any read error
  */
-MySceneGraph.prototype.onXMLError=function (message) {
-	console.error("XML Loading Error: "+message);	
-	this.loadedOk=false;
-};
+ MySceneGraph.prototype.correctOrder=fucntion(rootElement){		
+	/*	check the correct order of DSX	*/
+	 
+	var childs = rootElement.children;
+	
+	if(childs.length != 9){
+		console.error("Number Tags = 9");
+		return 1;
+	}
+	
+	if (childs[0].tagName != "scene")
+        console.warn("scene is not the first element on the DSX Tag");
+
+    if (childs[1].tagName != "views")
+        console.warn("views is not the second element on the DSX Tag");
+
+    if (childs[2].tagName != "illumination")
+        console.warn("illumination is not the third element on the DSX Tag");
+
+    if (childs[3].tagName != "lights")
+        console.warn("lights is not the fourth element on the DSX Tag");
+
+    if (childs[4].tagName != "textures")
+        console.warn("textures is not the fifth element on the DSX Tag");
+
+    if (childs[5].tagName != "materials")
+        console.warn("materials is not the sixth element on the DSX Tag");
+
+    if (childs[6].tagName != "transformations")
+        console.warn("transformations is not the seventh element on the DSX Tag");
+
+    if (childs[7].tagName != "primitives")
+        console.warn("primitives is not the oith element on the DSX Tag");
+
+    if (childs[8].tagName != "components")
+        console.warn("components is not the ninth element on the DSX Tag");
+
+    return 0;
+ }
 
 MySceneGraph.prototype.parseScene=function(rootElement){
 
 	var scene = rootElement.getElementsByTagName('scene')[0];
 	if(scene == null){
 		this.onXMLError("'scene' element is missing.");
+		return 1;
 	}
 	
 	this.rootID = this.reader.getString(scene, 'root');
-	this.axis_length = this.reader.getFloat(scene, 'axis_length');
-
 	
+	this.axis_length = this.reader.getFloat(scene, 'axis_length');	
 };
 
 MySceneGraph.prototype.parseViews=function(rootElement){
@@ -266,32 +320,32 @@ MySceneGraph.prototype.parseLights=function(rootElement){
 		//console.log("specular: " + specular.r + " " + specular.g + " " + specular.b + " " + specular.a + "\n");
 		}
 	
-		this.omni[i] = new SpotLight(new Lights(id,enabled,ambient,diffuse,specular), angle, exponent, target, location); 
+		this.omni[i] = new SpotLight(new Lights(id,enabled,ambient,diffuse,specular), angle * Math.PI/180.0, exponent, target, location); 
 	}
 };
 
 MySceneGraph.prototype.parseTextures = function(rootElement){
+	var textures, textureElem;
 	var textures = rootElement.getElementsByTagName('textures')[0];
 	if(textures == null){
 		this.onXMLError("'textures' element is missing.");
 	}
 	
 	var textureTemp = textures.getElementsByTagName('texture');
-	this.texture = new Array(textureTemp.length);
+
 	
-	var id, file, length_s, length_t;
-	for(var i=0; i < textureTemp.length; i++)
+	var id, texturefile, length_s, length_t;
+	for(var i=0; i<textureTemp.length; i++)//(var textureElem of textureTemp)
 	{
 		//console.log("Iteracao " + i + "\n");
 		
 		id = this.reader.getString(textureTemp[i],'id');
-		file = this.reader.getString(textureTemp[i],'file');
+		texturefile = new CGFtexture(this.scene, this.reader.getString(textureTemp[i], 'file'));
 		length_s=this.reader.getFloat(textureTemp[i],'length_s');
 		length_t=this.reader.getFloat(textureTemp[i],'length_t');
 		
-		//console.log("id/file/length_s/length_t: " + id + "/-- " + file + "/-- " + length_s + "/-- " + length_t + "\n");
-	
-		this.texture[i] = new Texture(id,file,length_s,length_t); 
+		
+		this.texture[id] = new Texture(id,texturefile,length_s,length_t); 
 	}	
 };
 
@@ -302,65 +356,48 @@ MySceneGraph.prototype.parseMaterial = function(rootElement){
 	}
 	
 	var materialTemp = materials.getElementsByTagName('material');
-	this.material = new Array(materialTemp.length);
 	
 	var id, emission, ambient, diffuse, specular, shininess;
 	for(var i=0; i < materialTemp.length; i++)
 	{
-		//console.log("Iteracao: " + i + "\n");
 		
 		id = this.reader.getString(materialTemp[i],'id');
-		
-		//console.log("id: " + id + "\n");
-		
+	
 		var elememission = materialTemp[i].getElementsByTagName('emission')[0];
-		if(elememission != null){
-			emission = new getRGBA(	this.reader.getFloat(elememission,'r'),
+		emission = new getRGBA(	this.reader.getFloat(elememission,'r'),
 								this.reader.getFloat(elememission,'g'),
 								this.reader.getFloat(elememission,'b'),
 								this.reader.getFloat(elememission,'a'));
 								
-		//console.log("emission: " + emission.r + " " + emission.g + " " + emission.b + " " + emission.a + "\n");
-		}
-		
 		var elemambient = materialTemp[i].getElementsByTagName('ambient')[0];
-		if(elemambient != null){
-			ambient = new getRGBA(	this.reader.getFloat(elemambient,'r'),
+		ambient = new getRGBA(	this.reader.getFloat(elemambient,'r'),
 									this.reader.getFloat(elemambient,'g'),
 									this.reader.getFloat(elemambient,'b'),
 									this.reader.getFloat(elemambient,'a'));
 								
-		//console.log("ambient: " + ambient.r + " " + ambient.g + " " + ambient.b + " " + ambient.a + "\n");
-		}
-		
 		var elemdiffuse = materialTemp[i].getElementsByTagName('diffuse')[0];
-		if(elemdiffuse == null){
-			diffuse = new getRGBA(	this.reader.getFloat(elemdiffuse,'r'),
+		diffuse = new getRGBA(	this.reader.getFloat(elemdiffuse,'r'),
 								this.reader.getFloat(elemdiffuse,'g'),
 								this.reader.getFloat(elemdiffuse,'b'),
 								this.reader.getFloat(elemdiffuse,'a'));
 								
-		//console.log("diffuse: " + diffuse.r + " " + diffuse.g + " " + diffuse.b + " " + diffuse.a + "\n");
-		}
-			
 		var elemspecular = materialTemp[i].getElementsByTagName('specular')[0];
-		if(elemspecular == null){
-			specular = new getRGBA(	this.reader.getFloat(elemspecular,'r'),
+		specular = new getRGBA(	this.reader.getFloat(elemspecular,'r'),
 								this.reader.getFloat(elemspecular,'g'),
 								this.reader.getFloat(elemspecular,'b'),
 								this.reader.getFloat(elemspecular,'a'));
-								
-		//console.log("specular: " + specular.r + " " + specular.g + " " + specular.b + " " + specular.a + "\n");
-		}
 		
 		var elemshininess = materialTemp[i].getElementsByTagName('shininess')[0];
-		if(elemshininess == null){
-			shininess = this.reader.getFloat(elemshininess, 'value');
+		shininess = this.reader.getFloat(elemshininess, 'value');
 		
-		//console.log("shininess: " + shininess + "\n");
-		}
+		var appearance = new CGFappearance(this.scene);
+		appearance.setEmission(emission.r, emission.g, emission.b, emission.a);
+        appearance.setAmbient(ambient.r, ambient.g, ambient.b, ambient.a);
+        appearance.setDiffuse(diffuse.r, diffuse.g, diffuse.b, diffuse.a);
+        appearance.setSpecular(specular.r, specular.g, specular.b, specular.a);
+        appearance.setShininess(shininess);
 		
-		this.material[i] = new Material(id,emission,ambient,diffuse,specular,shininess);
+		this.material[id] = appearance;
 	}
 };
 
@@ -380,6 +417,7 @@ MySceneGraph.prototype.parseTransformations = function(rootElement){
 		transformationElem = transformsTemp[i].children;
 		this.transformations[i] = this.getMatrix(transformationElem);		
 	}
+	console.log(this.transformations);
 }
 
 MySceneGraph.prototype.getMatrix = function(transformationElem){
@@ -446,10 +484,10 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement){
 		primitiveName = primitiveElem.tagName;
 		
 		var prim = this.getPrimitive(primitiveName, primitiveElem);
-		if(prim != null)
-			this.primitives[i] = prim;
-	
-		//ADICIONAR AOS NODES
+		
+		
+		this.node[id] = prim;
+		
 	}
 }
 
@@ -464,7 +502,7 @@ MySceneGraph.prototype.getPrimitive = function(primitiveName, primitiveElem){
 								this.reader.getFloat(primitiveElem, 'y2'));
 				
 			prim = new MyRectangle(this.scene, p1,p2);			
-			
+
 			break;	
 		case 'triangle':
 			var p1 = new getXYZ(this.reader.getFloat(primitiveElem, 'x1'),
@@ -512,11 +550,10 @@ MySceneGraph.prototype.getPrimitive = function(primitiveName, primitiveElem){
 			this.onXMLError("load 'primitives' fail");			
 			return null;
 		
-		return prim;
+		
 	}
+	return prim;
 }
-
-
 
 MySceneGraph.prototype.parseComponents = function(rootElement){
 	var componentsElems = rootElement.getElementsByTagName('components')[0];
@@ -532,10 +569,9 @@ MySceneGraph.prototype.parseComponents = function(rootElement){
 	for(var i=0; i<componentsTemp.length; i++){
 		id = this.reader.getString(componentsTemp[i],'id');
 		
-		//console.log("Iteracao: " + i + "; component id: " + id + "\n");
-		
 		var transfTemp = componentsTemp[i].getElementsByTagName('transformation')[0];
 		var transformationRef = transfTemp.getElementsByTagName('transformationref');
+		
 		if(transformationRef.length != 0){
 			transf = this.reader.getString(transformationRef[0],'id');
 		}
@@ -552,15 +588,12 @@ MySceneGraph.prototype.parseComponents = function(rootElement){
 		var mat = new Array(materialrefs.length);
 		
 		for(var k=0; k<materialrefs.length; k++){
-			mat[k] = this.reader.getString(materialrefs[i],'id');
-			
-			//console.log("Material id: " + mat[k] + "\n");
+			mat[k] = this.reader.getString(materialrefs[k],'id');
 		}
 		
 		//textures
 		var texturesTemp = componentsTemp[i].getElementsByTagName('texture')[0];
 		text = this.reader.getString(texturesTemp,'id');
-		//console.log("Texture id: " + text + "\n");
 		
 		//children
 		var childrensTemp = componentsTemp[i].getElementsByTagName('children')[0];
@@ -576,25 +609,26 @@ MySceneGraph.prototype.parseComponents = function(rootElement){
 			childrens[t] = this.reader.getString(primitivName[t-componentName.length],'id');
 		}
 		
-		//ADICIONAR AOS NODES
+		this.node[id] = new Component(id, transf, mat, text, childrens);
+		
+		console.log(mat);
 	}
 }
 
-//FALTA CARREGAR E VISITAR OS GRAFOS
-MySceneGraph.prototype.Graph = function(){
-	/*
-		FAZER ESTA FUNÇÃO QUE VAI CHAMAR A FUCAO DE VISITAR O GRAFO
-	*/
+MySceneGraph.prototype.displayGraph = function()
+{
+	var stackTextures = new Stack();
+	var stackMaterials = new Stack();
+	
+	this.parseGraph(this.root, stackMaterials, stackTextures);
 }
 
-MySceneGraph.prototype.readGraph = function(){
-	/*
-		FAZER ESTA FUNÇÃOQ UE VAI VISITAR TODOS OS SEUS FILHOS, 
-		PARA CADA FILHO VAI:
-			SE FOR COMPONENTE:
-				->VAI FAZER CHAMADA RECURSIVA PARA VOLTAR A LER A COMPONENTE, POIS PODEMOS TER COMPONENTES
-				DENTRO DE COMPONENTES.
-			SE FOR PRIMITIVA:
-				->PODEMOS TER PRIMITIVAS COMO FILHOS DIRETOS DO ROOT E CASO HAJAM, JÁ SE LÊ DIRETAMENTE
-	*/
+MySceneGraph.prototype.parseGraph = function(root, stackMaterials, stackTextures){
+
 }
+
+MySceneGraph.prototype.onXMLError=function (message) {
+	console.error("XML Loading Error: "+message);	
+	this.loadedOk=false;
+};
+

@@ -87,11 +87,11 @@ class SpotLight extends Lights{
 
 
 class Texture{
-	constructor(id, file, lengths, lengtht){
+	constructor(id, texturefile, length_s, length_t){
 		this.id = id;
-		this.file = file;
-		this.length_s = lengths;
-		this.length_t = this.lengtht;
+		this.texturefile = texturefile;
+		this.length_s = length_s;
+		this.length_t = length_t;
 	}
 }
 
@@ -104,4 +104,34 @@ class Material{
 		this.specular = specular;
 		this.shininess = shininess;
 	}
+}
+
+class Component{
+	constructor(idComponent, idTransformation,idMaterial, idTexture, idChildren){
+		this.idComponent = idComponent;
+		this.idTransformation = idTransformation;
+		this.idMaterial = idMaterial;
+		this.idTexture = idTexture;
+		this.idChildren = idChildren;
+	}
+}
+
+class Stack{
+	constructor(){
+		this.stack = [];
+	}
+
+	push(stackElement)
+	{
+      this.stack.push(stackElement);
+    }
+
+    pop()
+    {
+    	return this.stack.pop();
+    }
+    top()
+    {
+    	return this.stack[this.stack.length - 1];
+    }
 }

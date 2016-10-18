@@ -12,6 +12,8 @@ XMLscene.prototype.init = function (application) {
     this.initCameras();
 
     this.initLights();
+	
+	this.enableTextures(true);
 
     this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
@@ -21,9 +23,10 @@ XMLscene.prototype.init = function (application) {
     this.gl.depthFunc(this.gl.LEQUAL);
 
 	this.axis=new CGFaxis(this);
+	this.lightsStatus;
+  	this.viewIndex=0;
+  	this.IndexMaterials=0;
 	
-	
-	this.triangle = new MyTriangle(this, new getXY(0,0), new getXY(1,1), new getXY(1,1));
 };
 
 XMLscene.prototype.initLights = function () {
@@ -79,7 +82,7 @@ XMLscene.prototype.display = function () {
 	// This is one possible way to do it
 	if (this.graph.loadedOk)
 	{
-		
+		this.graph.displayGraph();
 		this.lights[0].update();
 	};	
 };

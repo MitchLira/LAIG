@@ -21,15 +21,15 @@
  MyRectangle.prototype.initBuffers = function() {
  	this.vertices = [
  	this.p1.x,this.p1.y,0,
- 	this.p1.x,this.p2.y,0,
+ 	this.p2.x,this.p1.y,0,
  	this.p2.x,this.p2.y,0,
- 	this.p2.x,this.p1.x,0
+ 	this.p1.x,this.p2.y,0
 
  	];
 
  	this.indices = [
- 	3, 1, 0, 
- 	2, 1, 3,
+ 	0,1,2,
+ 	2, 3, 0,
  	
 
  	];
@@ -45,10 +45,10 @@
 
  
  	this.texCoords=[
- 	this.maxS, this.maxT,
- 	this.minS, this.maxT,
- 	this.maxS, this.minT,
- 	this.minS, this.minT
+ 	    this.minS, this.maxT,
+        this.maxS, this.maxT,
+        this.maxS, this.minT,
+        this.minS, this.minT
  	
  	];
 
