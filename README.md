@@ -1,3 +1,3 @@
 # LAIG
 
-svsverdvdvd
+Group: Miguel Lira(@MitchLira) ; Miriam Gonçalves(@miriamcmcg);
