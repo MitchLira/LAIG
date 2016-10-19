@@ -59,21 +59,21 @@
         <!-- Deve existir um ou mais blocos "omni" ou "spot" -->
         <!-- Os identificadores "id" nao podem ser repetidos -->
         <omni id="omni1" enabled="1" >
-            <location x="3" y="3" z="3" w="0.2" />
+            <location x="26" y="26" z="56" w="0.2" />
             <ambient r="0" g="0" b="0" a="1" />
             <diffuse r="1" g="1" b="1" a="1" />
             <specular r="1" g="1" b="1" a="1" />
         </omni>
 
         <omni id="omni2" enabled="0" >
-            <location x="1" y="3" z="5" w="0.2" />
+            <location x="0" y="100" z="100" w="0.2" />
             <ambient r="0" g="0" b="0" a="1" />
             <diffuse r="1" g="1" b="1" a="1" />
             <specular r="1" g="1" b="1" a="1" />
         </omni>
 
         <omni id="omni3" enabled="1" >
-            <location x="2" y="5" z="2" w="0.2" />
+            <location x="-26" y="26" z="56" w="0.2" />
             <ambient r="0" g="0" b="0" a="1" />
             <diffuse r="1" g="1" b="1" a="1" />
             <specular r="1" g="1" b="1" a="1" />
@@ -115,6 +115,8 @@
 		<texture id="porta" file="resources\\images\\porta.png" length_s="1.0" length_t="1.0" />
 		<texture id="stone" file="resources\\images\\sidewalk.png" length_s="1.0" length_t="1.0" />
 		<texture id="sunny" file="resources\\images\\sun.png" length_s="1.0" length_t="1.0" />
+		
+		<texture id="terra" file="resources\\images\\terra.png" length_s="1.0" length_t="1.0" />
     </textures>
 
 
@@ -201,20 +203,18 @@
             <cylinder base="0.5" top="0.5" height="1" slices="50" stacks="20" />
         </primitive>
 
-    <primitive id="cone">
-            <cylinder base="0" top="0.5" height="1" slices="50" stacks="20" />
-        </primitive>
+		<primitive id="cone">
+			<cylinder base="0" top="0.5" height="1" slices="50" stacks="20" />
+		</primitive>
 
 		<primitive id="sphere">
-            <sphere radius="0.5" slices="40" stacks="40" />
-        </primitive>
+			<sphere radius="0.5" slices="40" stacks="40" />
+		</primitive>
 
 		<primitive id="torus">
-            <torus inner="0.5" outer="1" slices="40" loops="40" />
-        </primitive>
-
-
-
+			<torus inner="0.5" outer="1" slices="40" loops="40" />
+		</primitive>
+	
     </primitives>
 
 
@@ -264,8 +264,6 @@
 				<componentref id="casa" />
                 <componentref id="garden" />
 				<componentref id="sky" />
-				
-				
 
             </children>
 
@@ -296,7 +294,7 @@
 				<componentref id= "tree" />
 				<componentref id="fencefront" />
 				<componentref id="sidewalk" />
-				
+				<componentref id="terra" />
 				
             </children>
 
@@ -322,6 +320,290 @@
             <texture id="relva" />
 
 
+            <children>
+                <primitiveref id= "rectangle" />
+            </children>
+
+        </component>	
+		
+		<component id="terra">
+
+            <!-- bloco "transformation" obrigatorio -->
+			<transformation>
+				<translate x="25" y="2" z="25" />
+				<scale x="6" y="4" z="6" /> 
+				<rotate axis="x" angle="-90" /> 
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="terra" />
+
+
+            <children>
+                <primitiveref id= "torus" />
+            </children>
+
+        </component>
+		
+		<component id="casa">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			<translate x="-6" y="0" z="15"/> 
+			<scale x="5" y="5" z="5"/>
+			<translate x="-2" y="0" z="0"/>
+			 
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="tinta" />
+
+
+            <children>
+                <componentref id= "parede1" />
+				<componentref id= "parede2" />
+				<componentref id= "parede3" />
+				<componentref id= "parede4" />
+				<componentref id= "parede5" />
+				<componentref id= "parede6" />
+				<componentref id= "telhado1" />
+				<componentref id= "telhado2" />
+				
+            </children>
+
+        </component>
+		
+		<component id="parede1">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  <translate x="0" y="0" z="0" />
+			  <scale x="1" y="5" z="4" />
+ 			  <rotate axis="y" angle="-90" />
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="inherit" />
+
+			
+            <children>
+                <primitiveref id= "rectangle" />
+				<componentref id= "window1" />
+            </children>
+
+        </component>
+		
+		<component id="parede2">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  <translate x="0" y="0" z="4" />
+ 			  <scale x="4" y="5" z="1" />
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="inherit" />
+
+			
+            <children>
+                <primitiveref id= "rectangle" />
+				<componentref id= "door" />
+            </children>
+
+        </component>
+		
+		<component id="parede3">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+				<scale x="4" y="5" z="1" />
+			  <translate x="0" y="1" z="0" />
+			  <rotate axis="x" angle="-180" />
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="inherit" />
+
+			
+            <children>
+                <primitiveref id= "rectangle" />
+            </children>
+
+        </component>
+		
+		<component id="parede4">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  <translate x="4" y="0" z="0" />
+			  <scale x="1" y="5" z="4" />
+			  <translate x="0" y="0" z="1" />
+			  <rotate axis="y" angle="90" />
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="inherit" />
+
+			
+            <children>
+                <primitiveref id= "rectangle" />
+				<componentref id= "window2" />
+            </children>
+
+        </component>	
+		
+		<component id="parede5">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  <translate x="0" y="5" z="4" />
+			  <scale x="4" y="1" z="1" />
+			 
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="inherit" />
+
+			
+            <children>
+                <primitiveref id= "triangle" />
+            </children>
+
+        </component>		
+		
+		<component id="parede6">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  <translate x="4" y="5" z="0" />
+			  <rotate axis="y" angle="180" />
+			  <scale x="4" y="1" z="1" />
+			 
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="inherit" />
+
+			
+            <children>
+                <primitiveref id= "triangle" />
+            </children>
+
+        </component>
+		
+		<component id="telhado1">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  
+			  <translate x="4.5" y="4.8" z="0" />
+			  <rotate axis="z" angle="65" />
+			  <scale  x="1" y="2.75" z="4" />
+			  <translate x="0" y="0" z="1" />
+			  <rotate axis="y" angle="90" />
+			  
+			 
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="telha" />
+
+			
+            <children>
+                <primitiveref id= "rectangle" />
+            </children>
+
+        </component>
+	    
+		<component id="telhado2">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  
+			  
+			  <translate x="2" y="6" z="0" />
+			  <rotate axis="z" angle="-244" />
+			  <scale  x="1" y="2.75" z="4" />
+			  <translate x="0" y="0" z="1" />
+			  <rotate axis="y" angle="90" />
+			  
+			 
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="telha" />
+
+			
             <children>
                 <primitiveref id= "rectangle" />
             </children>
@@ -440,7 +722,7 @@
 			<rotate axis="z" angle="20" />
 			  <rotate axis="y" angle="35" />
 			  
-			  <translate x="1" y="2" z="0" />
+			  <translate x="0.8" y="2" z="0" />
 			  <scale x="0.5" y="0.5" z="2" />
 
             </transformation>
@@ -550,10 +832,6 @@
 				<componentref id= "sunray7" />
 				<componentref id= "sunray8" />
 				<componentref id= "sunray9" />
-
-				
-
-				
 				
             </children>
 
@@ -1400,264 +1678,6 @@
             </children>
 
         </component>		
-		
-		<component id="casa">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			<translate x="-6" y="0" z="15"/> 
-			<scale x="5" y="5" z="5"/>
-			<translate x="-2" y="0" z="0"/>
-			 
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="tinta" />
-
-
-            <children>
-                <componentref id= "parede1" />
-				<componentref id= "parede2" />
-				<componentref id= "parede3" />
-				<componentref id= "parede4" />
-				<componentref id= "parede5" />
-				<componentref id= "parede6" />
-				<componentref id= "telhado1" />
-				<componentref id= "telhado2" />
-				
-            </children>
-
-        </component>
-		
-		<component id="parede1">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			  <translate x="0" y="0" z="0" />
-			  <scale x="1" y="5" z="4" />
- 			  <rotate axis="y" angle="-90" />
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="inherit" />
-
-			
-            <children>
-                <primitiveref id= "rectangle" />
-				<componentref id= "window1" />
-            </children>
-
-        </component>
-		
-		<component id="parede2">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			  <translate x="0" y="0" z="4" />
- 			  <scale x="4" y="5" z="1" />
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="inherit" />
-
-			
-            <children>
-                <primitiveref id= "rectangle" />
-				<componentref id= "door" />
-            </children>
-
-        </component>
-		
-		<component id="parede3">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-				<scale x="4" y="5" z="1" />
-			  <translate x="0" y="1" z="0" />
-			  <rotate axis="x" angle="-180" />
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="inherit" />
-
-			
-            <children>
-                <primitiveref id= "rectangle" />
-            </children>
-
-        </component>
-		
-		<component id="parede4">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			  <translate x="4" y="0" z="0" />
-			  <scale x="1" y="5" z="4" />
-			  <translate x="0" y="0" z="1" />
-			  <rotate axis="y" angle="90" />
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="inherit" />
-
-			
-            <children>
-                <primitiveref id= "rectangle" />
-				<componentref id= "window2" />
-            </children>
-
-        </component>	
-		
-		<component id="parede5">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			  <translate x="0" y="5" z="4" />
-			  <scale x="4" y="1" z="1" />
-			 
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="inherit" />
-
-			
-            <children>
-                <primitiveref id= "triangle" />
-            </children>
-
-        </component>		
-		
-		<component id="parede6">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			  <translate x="4" y="5" z="0" />
-			  <rotate axis="y" angle="180" />
-			  <scale x="4" y="1" z="1" />
-			 
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="inherit" />
-
-			
-            <children>
-                <primitiveref id= "triangle" />
-            </children>
-
-        </component>
-		
-		<component id="telhado1">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			  
-			  <translate x="4.5" y="4.8" z="0" />
-			  <rotate axis="z" angle="65" />
-			  <scale  x="1" y="2.75" z="4" />
-			  <translate x="0" y="0" z="1" />
-			  <rotate axis="y" angle="90" />
-			  
-			 
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="telha" />
-
-			
-            <children>
-                <primitiveref id= "rectangle" />
-            </children>
-
-        </component>
-	    
-		<component id="telhado2">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			  
-			  
-			  <translate x="2" y="6" z="0" />
-			  <rotate axis="z" angle="-244" />
-			  <scale  x="1" y="2.75" z="4" />
-			  <translate x="0" y="0" z="1" />
-			  <rotate axis="y" angle="90" />
-			  
-			 
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="telha" />
-
-			
-            <children>
-                <primitiveref id= "rectangle" />
-            </children>
-
-        </component>
 	
 	</components>
 
