@@ -30,8 +30,6 @@
  	this.indices = [
  	0,1,2,
  	2, 3, 0,
- 	
-
  	];
 
  	this.primitiveType = this.scene.gl.TRIANGLES;

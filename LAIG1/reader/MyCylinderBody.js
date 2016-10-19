@@ -2,16 +2,17 @@
  * MyCylinderBody
  * @constructor
  */
- function MyCylinderBody(scene, slices, stacks) {
+ function MyCylinderBody(scene, base, top, height, slices, stacks) {
  	CGFobject.call(this,scene);
 	
+	
+	this.base = base;
+	this.top = top;
+	this.height = height;
 	this.slices = slices;
 	this.stacks = stacks;
 
-	this.patchSlices = 1/this.slices;
-	this.patchStacks = 1/this.stacks;
-
- 	this.initBuffers();
+	this.initBuffers();
  };
 
  MyCylinderBody.prototype = Object.create(CGFobject.prototype);
@@ -19,61 +20,46 @@
 
  MyCylinderBody.prototype.initBuffers = function() {
 
-	
-	this.vertices = new Array();
-	this.indices = new Array();
-	this.normals = new Array();
-	this.texCoords= new Array();
- 
-	
-	var sCoord = 0;
-	var tCoord = 0;
-	var ang = (2*Math.PI) / this.slices;
 
-	for (i = 0; i < this.slices; i++) {
-		this.vertices.push(Math.cos(i*ang), Math.sin(i*ang), 0);
-		this.normals.push(Math.cos(i*ang), Math.sin(i*ang), 0.0);
-		this.texCoords.push(sCoord, tCoord);
-		sCoord += this.patchSlices;
+	this.vertices = [];
+	this.indices = [];
+	this.normals = [];
+	this.texCoords = [];
+
+
+	var thetha = (2*Math.PI) / this.slices;
+	var zRatio = this.height / this.stacks;
+	var radiusRatio = (this.top - this.base) / this.stacks;
+
+
+	for (var stack = 0; stack <= this.stacks; stack++) {
+		var z = stack * zRatio;
+		var radius = this.top - stack * radiusRatio;
+
+		for (var slice = 0; slice <= this.slices; slice++) {
+			var x = radius * Math.cos(slice * thetha);
+			var y = radius * Math.sin(slice * thetha);
+			var s = 1 - (stack / this.stacks);
+			var t = 1 - (slice / this.slices);
+
+			this.vertices.push(x, y, z);
+			this.normals.push(x, y, 0);
+			this.texCoords.push(s, t);
 		}
-	
-
-	var top = this.slices;
-	var bottom = 0;
-
-	for (k = 1; k <= this.stacks; k++) {
-		this.vertices.push(Math.cos(0), Math.sin(0), k/this.stacks);				
-		this.normals.push(Math.cos(0), Math.sin(0), 0.0);
-		tCoord += this.patchStacks;
-		sCoord = 0;
-		 this.texCoords.push(sCoord, tCoord);
-		for (i = 1; i < this.slices; i++) {
-
-			this.vertices.push(Math.cos(i*ang), Math.sin(i*ang), k/this.stacks);
-			this.normals.push(Math.cos(i*ang), Math.sin(i*ang), 0.0);
-			
-
-			sCoord += this.patchSlices;
-			this.texCoords.push(sCoord, tCoord);
-
-			this.indices.push(top);
-			this.indices.push(bottom+1);
-			this.indices.push(top+1);
-			this.indices.push(bottom);
-			this.indices.push(bottom+1);
-			this.indices.push(top);
-
-			top++;
-			bottom++;
-		}
-		top++;
-		bottom++;
-	
-		this.indices.push(top - 1, bottom - this.slices, top - this.slices);
-		this.indices.push(bottom - 1, bottom - this.slices, top - 1);
 	}
 
 
- 	this.primitiveType = this.scene.gl.TRIANGLES;
- 	this.initGLBuffers();
+	for (var stack = 0; stack < this.stacks; stack++) {
+		for (var slice = 0; slice < this.slices; slice++) {
+			var first = (stack * (this.slices + 1)) + slice;
+			var second = first + this.slices + 1;
+
+			this.indices.push(first, second + 1, second);
+			this.indices.push(first, first + 1, second + 1);
+		}
+	}
+
+
+	this.primitiveType = this.scene.gl.TRIANGLES;
+	this.initGLBuffers();
  };

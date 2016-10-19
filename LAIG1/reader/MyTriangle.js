@@ -24,7 +24,7 @@
  	];
 
  	this.indices = [
-		2, 1, 0, 
+		0, 1, 2, 
  	];
 
  	this.primitiveType = this.scene.gl.TRIANGLES;

@@ -21,7 +21,6 @@ class getXYZW{
 		this.w = w;
 	}
 };
-
 class getRGBA{
 	constructor(r,g,b,a){
 		this.r = r;
@@ -31,72 +30,38 @@ class getRGBA{
 	}
 }
 
-class Illumination{
-	constructor(doublesided, local, ambient, background){
-		this.doublesided = doublesided;
-		this.local = local;
-		this.ambient = ambient;	
-		this.background = background;
-	}
-};
 
-class Lights{
-	constructor(id, enabled, ambient, diffuse, specular){
-		this.id= id;
-		this.enabled = enabled;
-		this.ambient = ambient;
-		this.diffuse = diffuse;
-		this.specular = specular;
-	}
-};
 
-class OmniLight extends Lights{
-	constructor(light,location){
-		super(light.id, light.enable, light.ambient, light.diffuse, light.specular);
-		this.location = location;
-	}
-};
 
-class SpotLight extends Lights{
-	constructor(light, angle, exponent, target, location){
-		super(light.id, light.enable, light.ambient, light.diffuse, light.specular);
-		this.angle = angle;
-		this.exponent = exponent;
-		this.target = target;
-		this.location = location;
-	}
+
+
+
+
+class Illumination {
+  constructor(doublesided, local, ambient, background) {
+    this.doublesided = doublesided;
+    this.local = local;
+    this.ambient = ambient;
+    this.background = background;
+  }
 }
 
 
-class Texture{
-	constructor(id, texturefile, length_s, length_t){
-		this.id = id;
-		this.texturefile = texturefile;
-		this.length_s = length_s;
-		this.length_t = length_t;
-	}
+
+
+
+
+class Texture {
+  constructor(id, texture, lengthS, lengthT) {
+    this.id = id;
+    this.texture = texture;
+    this.lengthS = lengthS;
+    this.lengthT = lengthT;
+  }
 }
 
-class Material{
-	constructor(id, emission, ambient, diffuse, specular, shininess){
-		this.id = id;
-		this.emission = emission;
-		this.ambient = ambient;
-		this.diffuse = diffuse;
-		this.specular = specular;
-		this.shininess = shininess;
-	}
-}
 
-class Component{
-	constructor(idComponent, idTransformation,idMaterial, idTexture, idChildren){
-		this.idComponent = idComponent;
-		this.idTransformation = idTransformation;
-		this.idMaterial = idMaterial;
-		this.idTexture = idTexture;
-		this.idChildren = idChildren;
-	}
-}
+
 
 class Stack{
 	constructor(){
@@ -105,10 +70,10 @@ class Stack{
 
 	push(stackElement)
 	{
-		if(typeof(stackElement) == 'undefined')
-			stackElement = [];
-		
-		this.stack.push(stackElement);
+		if (typeof(stackElement) === 'undefined') {
+        stackElement = [];
+      }
+      this.stack.push(stackElement);
     }
 
     pop()
@@ -119,4 +84,44 @@ class Stack{
     {
     	return this.stack[this.stack.length - 1];
     }
+}
+
+
+class Lights {
+  constructor(id, enabled, ambient, diffuse, specular) {
+    this.id = id;
+    this.enabled = enabled;
+    this.ambient = ambient;
+    this.diffuse = diffuse;
+    this.specular = specular;
+  }
+};
+
+
+
+class OmniLight extends Lights {
+  constructor(light, location) {
+    super(light.id, light.enabled, light.ambient, light.diffuse, light.specular);
+    this.location = location;
+  }
+};
+
+class SpotLight extends Lights{
+  constructor(light, angle, exponent, target, location) {
+    super(light.id, light.enabled, light.ambient, light.diffuse, light.specular);
+    this.angle = angle;
+    this.exponent = exponent;
+    this.location = location;
+    this.direction = new getXYZ(target.x - location.x, target.y - location.y, target.z - location.z);
+  }
+}
+
+class  Component {
+  constructor(id, transformationID, materialIDs, textureID, childrenIDs) {
+		this.id = id;
+		this.transformationID = transformationID;
+		this.materialIDs = materialIDs;
+		this.textureID = textureID;
+		this.childrenIDs = childrenIDs ;
+  }
 }

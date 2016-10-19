@@ -2,10 +2,11 @@
  * MyCylinderBase
  * @constructor
  */
-function MyCylinderBase(scene, slices) {
+function MyCylinderBase(scene, radius, slices) {
  	CGFobject.call(this,scene);
 	
-	this.slices =  slices;
+	this.radius = radius;
+	this.slices = slices;
 
  	this.initBuffers();
  };
@@ -15,35 +16,33 @@ function MyCylinderBase(scene, slices) {
 
  MyCylinderBase.prototype.initBuffers = function() {
 
-	this.vertices = new Array();
-	this.indices = new Array();
-	this.normals = new Array();
-	this.texCoords = new Array();
+	this.vertices = [];
+	this.indices = [];
+	this.normals = [];
+	this.texCoords = [];
 
 
 	var ang = (2*Math.PI) / this.slices;
-	var first = 1;
-
+	var start = 1;
+	var texCenter;
+	
 	this.vertices.push(0, 0, 0);
 	this.normals.push(0, 0, 1);
 	this.texCoords.push(0.5, 0.5);
+	for (var slice = 0; slice <= this.slices; slice++) {
 
-	for (i = 0; i <= this.slices; i++) {
-		var x = Math.cos(i*ang);
-		var y = Math.sin(i*ang);
 
-		this.vertices.push(x, y, 0);
+		this.vertices.push(this.radius * Math.cos(slice * ang), this.radius *Math.sin(slice * ang), 0);
 		this.normals.push(0, 0, 1);
-		this.texCoords.push(0.5 + 0.5 * x, 0.5 - 0.5 * y);
+		this.texCoords.push(0.5 + 0.5 * Math.cos(slice * ang), 0.5 - 0.5 *Math.sin(slice * ang));
 
-		if (i > 1) {
-			this.indices.push(first++, first, 0);
-		}
+		if (slice > 1)
+			this.indices.push(start++, start, 0);
 	}
 
-	this.indices.push(0, first, 1);
-	
- 	this.primitiveType = this.scene.gl.TRIANGLES;
- 	
- 	this.initGLBuffers();
+	this.indices.push(0, start, 1);
+
+
+	this.primitiveType = this.scene.gl.TRIANGLES;
+	this.initGLBuffers();
  };

@@ -17,7 +17,7 @@
 
     <!-- deve definir-se um objeto para raiz do grafo , assim -->
     <!-- como o comprimento dos tres eixos (cilindros) -->
-    <scene root="root" axis_length="7" />
+    <scene root="root" axis_length="50" />
 
 
 
@@ -28,20 +28,22 @@
         <!-- primeira vista; de cada vez que se pressione a tecla v/V, -->
         <!-- a vista muda para a proxima da lista; da -->
         <!-- ultima vista da lista volta 'a primeira -->
-        <perspective id="p1" near="0.1" far="500" angle="22">
-            <from x="15" y="20" z="35" />
-            <to x="5" y="5" z="5" />
+		<perspective id="p3" near="0.5" far="1200" angle="30">
+            <from x="-30" y="30" z="200" />
+            <to x="60" y="20" z="-100" />
+        </perspective>
+		
+        <perspective id="p1" near="0.1" far="500" angle="50">
+            <from x="55" y="50" z="70" />
+            <to x="15" y="10" z="15" />
         </perspective>
 
-        <perspective id="p2" near="0.1" far="500" angle="25">
-            <from x="0" y="5" z="5" />
+        <perspective id="p2" near="0.1" far="500" angle="100">
+            <from x="50" y="50" z="70" />
             <to x="0" y="0" z="0" />
         </perspective>
 
-        <perspective id="p3" near="0.1" far="500" angle="40">
-            <from x="25" y="25" z="25" />
-            <to x="0" y="0" z="0" />
-        </perspective>
+
 
     </views>
 
@@ -115,8 +117,10 @@
 		<texture id="porta" file="resources\\images\\porta.png" length_s="1.0" length_t="1.0" />
 		<texture id="stone" file="resources\\images\\sidewalk.png" length_s="1.0" length_t="1.0" />
 		<texture id="sunny" file="resources\\images\\sun.png" length_s="1.0" length_t="1.0" />
-		
+		<texture id="water" file="resources\\images\\agua.png" length_s="1.0" length_t="1.0" />
 		<texture id="terra" file="resources\\images\\terra.png" length_s="1.0" length_t="1.0" />
+		<texture id="stripes" file="resources\\images\\boiaesfera.png" length_s="1.0" length_t="1.0" />
+		<texture id="bananas" file="resources\\images\\boiatorus.png" length_s="1.0" length_t="1.0" />
     </textures>
 
 
@@ -294,11 +298,11 @@
 				<componentref id= "tree" />
 				<componentref id="fencefront" />
 				<componentref id="sidewalk" />
-				<componentref id="terra" />
+				<componentref id="pool" />
 				
             </children>
 
-        </component>	
+        </component>
         
 		<component id="grass">
 
@@ -326,13 +330,12 @@
 
         </component>	
 		
-		<component id="terra">
+		<component id="tree">
 
             <!-- bloco "transformation" obrigatorio -->
-			<transformation>
-				<translate x="25" y="2" z="25" />
-				<scale x="6" y="4" z="6" /> 
-				<rotate axis="x" angle="-90" /> 
+            <transformation>
+			  <translate x="25" y="0" z="25" />
+			  <scale x="5" y="5" z="5" />
             </transformation>
 
             <materials>
@@ -343,7 +346,600 @@
             </materials>
 
 
-            <texture id="terra" />
+            <texture id="relva" />
+
+
+            <children>
+                <componentref id= "body" />
+				<componentref id= "circle" />
+				<componentref id= "leaves" />
+				<componentref id= "branch" />
+				<componentref id= "earth" />
+            </children>
+
+        </component>
+		
+		<component id="fencefront">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			
+			 
+			  
+			   <translate x="0" y="0" z="0" />
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <componentref id= "fence1" />
+				<componentref id= "fence2" />
+				<componentref id= "fence3" />
+				<componentref id= "fence4" />
+				<componentref id="fencepiece1" />
+				<componentref id="fencepiece2" />
+				<componentref id="fencepiece3" />
+				<componentref id="fencepiece4" />
+				<componentref id="fencepiece5" />
+				<componentref id="fencepiece6" />
+				<componentref id="fencepiece7" />
+				<componentref id="fencepiece8" />
+				<componentref id="fencepiece9" />
+				<componentref id="fencepiece10" />
+            </children>
+		</component>
+
+		<component id="fence1">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			
+			 
+			  <translate x="0" y="0" z="50" />
+				<scale x="50" y="1" z="1" />
+			   <translate x="0" y="5" z="0" />
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "rectangle" />
+            </children>
+		</component>
+		
+		<component id="fence2">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			
+			  <translate x="0" y="0" z="50" />
+				<scale x="50" y="1" z="1" />
+			   <translate x="0" y="3" z="0" />
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "rectangle" />
+				
+            </children>
+		</component>
+		
+		<component id="fence3">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			
+			  <translate x="-50" y="0" z="50" />
+				<scale x="35" y="1" z="1" />
+			   <translate x="0" y="3" z="0" />
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "rectangle" />
+				
+            </children>
+		</component>
+		
+		<component id="fence4">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			
+			  <translate x="-50" y="0" z="50" />
+				<scale x="35" y="1" z="1" />
+			   <translate x="0" y="5" z="0" />
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "rectangle" />
+				
+            </children>
+		</component>
+		
+		<component id="fencepiece1">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+					<translate x="0" y="0" z="50" />
+				 <scale x="1" y="6" z="1" />
+				 <translate x="0" y="1" z="0" />
+				 <rotate axis="x" angle="90" />
+			   
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "cylinder" />
+            </children>
+		</component>
+		
+		<component id="fencepiece2">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+				 <translate x="50" y="0" z="50" />
+				 <scale x="1" y="6" z="1" />
+				 <translate x="0" y="1" z="0" />
+				 <rotate axis="x" angle="90" />
+			   
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "cylinder" />
+            </children>
+		</component>
+		
+		<component id="fencepiece3">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+				 <translate x="40" y="0" z="50" />
+				 <scale x="1" y="6" z="1" />
+				 <translate x="0" y="1" z="0" />
+				 <rotate axis="x" angle="90" />
+			   
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "cylinder" />
+            </children>
+		</component>	
+		
+		<component id="fencepiece4">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+				 <translate x="30" y="0" z="50" />
+				 <scale x="1" y="6" z="1" />
+				 <translate x="0" y="1" z="0" />
+				 <rotate axis="x" angle="90" />
+			   
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "cylinder" />
+            </children>
+		</component>
+		
+		<component id="fencepiece5">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+				 <translate x="20" y="0" z="50" />
+				 <scale x="1" y="6" z="1" />
+				 <translate x="0" y="1" z="0" />
+				 <rotate axis="x" angle="90" />
+			   
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "cylinder" />
+            </children>
+		</component>
+		
+		<component id="fencepiece6">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+				 <translate x="10" y="0" z="50" />
+				 <scale x="1" y="6" z="1" />
+				 <translate x="0" y="1" z="0" />
+				 <rotate axis="x" angle="90" />
+			   
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "cylinder" />
+            </children>
+		</component>	
+		
+		<component id="fencepiece7">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+				 <translate x="-50" y="0" z="50" />
+				 <scale x="1" y="6" z="1" />
+				 <translate x="0" y="1" z="0" />
+				 <rotate axis="x" angle="90" />
+			   
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "cylinder" />
+            </children>
+		</component>
+		
+		<component id="fencepiece8">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+				 <translate x="-38" y="0" z="50" />
+				 <scale x="1" y="6" z="1" />
+				 <translate x="0" y="1" z="0" />
+				 <rotate axis="x" angle="90" />
+			   
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "cylinder" />
+            </children>
+		</component>
+		
+		<component id="fencepiece9">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+				 <translate x="-28" y="0" z="50" />
+				 <scale x="1" y="6" z="1" />
+				 <translate x="0" y="1" z="0" />
+				 <rotate axis="x" angle="90" />
+			   
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "cylinder" />
+            </children>
+		</component>
+		
+		<component id="fencepiece10">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+				 <translate x="-15" y="0" z="50" />
+				 <scale x="1" y="6" z="1" />
+				 <translate x="0" y="1" z="0" />
+				 <rotate axis="x" angle="90" />
+			   
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="madeira" />
+
+
+            <children>
+                <primitiveref id= "cylinder" />
+            </children>
+		</component>	
+		
+		<component id="sidewalk">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  <translate x="0" y="0.1" z="35" />
+			  <scale x="15" y="1" z="65"/>
+			  <translate x="-1" y="0" z="1" />
+			  <rotate axis="x" angle="-90" />
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="stone" />
+
+
+            <children>
+                <primitiveref id= "rectangle" />
+            </children>
+
+        </component>
+
+		<component id="pool">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  <translate x="-35" y="0" z="25" />
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="water" />
+
+
+            <children>
+                <componentref id= "water" />
+				<componentref id= "border" />
+				<componentref id= "floatsphere" />
+				<componentref id= "floattorus" />
+            </children>
+
+        </component>
+		
+		<component id="water">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  <translate x="0" y="0.1" z="0" />
+			  <scale x="15" y="0.1" z="25" />
+			  <rotate axis="x" angle="-90" />
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="water" />
+
+
+            <children>
+                <primitiveref id= "sphere" />
+            </children>
+
+        </component>
+		
+		<component id="border">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  <translate x="0" y="0" z="0" />
+			  <scale x="16" y="0.1" z="26" />
+			  <rotate axis="x" angle="-90" />
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="stone" />
+
+
+            <children>
+                <primitiveref id= "sphere" />
+            </children>
+
+        </component>
+		
+		<component id="floatsphere">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  <translate x="-2" y="1" z="0" />
+			  <scale x="2" y="2" z="2" />
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="stripes" />
+
+
+            <children>
+                <primitiveref id= "sphere" />
+            </children>
+
+        </component>
+		
+		<component id="floattorus">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  <translate x="0" y="0" z="0" />
+			  <scale x="0.5" y="1" z="0.5" />
+			  <rotate axis ="x" angle ="-90" />
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="bananas" />
 
 
             <children>
@@ -610,12 +1206,13 @@
 
         </component>
         
-		<component id="tree">
+		<component id="earth">
 
             <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			  <translate x="25" y="0" z="25" />
-			  <scale x="5" y="5" z="5" />
+			<transformation>
+				<scale x="1" y="0.2" z="1" />
+				<rotate axis = "x" angle = "90" />
+
             </transformation>
 
             <materials>
@@ -626,18 +1223,15 @@
             </materials>
 
 
-            <texture id="relva" />
+            <texture id="terra" />
 
 
             <children>
-                <componentref id= "body" />
-				<componentref id= "circle" />
-				<componentref id= "leaves" />
-				<componentref id= "branch" />
+                <primitiveref id= "torus" />
             </children>
 
         </component>
-			
+		
 		<component id="body">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1220,464 +1814,12 @@
             </children>
 		</component>
 		
-		<component id="fencefront">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			
-			 
-			  
-			   <translate x="0" y="0" z="0" />
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <componentref id= "fence1" />
-				<componentref id= "fence2" />
-				<componentref id= "fence3" />
-				<componentref id= "fence4" />
-				<componentref id="fencepiece1" />
-				<componentref id="fencepiece2" />
-				<componentref id="fencepiece3" />
-				<componentref id="fencepiece4" />
-				<componentref id="fencepiece5" />
-				<componentref id="fencepiece6" />
-				<componentref id="fencepiece7" />
-				<componentref id="fencepiece8" />
-				<componentref id="fencepiece9" />
-				<componentref id="fencepiece10" />
-            </children>
-		</component>
+	
 		
-		<component id="fence1">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			
-			 
-			  <translate x="0" y="0" z="50" />
-				<scale x="50" y="1" z="1" />
-			   <translate x="0" y="5" z="0" />
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "rectangle" />
-            </children>
-		</component>
 		
-		<component id="fence2">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			
-			  <translate x="0" y="0" z="50" />
-				<scale x="50" y="1" z="1" />
-			   <translate x="0" y="3" z="0" />
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "rectangle" />
+		
+	
 				
-            </children>
-		</component>
-		
-		<component id="fence3">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			
-			  <translate x="-50" y="0" z="50" />
-				<scale x="35" y="1" z="1" />
-			   <translate x="0" y="3" z="0" />
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "rectangle" />
-				
-            </children>
-		</component>
-		
-		<component id="fence4">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			
-			  <translate x="-50" y="0" z="50" />
-				<scale x="35" y="1" z="1" />
-			   <translate x="0" y="5" z="0" />
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "rectangle" />
-				
-            </children>
-		</component>
-		
-		<component id="fencepiece1">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-					<translate x="0" y="0" z="50" />
-				 <scale x="1" y="6" z="1" />
-				 <translate x="0" y="1" z="0" />
-				 <rotate axis="x" angle="90" />
-			   
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "cylinder" />
-            </children>
-		</component>
-		
-		<component id="fencepiece2">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-				 <translate x="50" y="0" z="50" />
-				 <scale x="1" y="6" z="1" />
-				 <translate x="0" y="1" z="0" />
-				 <rotate axis="x" angle="90" />
-			   
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "cylinder" />
-            </children>
-		</component>
-		
-		<component id="fencepiece3">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-				 <translate x="40" y="0" z="50" />
-				 <scale x="1" y="6" z="1" />
-				 <translate x="0" y="1" z="0" />
-				 <rotate axis="x" angle="90" />
-			   
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "cylinder" />
-            </children>
-		</component>	
-		
-		<component id="fencepiece4">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-				 <translate x="30" y="0" z="50" />
-				 <scale x="1" y="6" z="1" />
-				 <translate x="0" y="1" z="0" />
-				 <rotate axis="x" angle="90" />
-			   
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "cylinder" />
-            </children>
-		</component>
-		
-		<component id="fencepiece5">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-				 <translate x="20" y="0" z="50" />
-				 <scale x="1" y="6" z="1" />
-				 <translate x="0" y="1" z="0" />
-				 <rotate axis="x" angle="90" />
-			   
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "cylinder" />
-            </children>
-		</component>
-		
-		<component id="fencepiece6">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-				 <translate x="10" y="0" z="50" />
-				 <scale x="1" y="6" z="1" />
-				 <translate x="0" y="1" z="0" />
-				 <rotate axis="x" angle="90" />
-			   
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "cylinder" />
-            </children>
-		</component>	
-		
-		<component id="fencepiece7">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-				 <translate x="-50" y="0" z="50" />
-				 <scale x="1" y="6" z="1" />
-				 <translate x="0" y="1" z="0" />
-				 <rotate axis="x" angle="90" />
-			   
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "cylinder" />
-            </children>
-		</component>
-		
-		<component id="fencepiece8">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-				 <translate x="-38" y="0" z="50" />
-				 <scale x="1" y="6" z="1" />
-				 <translate x="0" y="1" z="0" />
-				 <rotate axis="x" angle="90" />
-			   
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "cylinder" />
-            </children>
-		</component>
-		
-		<component id="fencepiece9">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-				 <translate x="-28" y="0" z="50" />
-				 <scale x="1" y="6" z="1" />
-				 <translate x="0" y="1" z="0" />
-				 <rotate axis="x" angle="90" />
-			   
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "cylinder" />
-            </children>
-		</component>
-		
-		<component id="fencepiece10">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-				 <translate x="-15" y="0" z="50" />
-				 <scale x="1" y="6" z="1" />
-				 <translate x="0" y="1" z="0" />
-				 <rotate axis="x" angle="90" />
-			   
-
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="madeira" />
-
-
-            <children>
-                <primitiveref id= "cylinder" />
-            </children>
-		</component>		
-		
-		<component id="sidewalk">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-			  <translate x="0" y="0.1" z="35" />
-			  <scale x="15" y="1" z="65"/>
-			  <translate x="-1" y="0" z="1" />
-			  <rotate axis="x" angle="-90" />
-            </transformation>
-
-            <materials>
-                <material id="inherit"  />
-                <material id="m2"/>
-                <material id="m1"/>
-                <material id="inherit"  />
-            </materials>
-
-
-            <texture id="stone" />
-
-
-            <children>
-                <primitiveref id= "rectangle" />
-            </children>
-
-        </component>		
 	
 	</components>
 
