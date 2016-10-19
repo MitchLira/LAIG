@@ -31,24 +31,6 @@ class getRGBA{
 	}
 }
 
-class getAxisAngle{
-	constructor(axis, angle){
-		this.axis = axis;
-		this.angle = angle;
-	}
-}
-
-class InfoPerspective{
-	constructor(id, near, far, angle, from, to){
-		this.id = id;
-		this.near = near,
-		this.far = far;
-		this.angle = angle;
-		this.from = from;
-		this.to = to;
-	}
-};
-
 class Illumination{
 	constructor(doublesided, local, ambient, background){
 		this.doublesided = doublesided;
@@ -123,7 +105,10 @@ class Stack{
 
 	push(stackElement)
 	{
-      this.stack.push(stackElement);
+		if(typeof(stackElement) == 'undefined')
+			stackElement = [];
+		
+		this.stack.push(stackElement);
     }
 
     pop()

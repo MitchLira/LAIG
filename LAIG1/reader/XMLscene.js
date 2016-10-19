@@ -23,16 +23,20 @@ XMLscene.prototype.init = function (application) {
     this.gl.depthFunc(this.gl.LEQUAL);
 
 	this.axis=new CGFaxis(this);
+	this.appearance = new CGFappearance(this);
+	
 	this.lightsStatus;
   	this.viewIndex=0;
   	this.IndexMaterials=0;
-	
 };
 
 XMLscene.prototype.initLights = function () {
 
 	this.lights[0].setPosition(2, 3, 3, 1);
     this.lights[0].setDiffuse(1.0,1.0,1.0,1.0);
+	this.lights[0].setAmbient(0,0,0,1);
+	this.lights[0].setSpecular(1,1,1,1);
+	this.lights[0].enable();
     this.lights[0].update();
 };
 
@@ -44,13 +48,12 @@ XMLscene.prototype.setDefaultAppearance = function () {
     this.setAmbient(0.2, 0.4, 0.8, 1.0);
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
-    this.setShininess(10.0);	
+    this.setShininess(10.0);
 };
 
 // Handler called when the graph is finally loaded. 
 // As loading is asynchronous, this may be called already after the application has started the run loop
-XMLscene.prototype.onGraphLoaded = function () 
-{
+XMLscene.prototype.onGraphLoaded = function () {
 	this.gl.clearColor(0,1,1,1);
 	this.lights[0].setVisible(true);
     this.lights[0].enable();
@@ -80,10 +83,9 @@ XMLscene.prototype.display = function () {
 	// it is important that things depending on the proper loading of the graph
 	// only get executed after the graph has loaded correctly.
 	// This is one possible way to do it
-	if (this.graph.loadedOk)
-	{
-		this.graph.displayGraph();
+	if (this.graph.loadedOk){
 		this.lights[0].update();
+		this.graph.displayGraph();
 	};	
 };
 
