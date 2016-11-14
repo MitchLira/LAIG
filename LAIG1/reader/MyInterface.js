@@ -29,9 +29,9 @@ MyInterface.prototype.init = function(application) {
 
 MyInterface.prototype.addLight = function(type, i, name) {
     if (type == "spot")
-        this.spot.add(this.scene.lightsStatus, i, this.scene.lightsStatus[i]).name(name);
+        this.spot.add(this.scene.lightsStatus, i, i);
     else
-        this.omni.add(this.scene.lightsStatus, i, this.scene.lightsStatus[i]).name(name);
+        this.omni.add(this.scene.lightsStatus, i, i);
 
 }
 

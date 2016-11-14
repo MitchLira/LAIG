@@ -85,34 +85,16 @@ MySceneGraph.prototype.chekDSXOrder = function(rootElement) {
         console.error("Missing Tag");
         return 1;
     }
-
-    if (childs[0].tagName != "scene")
-        console.warn("scene is not in the correct order on the file DSX ");
-
-    if (childs[1].tagName != "views")
-        console.warn("views is not in the correct order on the file DSX");
-
-    if (childs[2].tagName != "illumination")
-        console.warn("illumination is not in the correct order on the file DSX");
-
-    if (childs[3].tagName != "lights")
-        console.warn("lights is not in the correct order on the file DSX");
-
-    if (childs[4].tagName != "textures")
-        console.warn("textures is not in the correct order on the file DSX");
-
-    if (childs[5].tagName != "materials")
-        console.warn("materials is not in the correct order on the file DSX");
-
-    if (childs[6].tagName != "transformations")
-        console.warn("transformations is not in the correct order on the file DSX");
-
-    if (childs[7].tagName != "primitives")
-        console.warn("primitives is not in the correct order on the file DSX");
-
-    if (childs[8].tagName != "components")
-        console.warn("components is not in the correct order on the file DSX");
-
+    var rightOrder = ["scene","views","illumination","lights","textures","materials","transformations","primitives","components"];
+	var i;
+	for(i = 0; i< rightOrder.length; i++)
+	{
+		if(childs[i].tagName != rightOrder[i])
+		{
+			console.warn(childs[i].tagName + " is is not in the correct order on the file DSX ");
+		}
+	}
+    
     return 0;
 }
 
@@ -327,17 +309,13 @@ MySceneGraph.prototype.getTranformationMatrix = function(getTransformation) {
 
     for (var i = 0; i < getTransformation.children.length ; i++) {
         var transformation = getTransformation.children[i];
-        var transformationName = transformation.tagName;
-
-        switch (transformationName) {
-            case 'translate':
-                var translateCoords;
+            if(transformation.tagName == 'translate')
+             {  var translateCoords;
 
                	translateCoords =new getXYZ(this.reader.getFloat(transformation,'x'),this.reader.getFloat(transformation,'y'),this.reader.getFloat(transformation,'z'));
                 mat4.translate(matrix, matrix, [translateCoords.x,translateCoords.y,translateCoords.z]);
-                break;
-
-            case 'rotate':
+              }
+            else if(transformation.tagName == 'rotate'){
                 var rotationAxis, angle, rotation;
 
                 rotationAxis = this.reader.getString(transformation, 'axis');
@@ -348,16 +326,15 @@ MySceneGraph.prototype.getTranformationMatrix = function(getTransformation) {
                 else if (rotationAxis == 'z') rotation = [0, 0, 1];
 
                 mat4.rotate(matrix, matrix, angle*Math.PI/180, rotation);
-                break;
+            }
 
-            case 'scale':
+            else if(transformation.tagName == 'scale'){
                 var scaleCoords;
 
                 scaleCoords = new getXYZ(this.reader.getFloat(transformation,'x'),this.reader.getFloat(transformation,'y'),this.reader.getFloat(transformation,'z'));
                 mat4.scale(matrix, matrix,[scaleCoords.x,scaleCoords.y,scaleCoords.z ]);
 
-                break;
-        }
+            }
     }
 
     return matrix;
@@ -396,49 +373,44 @@ MySceneGraph.prototype.loadPrimitives = function(rootElement) {
 MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
     var primitive;
 
-    switch (primitiveName) {
-        case 'rectangle':
-            var point1 = new getXY(this.reader.getFloat(primitiveTag, 'x1'), this.reader.getFloat(primitiveTag, 'y1'));
-            var point2 = new getXY(this.reader.getFloat(primitiveTag, 'x2'), this.reader.getFloat(primitiveTag, 'y2'));
+    if (primitiveName== 'rectangle') {
+    	var point1 = new getXY(this.reader.getFloat(primitiveTag, 'x1'), this.reader.getFloat(primitiveTag, 'y1'));
+        var point2 = new getXY(this.reader.getFloat(primitiveTag, 'x2'), this.reader.getFloat(primitiveTag, 'y2'));
 
-            primitive = new MyRectangle(this.scene, point1, point2);
-            break;
+        primitive = new MyRectangle(this.scene, point1, point2);
+    }
 
-        case 'triangle':
-            var point1 = new getXYZ(this.reader.getFloat(primitiveTag, 'x1'), this.reader.getFloat(primitiveTag, 'y1'), this.reader.getFloat(primitiveTag, 'z1'));
-            var point2 = new getXYZ(this.reader.getFloat(primitiveTag, 'x2'), this.reader.getFloat(primitiveTag, 'y2'), this.reader.getFloat(primitiveTag, 'z2'));
-            var point3 = new getXYZ(this.reader.getFloat(primitiveTag, 'x3'), this.reader.getFloat(primitiveTag, 'y3'), this.reader.getFloat(primitiveTag, 'z3'));
+    else if(primitiveName == 'triangle'){
+       	var point1 = new getXYZ(this.reader.getFloat(primitiveTag, 'x1'), this.reader.getFloat(primitiveTag, 'y1'), this.reader.getFloat(primitiveTag, 'z1'));
+        var point2 = new getXYZ(this.reader.getFloat(primitiveTag, 'x2'), this.reader.getFloat(primitiveTag, 'y2'), this.reader.getFloat(primitiveTag, 'z2'));
+       	var point3 = new getXYZ(this.reader.getFloat(primitiveTag, 'x3'), this.reader.getFloat(primitiveTag, 'y3'), this.reader.getFloat(primitiveTag, 'z3'));
 
-            primitive = new MyTriangle(this.scene, point1, point2, point3);
-            break;
+    	primitive = new MyTriangle(this.scene, point1, point2, point3);
+    }
+	else if(primitiveName == 'cylinder'){
+        var base = this.reader.getFloat(primitiveTag, 'base');
+        var top = this.reader.getFloat(primitiveTag, 'top');
+        var height = this.reader.getFloat(primitiveTag, 'height');
+        var slices = this.reader.getInteger(primitiveTag, 'slices');
+        var stacks = this.reader.getInteger(primitiveTag, 'stacks');
+        primitive = new MyCylinder(this.scene, base, top, height, slices, stacks);
+	}
+     else if(primitiveName == 'sphere'){   
+     	var radius = this.reader.getFloat(primitiveTag, 'radius');
+        var slices = this.reader.getInteger(primitiveTag, 'slices');
+        var stacks = this.reader.getInteger(primitiveTag, 'stacks');
 
-        case 'cylinder':
-            var base = this.reader.getFloat(primitiveTag, 'base');
-            var top = this.reader.getFloat(primitiveTag, 'top');
-            var height = this.reader.getFloat(primitiveTag, 'height');
-            var slices = this.reader.getInteger(primitiveTag, 'slices');
-            var stacks = this.reader.getInteger(primitiveTag, 'stacks');
-            primitive = new MyCylinder(this.scene, base, top, height, slices, stacks);
-            break;
+        primitive = new MySphere(this.scene, radius, slices, stacks);
+     }
+	 else if(primitiveName == 'torus'){
+     	var inner = this.reader.getFloat(primitiveTag, 'inner');
+        var outer = this.reader.getFloat(primitiveTag, 'outer');
+        var slices = this.reader.getInteger(primitiveTag, 'slices');
+        var loops = this.reader.getInteger(primitiveTag, 'loops');
 
-        case 'sphere':
-            var radius = this.reader.getFloat(primitiveTag, 'radius');
-            var slices = this.reader.getInteger(primitiveTag, 'slices');
-            var stacks = this.reader.getInteger(primitiveTag, 'stacks');
-
-            primitive = new MySphere(this.scene, radius, slices, stacks);
-            break;
-
-        case 'torus':
-            var inner = this.reader.getFloat(primitiveTag, 'inner');
-            var outer = this.reader.getFloat(primitiveTag, 'outer');
-            var slices = this.reader.getInteger(primitiveTag, 'slices');
-            var loops = this.reader.getInteger(primitiveTag, 'loops');
-
-            primitive = new MyTorus(this.scene, inner, outer, slices, loops);
-            break;
-
-        default:
+        primitive = new MyTorus(this.scene, inner, outer, slices, loops);
+	 }
+     else{
             this.onXMLError("Primitive is not valid.");
             return null;
     }

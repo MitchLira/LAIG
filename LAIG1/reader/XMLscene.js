@@ -40,8 +40,8 @@ XMLscene.prototype.init = function (application) {
 XMLscene.prototype.initLights = function () {
 
   this.lights[0].setPosition(2, 3, 3, 1);
-  this.lights[0].setAmbient(0, 0, 0, 1);
-  this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+  this.lights[0].setAmbient(0, 0, 1, 1);
+  this.lights[0].setDiffuse(0, 0, 1.0, 1.0);
   this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
   this.lights[0].setVisible(true);
   this.lights[0].enable();
@@ -53,7 +53,7 @@ XMLscene.prototype.initCameras = function () {
 };
 
 XMLscene.prototype.setDefaultAppearance = function () {
-  this.setAmbient(0.2, 0.4, 0.8, 1.0);
+  this.setAmbient(0, 0, 0.8, 1.0);
   this.setDiffuse(0.2, 0.4, 0.8, 1.0);
   this.setSpecular(0.2, 0.4, 0.8, 1.0);
   this.setShininess(10.0);
