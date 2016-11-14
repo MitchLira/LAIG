@@ -28,18 +28,18 @@
         <!-- primeira vista; de cada vez que se pressione a tecla v/V, -->
         <!-- a vista muda para a proxima da lista; da -->
         <!-- ultima vista da lista volta 'a primeira -->
-  <perspective id="p1" near="0.1" far="500" angle="22">
-            <from x="15" y="20" z="35" />
-            <to x="5" y="5" z="5" />
+		<perspective id="p3" near="0.5" far="1200" angle="30">
+            <from x="-30" y="30" z="200" />
+            <to x="60" y="20" z="-100" />
+        </perspective>
+		
+        <perspective id="p1" near="0.1" far="500" angle="50">
+            <from x="55" y="50" z="70" />
+            <to x="15" y="10" z="15" />
         </perspective>
 
-        <perspective id="p2" near="0.1" far="500" angle="25">
-            <from x="0" y="5" z="5" />
-            <to x="0" y="0" z="0" />
-        </perspective>
-
-        <perspective id="p3" near="0.1" far="500" angle="40">
-            <from x="25" y="25" z="25" />
+        <perspective id="p2" near="0.1" far="500" angle="100">
+            <from x="50" y="50" z="70" />
             <to x="0" y="0" z="0" />
         </perspective>
 
@@ -184,10 +184,17 @@
 
         </transformation>
     </transformations>
-    
+
+
     <primitives>
 
+        <!-- Deve existir um ou mais blocos "primitive" -->
+        <!-- Os identificadores "id" nao podem ser repetidos -->
         <primitive id="rectangle">
+            <!-- apenas pode existir UMA das seguintes tags: -->
+            <!--     rectangle, triangle, cylinder, sphere, torus -->
+            <!-- os parametros devem ser interpretados, genericamente como-->
+            <!-- em OpenGL/GLUT; o cilindro deve adicionalmente ter tampas -->
             <rectangle x1="0" y1="0" x2="1" y2="1" />
         </primitive>
 
@@ -210,6 +217,8 @@
 		<primitive id="torus">
 			<torus inner="0.5" outer="1" slices="40" loops="40" />
 		</primitive>
+		
+		
     </primitives>
 
 
@@ -258,12 +267,12 @@
                 <!-- componentes ou primitivas -->
 				<componentref id="casa" />
                 <componentref id="garden" />
-				<componentref id="sky"/>
+				<componentref id="sky" />
 
             </children>
 
         </component>
-	
+		
 		<component id="garden">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -281,7 +290,7 @@
             </materials>
 
 
-            <texture id="relva" force="false" />
+            <texture id="relva" />
 
 
             <children>
@@ -291,10 +300,11 @@
 				<componentref id="sidewalk" />
 				<componentref id="pool" />
 				
+				
             </children>
 
         </component>
-        
+       
 		<component id="grass">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -312,7 +322,7 @@
             </materials>
 
 
-            <texture id="relva"  />
+            <texture id="relva" />
 
 
             <children>
@@ -337,7 +347,7 @@
             </materials>
 
 
-            <texture id="relva" force="false" />
+            <texture id="relva" />
 
 
             <children>
@@ -1803,8 +1813,10 @@
             <children>
                 <primitiveref id= "rectangle" />
             </children>
-		</component>
+		</component>	
+	
 	</components>
+
 
 	<animations>
     <!-- podem existir zero ou mais nós "animation" -->
@@ -1812,12 +1824,12 @@
     <!-- demorar. Nesta versão do formato DSX, type pode ter -->
     <!-- o valor "linear" ou "circular"; na animacao circular -->
     <!-- os angulos sao expressos em graus  -->
-    
-    <animation id="an1" span="4" type="linear">
-        <controlpoint xx="0" yy="0" zz="0" />
-        <controlpoint xx="2" yy="2" zz="2" />
-    </animation>
 
-    <animation id="an2" span="4" type="circular" centerx="0" centery="1" centerz="1" radius="2" startang="0" rotang="20" />
-	</animations>
+        <animation id="a1" span="0.5" type="linear">
+        <controlpoint xx="0.1" yy="0.2" zz="0" />
+    </animation>
+    <animation id="a2" span="0.5" type="circular"
+		centerx="0" centery="0" centerz="0"
+		radius="0.5" startang="0.3" rotang="0.3" />
+</animations>
 </dsx>

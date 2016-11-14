@@ -434,14 +434,14 @@ this.reader.getFloat(primitiveTag, 'z3'));
 	 }
 	 else if(primitiveName == 'patch') {
 	 	var orderU = this.reader.getInteger(primitiveTag, 'orderU'); 
-	 	var orderV = this.reader.getInteger(primitveTag, 'orderV');
+	 	var orderV = this.reader.getInteger(primitiveTag, 'orderV');
 	 	var partsU = this.reader.getInteger(primitiveTag, 'partsU');
 	 	var partsV = this.reader.getInteger(primitiveTag, 'partsV');  
 	 	var controlpoints = [];
 	 	var getcontrolpoints = primitiveTag.getElementsByTagName('controlpoint');
-	 	for(var i = 0; i < getcontrolpoints.length; i++)
+	 	for(var j = 0; j < getcontrolpoints.length; j++)
 	 	{
-	 		var controlp = new getXYZ(this.reader.getFloat(getcontrolpoints[j],'xx'),this.reader.getFloat(getcontrolpoints[j],'yy'),this.reader.getFloat(getcontrolpoints[j],'zz'));
+	 		var controlp = new getXYZ(this.reader.getFloat(getcontrolpoints[j],'x'),this.reader.getFloat(getcontrolpoints[j],'y'),this.reader.getFloat(getcontrolpoints[j],'z'));
 			controlpoints.push(controlp);
 			
 			primitive = new MyPatch(orderU, orderV, partsU, partsV, controlpoints);

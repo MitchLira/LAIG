@@ -3,7 +3,7 @@ function XMLscene(myInterface) {
   CGFscene.call(this);
 
   this.interface=myInterface;
-
+  
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -28,7 +28,6 @@ XMLscene.prototype.init = function (application) {
   this.axis=new CGFaxis(this);
   
   
-
   this.appearance = new CGFappearance(this);
 
   //interface
@@ -170,15 +169,17 @@ XMLscene.prototype.display = function () {
 
   // Draw axis
   this.axis.display();
-  
+ 
   this.setDefaultAppearance();
+
 
   // ---- END Background, camera and axis setup
   
   if (this.graph.loadedOk)
   {
+    
     this.updateLights();
-  
+    
     this.graph.displayGraph();
   };
 };
