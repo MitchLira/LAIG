@@ -15,10 +15,23 @@ function LinearAnimation(id, span, controlPoints) {
 	 
 	 this.TotalLength = getLength(controlPoints);
 	 this.velocity = controlPoints/span;
+	 
+	 var deltaZ = controlPoints[1].z - controlPoints[0].z;
+	 var deltaX = controlPoints[1].x - controlPoints[0].x;
+	 
+	 this.angle = Math.atan2(deltaz, deltaX);
+	 
+	 this.secondsElapsed = 0;
  };
  
  
- 
+ LinearAnimation.prototype.rotateandmove = function(currentTime) {
+	 
+	 var seconds = currentTime/1000;
+	 
+			
+	 
+ }
  
  
  LinearAnimation.prototype.getDistance = function(controlPoints) {
