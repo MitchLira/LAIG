@@ -11,7 +11,7 @@ function MySceneGraph(filename, scene) {
     this.illumination;
     this.omniLights = [];
     this.spotLights = [];
-	this.Animations = [];
+    this.animations = [];
     this.textures = {};
     this.materials = {};
     this.transformations = {};
@@ -69,12 +69,14 @@ MySceneGraph.prototype.onXMLReady = function() {
 
     if(this.loadPrimitives(rootElement))
         return;
-
+	
+	if(this.loadAnimations(rootElement))
+    	return;
+	
     if(this.loadComponents(rootElement))
         return;
 
-    if(this.loadAnimations(rootElement))
-    	return;
+
 
 
 
@@ -89,7 +91,7 @@ MySceneGraph.prototype.chekDSXOrder = function(rootElement) {
         console.error("Missing Tag");
         return 1;
     }
-    var rightOrder = ["scene","views","illumination","lights","textures","materials","transformations","primitives","components","animations"];
+    var rightOrder = ["scene","views","illumination","lights","textures","materials","transformations","primitives","animations","components"];
 	var i;
 	for(i = 0; i< rightOrder.length; i++)
 	{
@@ -539,7 +541,7 @@ MySceneGraph.prototype.loadAnimations = function(rootElement) {
 			{
 				controlp = new getXYZ(this.reader.getFloat(getcontrolPoint[j],'xx'),this.reader.getFloat(getcontrolPoint[j],'yy'),this.reader.getFloat(getcontrolPoint[j],'zz'));
 				controlPoints.push(controlp);
-				this.Animations.push(new LinearAnimation(animation, controlp));
+				this.animations.push(new LinearAnimation(animation, controlp));
 				
 			}
 		}
@@ -554,7 +556,7 @@ MySceneGraph.prototype.loadAnimations = function(rootElement) {
 			startang = this.reader.getFloat(getAnimation[i], 'startang');
 			rotang = this.reader.getFloat(getAnimation[i], 'rotang');
 		
-			this.Animations.push(new CircularAnimation(animation, center, radius, startang, rotang));
+			this.animations.push(new CircularAnimation(animation, center, radius, startang, rotang));
 		}
 	}
 }

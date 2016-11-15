@@ -34,6 +34,11 @@ XMLscene.prototype.init = function (application) {
   this.lightsStatus;
   this.viewIndex=0;
   this.materialIndex=0;
+  
+  
+  
+  
+  this.setUpdatePeriod(30);
 };
 
 XMLscene.prototype.initLights = function () {
@@ -151,7 +156,12 @@ XMLscene.prototype.updateMaterial = function () {
     this.materialIndex++;
 }
 
-
+XMLscene.prototype.update = function(currTime) {
+/*	for(var i=0; i < Animations.length; i++)
+	{
+		Animations.update(seconds);
+	}*/
+}
 
 XMLscene.prototype.display = function () {
   // ---- BEGIN Background, camera and axis setup
