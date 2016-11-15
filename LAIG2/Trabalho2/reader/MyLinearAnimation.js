@@ -50,7 +50,7 @@ function LinearAnimation(id, span, controlPoints) {
       }
    }
 
-   increment = timeBetween2Points/this.times[this.nControlpoints];  //razao entre os tempos dá o que tem que aumentar para x,y,z
+   increment = distanceElapsed/this.distances2Points[this.nControlpoints];  //razao entre os tempos dá o que tem que aumentar para x,y,z
    this.position = new getXYZ(
               (increment * this.controlPoints[this.nControlpoints+1].x) + ((1-increment)*this.controlPoints[this.nControlpoints].x),
               (increment * this.controlPoints[this.nControlpoints+1].y) + ((1-increment)*this.controlPoints[this.nControlpoints].y),
