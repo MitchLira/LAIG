@@ -26,6 +26,7 @@ CircularAnimation.prototype.constructor = CircularAnimation;
 	this.nRotations = 0;
 	this.secondsElapsed = 0;
 	this.angleRotated = 0;
+	this.finish = false;
  };
 
 
@@ -40,7 +41,7 @@ CircularAnimation.prototype.getAngle = function(){
 }
 
 
-CircularAnimation.prototype.setChanges = function(currTime) {
+CircularAnimation.prototype.update = function(currTime) {
 
 		if(this.angleRotated >= this.rotang)
 		{
@@ -49,11 +50,12 @@ CircularAnimation.prototype.setChanges = function(currTime) {
 										              this.center.y,
 										              this.center.z + this.radius*Math.cos(this.rotang+this.startang)
                                 );
+            this.finish= true;
 			return;
 		}
 
 		var seconds = currTime/1000;
-		if(nRotations > 0)
+		if(this.nRotations > 0)
 			this.nRotations = (seconds - this.secondsElapsed); //número de segundos que passaram
 
 		this.secondsElapsed = seconds;
@@ -62,7 +64,7 @@ CircularAnimation.prototype.setChanges = function(currTime) {
 
 		this.position = new getXYZ(
                                 this.center.x + this.radius*Math.sin(angleRotated + this.startang),
-								                this.center.y,
-								                this.center.z + this.radius*Math.cos(angleRotated+ this.startang)
+								this.center.y,
+								this.center.z + this.radius*Math.cos(angleRotated+ this.startang)
                               );
 }

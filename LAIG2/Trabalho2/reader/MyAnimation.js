@@ -7,6 +7,6 @@ function MyAnimation(id) {
   this.id = id;
 };
 
-MyAnimation.prototype.setChanges = function(currTime) {};
+MyAnimation.prototype.update = function(currTime) {};
 MyAnimation.prototype.getPosition = function() {};
 MyAnimation.prototype.getAngle = function() {};

@@ -31,8 +31,8 @@ XMLscene.prototype.init = function (application) {
   this.appearance = new CGFappearance(this);
 
   this.anim1 = new CircularAnimation("1", new getXYZ(0, 0, 0), 2.5, 0, 360, 5);
-  this.anim2 = new LinearAnimation("1", [new getXYZ(0, 0, 0), new getXYZ(0,1,0), new getXYZ(1,0,0)],5);
-  this.anims = [this.anim1, this.anim2];
+  this.anim2 = new LinearAnimation("1",10, [new getXYZ(0, 0, 0), new getXYZ(0,1,0), new getXYZ(1,0,0)]);
+  this.anims = [this.anim2, this.anim1];
   this.animated = new Animated(this.tri, this.anims);
 
   //interface
@@ -190,18 +190,19 @@ XMLscene.prototype.display = function () {
 
   // ---- END Background, camera and axis setup
 
-  // if (this.graph.loadedOk)
-  // {
-  //
-  //   this.updateLights();
-  //
-  //   this.graph.displayGraph();
-  // };
-
+/*   if (this.graph.loadedOk)
+   {
+  
+     this.updateLights();
+  
+     this.graph.displayGraph();
+   };
+*/
   this.pushMatrix();
 
   var position = this.animated.getAnimationPosition();
   var angle = this.animated.getAnimationAngle();
+  console.log(position);
   this.translate(position.x, position.y, position.z);
   this.rotate(angle, 0, 1, 0);
 
@@ -209,3 +210,11 @@ XMLscene.prototype.display = function () {
 
   this.popMatrix();
 };
+
+
+
+XMLscene.prototype.update = function(currTime){
+  for(var anim of this.anims){
+    anim.update(currTime);
+  }
+}

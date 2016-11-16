@@ -541,9 +541,8 @@ MySceneGraph.prototype.loadAnimations = function(rootElement) {
 			{
 				controlp = new getXYZ(this.reader.getFloat(getcontrolPoint[j],'xx'),this.reader.getFloat(getcontrolPoint[j],'yy'),this.reader.getFloat(getcontrolPoint[j],'zz'));
 				controlPoints.push(controlp);
-				this.animations.push(new LinearAnimation(id, span, controlp));
-
 			}
+			//this.animations.push(new LinearAnimation(id, span, controlPoints));
 		}
 		else if(type == "circular")
 		{
@@ -556,7 +555,7 @@ MySceneGraph.prototype.loadAnimations = function(rootElement) {
 			startang = this.reader.getFloat(getAnimation[i], 'startang');
 			rotang = this.reader.getFloat(getAnimation[i], 'rotang');
 
-			this.animations.push(new CircularAnimation(animation, center, radius, startang, rotang));
+			//this.animations.push(new CircularAnimation(animation, center, radius, startang, rotang));
 		}
 	}
 }

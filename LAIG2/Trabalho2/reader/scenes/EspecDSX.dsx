@@ -235,7 +235,7 @@
 		<animation id="a2" span="0.5" type="circular"
 			centerx="0" centery="0" centerz="0"
 			radius="0.5" startang="0.3" rotang="0.3" />
-		</animations>
+	</animations>
 
     <components>
 
