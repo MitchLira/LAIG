@@ -510,7 +510,7 @@ MySceneGraph.prototype.loadComponents = function(rootElement) {
         var getTexture = getComponent[i].getElementsByTagName('texture')[0];
         texture = this.reader.getString(getTexture, 'id');
 		
-		/*var getAnimation = getComponent[i].getElementsByTagName('animation');
+		var getAnimation = getComponent[i].getElementsByTagName('animation');
 		if(getAnimation.length > 0)
 		{
 			var getAnimationRef = getAnimation[0].getElementsByTagName('animationRef')[0];
@@ -523,8 +523,10 @@ MySceneGraph.prototype.loadComponents = function(rootElement) {
 				for(var k = 0; k < tmpanimation.length.length; k++)
 				{
 					IDanimation = this.reader.getString(getAnimationRef[k], 'id');
-					animations[k] = this.animations[IDanimation];
+					tmpanimation[k] = this.animations[IDanimation];
 				}
+				animation = new Animated(tmpanimation);
+				console.log(tmpanimation);
 			}
 			else
 			{
@@ -534,8 +536,8 @@ MySceneGraph.prototype.loadComponents = function(rootElement) {
 		}else
 		{
 			animation = null;
-		}*/
-
+		}
+		 
 
         var getChildren = getComponent[i].getElementsByTagName('children')[0];
         var ComponentRef = getChildren.getElementsByTagName('componentref');
@@ -550,7 +552,7 @@ MySceneGraph.prototype.loadComponents = function(rootElement) {
             childrenIDs[j] = this.reader.getString(primitiveRef[j - ComponentRef.length], 'id');
         }
 
-        this.nodes[id] = new Component(id, tranformation, materials, texture, childrenIDs);
+        this.nodes[id] = new Component(id, tranformation, materials, texture, childrenIDs,animation);
     }
 
 }
@@ -583,8 +585,8 @@ MySceneGraph.prototype.visitGraph = function(root, transformationStack, material
     if (!(node instanceof Component)) { 
 		this.scene.pushMatrix();
 
-	//if(node.animationID != null)
-      //		this.scene.multMatrix(component.animationID.getMatrix());
+	if(node.animated != null)
+    		this.scene.multMatrix(component.animated.getMatrix());
 	
         this.scene.multMatrix(transformationStack.top());
 

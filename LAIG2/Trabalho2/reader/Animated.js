@@ -1,6 +1,5 @@
-function Animated(primitive, animations){
-  this.primitive = primitive;
-  this.animations = animations;
+function Animated(animations){
+    this.animations = animations;
 
   this.animationsIndex = 0;
   this.animations[0].finish = false;
@@ -15,9 +14,11 @@ Animated.prototype.getAnimationPosition = function(){
   }
   return this.animations[this.animationsIndex].getPosition();
 };
+
 Animated.prototype.getAnimationAngle = function(){
   return this.animations[this.animationsIndex].getAngle();
-}
+};
+
 Animated.prototype.getMatrix = function() {
 
   var matrix = mat4.create();
@@ -25,4 +26,4 @@ Animated.prototype.getMatrix = function() {
   mat4.rotate(matrix, matrix,this.getAnimationAngle(), [0,1,0]);
 
   return matrix;
-}
+};

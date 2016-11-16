@@ -117,12 +117,12 @@ class SpotLight extends Lights{
 }
 
 class  Component {
-		this.animationID = animationID;
+constructor(id, transformationID, materialIDs, textureID, childrenIDs, animated) {
 		this.id = id;
 		this.transformationID = transformationID;
 		this.materialIDs = materialIDs;
 		this.textureID = textureID;
 		this.childrenIDs = childrenIDs ;
-		this.animationID = animationID;
+		this.animated = animated;
   }
 }
