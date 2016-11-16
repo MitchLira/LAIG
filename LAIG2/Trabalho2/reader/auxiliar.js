@@ -123,5 +123,6 @@ class  Component {
 		this.materialIDs = materialIDs;
 		this.textureID = textureID;
 		this.childrenIDs = childrenIDs ;
+		this.animationID = animationID;
   }
 }
