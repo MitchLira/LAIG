@@ -50,9 +50,6 @@ CircularAnimation.prototype.update = function(currTime) {
 
 		this.angleRotated += this.angularVelocity * (this.nRotations/2);
 
-    console.log(this.center);
-    console.log(this.radius);
-    console.log(this.angleRotated);
 		this.position = new getXYZ(
                                 this.center.x + this.radius*Math.sin(this.angleRotated + this.startang),
 								                this.center.y,

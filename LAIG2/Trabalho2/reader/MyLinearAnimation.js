@@ -10,39 +10,40 @@ function LinearAnimation(id, span, controlPoints) {
  	 MyAnimation.call(this, id);
 
    this.id = id;
-   this.span = span;
+
    this.controlPoints = controlPoints;
    this.position = controlPoints[0];
-   this.finish = false;
-   this.distances2Points =[];
-   this.totalDistance = this.getDistance(this.controlPoints);
-   
-	 this.velocity = this.totalDistance/span;
 	 var deltaZ = this.controlPoints[1].z - this.controlPoints[0].z;
 	 var deltaX = this.controlPoints[1].x - this.controlPoints[0].x;
+   this.angle = Math.atan2(deltaZ, deltaX);
 
-	 this.angle = Math.atan2(deltaZ, deltaX);
+   this.distances2Points = [];
+   this.totalDistance = this.getDistance(this.controlPoints);
 
+	 this.velocity = this.totalDistance/this.span;
 	 this.secondsElapsed = 0;
+   this.distanceElapsed = 0;
    this.nControlpoints = 0;
+   this.finish = false;
  };
 
 
  LinearAnimation.prototype.update = function(currentTime) {
-   var seconds, timeElapsed, increment, distanceElapsed;
+   var seconds, timeElapsed, increment;
 
    seconds = currentTime/1000;
-   timeElapsed = seconds - this.secondsElapsed;
+   if(this.secondsElapsed > 0)
+      timeElapsed = seconds - this.secondsElapsed;
    this.secondsElapsed = seconds;
 
-   distanceElapsed += timeElapsed * this.velocity;
-   if(distanceElapsed > this.distances2Points[this.nControlpoints]){   //Significa que terminou o percurso que tinha que fazer
+   this.distanceElapsed += timeElapsed * this.velocity;
+   if(this.distanceElapsed > this.distances2Points[this.nControlpoints]){   //Significa que terminou o percurso que tinha que fazer
       if(this.nControlpoints  == this.controlPoints.length-2){
         this.finish = true;
         return;
       }
       else{
-        distanceElapsed = 0;
+        this.distanceElapsed = 0;
         this.nControlpoints++;
         this.angle = Math.atan2(
                                   (this.controlPoints[this.nControlpoints + 1].x - this.controlPoints[this.nControlPoints].x),
@@ -51,7 +52,7 @@ function LinearAnimation(id, span, controlPoints) {
       }
    }
 
-   increment = distanceElapsed/this.distances2Points[this.nControlpoints];  //razao entre os tempos dá o que tem que aumentar para x,y,z
+   increment = this.distanceElapsed/this.distances2Points[this.nControlpoints];  //razao entre os tempos dá o que tem que aumentar para x,y,z
    this.position = new getXYZ(
               (increment * this.controlPoints[this.nControlpoints+1].x) + ((1-increment)*this.controlPoints[this.nControlpoints].x),
               (increment * this.controlPoints[this.nControlpoints+1].y) + ((1-increment)*this.controlPoints[this.nControlpoints].y),
@@ -75,7 +76,9 @@ function LinearAnimation(id, span, controlPoints) {
 		 var powY = Math.pow(y2-y1, 2);
 		 var powZ = Math.pow(z2-z1, 2);
 		 var subdistance = Math.sqrt(powX + powY + powZ);
-		 distance += subdistance;
+
+     distance += subdistance;
+     this.distances2Points.push(subdistance);
 	 }
 
 	 return distance;
