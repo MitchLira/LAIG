@@ -9,7 +9,7 @@ function Animated(primitive, animations){
 
 
 Animated.prototype.getAnimationPosition = function(){
-  if(this.animations[this.animationsIndex].finish && (this.animationsIndex != this.animation.length-1)){
+  if(this.animations[this.animationsIndex].finish && (this.animationsIndex != this.animations.length-1)){
     this.animationsIndex++;
     this.animations[this.animationsIndex].finish = false;
   }

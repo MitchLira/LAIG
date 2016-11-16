@@ -15,31 +15,19 @@ CircularAnimation.prototype.constructor = CircularAnimation;
  	this.rotang = (rotang * Math.PI)/180.0;
 
  	this.position = new getXYZ(
-                              this.center.x + this.radius*Math.cos(startang),
+                              this.center.x + this.radius*Math.cos(this.startang),
                               this.center.y,
-								              this.center.z + this.radiu*Math.sin(startang)
+								              this.center.z + this.radius*Math.sin(this.startang)
                             );
 
 
-	this.angularVelocity =  this.rotang/this.span;
+	this.angularVelocity =  this.rotang/span;
 	this.angle = this.startang;
 	this.nRotations = 0;
 	this.secondsElapsed = 0;
 	this.angleRotated = 0;
 	this.finish = false;
  };
-
-
-
-CircularAnimation.prototype.getPosition = function() {
-
-  return this.position;
-}
-CircularAnimation.prototype.getAngle = function(){
-
-  return this.startang;
-}
-
 
 CircularAnimation.prototype.update = function(currTime) {
 
@@ -50,21 +38,33 @@ CircularAnimation.prototype.update = function(currTime) {
 										              this.center.y,
 										              this.center.z + this.radius*Math.cos(this.rotang+this.startang)
                                 );
-            this.finish= true;
+      this.finish= true;
 			return;
 		}
 
 		var seconds = currTime/1000;
-		if(this.nRotations > 0)
+		if(this.secondsElapsed > 0)
 			this.nRotations = (seconds - this.secondsElapsed); //número de segundos que passaram
 
 		this.secondsElapsed = seconds;
 
-		this.angleRotated = this.angularVelocity*nRotations;
+		this.angleRotated += this.angularVelocity * (this.nRotations/2);
 
+    console.log(this.center);
+    console.log(this.radius);
+    console.log(this.angleRotated);
 		this.position = new getXYZ(
-                                this.center.x + this.radius*Math.sin(angleRotated + this.startang),
-								this.center.y,
-								this.center.z + this.radius*Math.cos(angleRotated+ this.startang)
+                                this.center.x + this.radius*Math.sin(this.angleRotated + this.startang),
+								                this.center.y,
+								                this.center.z + this.radius*Math.cos(this.angleRotated+ this.startang)
                               );
+};
+
+CircularAnimation.prototype.getPosition = function() {
+
+  return this.position;
+}
+CircularAnimation.prototype.getAngle = function(){
+
+  return this.angleRotated;
 }

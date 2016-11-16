@@ -30,9 +30,9 @@ XMLscene.prototype.init = function (application) {
   this.tri = new MyTriangle(this, new getXYZ(0,0,0), new getXYZ(2,0,0), new getXYZ(1,2,0));
   this.appearance = new CGFappearance(this);
 
-  this.anim1 = new CircularAnimation("1", new getXYZ(0, 0, 0), 2.5, 0, 360, 5);
+  this.anim1 = new CircularAnimation("1", 10, new getXYZ(0, 0, 0), 2.5, 0, 180);
   this.anim2 = new LinearAnimation("1",10, [new getXYZ(0, 0, 0), new getXYZ(0,1,0), new getXYZ(1,0,0)]);
-  this.anims = [this.anim2, this.anim1];
+  this.anims = [this.anim1]//, this.anim1];
   this.animated = new Animated(this.tri, this.anims);
 
   //interface
@@ -192,9 +192,9 @@ XMLscene.prototype.display = function () {
 
 /*   if (this.graph.loadedOk)
    {
-  
+
      this.updateLights();
-  
+
      this.graph.displayGraph();
    };
 */
@@ -202,7 +202,7 @@ XMLscene.prototype.display = function () {
 
   var position = this.animated.getAnimationPosition();
   var angle = this.animated.getAnimationAngle();
-  console.log(position);
+  //console.log(position);
   this.translate(position.x, position.y, position.z);
   this.rotate(angle, 0, 1, 0);
 
