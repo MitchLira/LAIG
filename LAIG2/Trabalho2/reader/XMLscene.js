@@ -3,7 +3,8 @@ function XMLscene(myInterface) {
   CGFscene.call(this);
 
   this.interface=myInterface;
-
+  
+ 
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -27,14 +28,15 @@ XMLscene.prototype.init = function (application) {
 
   this.axis=new CGFaxis(this);
   
-  
-
   this.appearance = new CGFappearance(this);
 
   //interface
   this.lightsStatus;
   this.viewIndex=0;
   this.materialIndex=0;
+  
+   this.setUpdatePeriod(30);
+
 };
 
 XMLscene.prototype.initLights = function () {

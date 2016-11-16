@@ -222,20 +222,23 @@
     </primitives>
 	
 	<animations>
-    <!-- podem existir zero ou mais nós "animation" -->
-    <!-- span é o tempo, em segundos, que a animação deve -->
-    <!-- demorar. Nesta versão do formato DSX, type pode ter -->
+    <!-- podem existir zero ou mais nós "animation"			  -->
+    <!-- span é o tempo, em segundos, que a animação deve 	  -->
+    <!-- demorar. Nesta versão do formato DSX, type pode ter  -->
     <!-- o valor "linear" ou "circular"; na animacao circular -->
     <!-- os angulos sao expressos em graus  -->
 
-		<animation id="a1" span="0.5" type="linear">
+		<animation id="a1" span="30" type="linear">
 			<controlpoint xx="0" yy="0" zz="0" />
 			<controlpoint xx="1" yy="0" zz="0" />
+			<controlpoint xx="0" yy="0" zz="2" />
+			<controlpoint xx="1" yy="0" zz="0" />
+			<controlpoint xx="0" yy="0" zz="2" />
 		</animation>
     
-		<animation id="a2" span="0.5" type="circular"
-			centerx="0" centery="0" centerz="0"
-			radius="0.5" startang="0.3" rotang="0.3" />
+		<animation id="a2" span="120" type="circular"
+			centerx="-40" centery="40" centerz="0"
+			radius="0" startang="0" rotang="1800" />
 			
 	</animations>
 	
@@ -918,7 +921,7 @@
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			  <translate x="-2" y="1" z="0" />
+			  <translate x="-3" y="1" z="-2" />
 			  <scale x="2" y="2" z="2" />
             </transformation>
 
@@ -944,7 +947,7 @@
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
 			  <translate x="0" y="0" z="0" />
-			  <scale x="0.5" y="1" z="0.5" />
+			  <scale x="3" y="3" z="3" />
 			  <rotate axis ="x" angle ="-90" />
             </transformation>
 
@@ -954,10 +957,9 @@
                 <material id="m1"/>
                 <material id="inherit"  />
             </materials>
-
+	
 
             <texture id="bananas" />
-
 
             <children>
                 <primitiveref id= "torus" />
@@ -1416,8 +1418,8 @@
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			  
-			  <translate x="-40" y="40" z="0" />
+
+			  <translate x="0" y="0" z="0" />
 			  
             </transformation>
 
@@ -1430,7 +1432,10 @@
 
 
             <texture id="relva" />
-
+            
+            <animation>
+                <animationref id="a2" />
+            </animation>
 
             <children>
                 <componentref id= "sunbody" />

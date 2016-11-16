@@ -14,7 +14,7 @@ function MySceneGraph(filename, scene) {
     this.textures = {};
     this.materials = {};
     this.transformations = {};
-    this.animations = {};
+    this.animations = [];
     this.nodes = {};
 
     
@@ -448,7 +448,7 @@ MySceneGraph.prototype.loadAnimations = function(rootElement) {
 				controlPoints.push(new getXYZ(this.reader.getFloat(getcontrolPoint[j],'xx'),this.reader.getFloat(getcontrolPoint[j],'yy'),this.reader.getFloat(getcontrolPoint[j],'zz')));
 			}
 			this.animations[id] = new LinearAnimation(id, span, controlPoints);
-
+			
 		}
 		else if(type == "circular")
 		{
@@ -510,24 +510,25 @@ MySceneGraph.prototype.loadComponents = function(rootElement) {
         var getTexture = getComponent[i].getElementsByTagName('texture')[0];
         texture = this.reader.getString(getTexture, 'id');
 		
+		
 		var getAnimation = getComponent[i].getElementsByTagName('animation');
+		
 		if(getAnimation.length > 0)
 		{
-			var getAnimationRef = getAnimation[0].getElementsByTagName('animationRef')[0];
-
+			var getAnimationRef = getAnimation[0].getElementsByTagName('animationref');
+			
 
 			if(getAnimationRef.length >0)
 			{
-				var tmpanimation = new Array(getAnimationRef.length);
+				var tmpanimations = new Array(getAnimationRef.length);
 				var IDanimation;
-				for(var k = 0; k < tmpanimation.length.length; k++)
+				for(var k = 0; k < tmpanimations.length; k++)
 				{
 					IDanimation = this.reader.getString(getAnimationRef[k], 'id');
-					tmpanimation[k] = this.animations[IDanimation];
+					tmpanimations[k] = this.animations[IDanimation];
 				}
-				console.log(tmpanimation);
-				animation = new Animated(tmpanimation);
-				
+				animation = new Animated(tmpanimations);
+				console.log(animation);
 			}
 			else
 			{
@@ -538,7 +539,7 @@ MySceneGraph.prototype.loadComponents = function(rootElement) {
 		{
 			animation = null;
 		}
-		 
+		
 
         var getChildren = getComponent[i].getElementsByTagName('children')[0];
         var ComponentRef = getChildren.getElementsByTagName('componentref');
@@ -586,26 +587,33 @@ MySceneGraph.prototype.visitGraph = function(root, transformationStack, material
     if (!(node instanceof Component)) { 
 		this.scene.pushMatrix();
 
-	if(node.animated != null)
-    		this.scene.multMatrix(component.animated.getMatrix());
 	
-        this.scene.multMatrix(transformationStack.top());
+	
+    this.scene.multMatrix(transformationStack.top());
 
 	
-        if(textureStack.top() != "none")
-          materialStack.top().setTexture(textureStack.top());
+    if(textureStack.top() != "none")
+    	materialStack.top().setTexture(textureStack.top());
 
-        materialStack.top().apply();
-        node.display();
-        materialStack.top().setTexture(null);
+    materialStack.top().apply();
+    node.display();
+    materialStack.top().setTexture(null);
 
-        this.scene.popMatrix();
+   	this.scene.popMatrix();
         
     } else { 
 
 
 
         currentTransformation = mat4.create();
+
+            		
+        if(node.animated != null){
+        	console.log(node.animated);
+    		this.scene.multMatrix(node.animated.getMatrix());
+    		
+        }
+
         mat4.multiply(currentTransformation, transformationStack.top(),this.transformations[node.transformationID]);
         transformationStack.push(currentTransformation);
 
@@ -622,6 +630,7 @@ MySceneGraph.prototype.visitGraph = function(root, transformationStack, material
             textureStack.push("none");
         else
             textureStack.push(this.textures[texture].texture);
+		
 
 
         for (var i = 0; i < node.childrenIDs.length; i++) {
