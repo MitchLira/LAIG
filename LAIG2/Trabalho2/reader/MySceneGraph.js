@@ -525,8 +525,9 @@ MySceneGraph.prototype.loadComponents = function(rootElement) {
 					IDanimation = this.reader.getString(getAnimationRef[k], 'id');
 					tmpanimation[k] = this.animations[IDanimation];
 				}
-				animation = new Animated(tmpanimation);
 				console.log(tmpanimation);
+				animation = new Animated(tmpanimation);
+				
 			}
 			else
 			{

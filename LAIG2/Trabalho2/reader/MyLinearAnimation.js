@@ -13,7 +13,6 @@ function LinearAnimation(id, span, controlPoints) {
 
    this.controlPoints = controlPoints;
    this.position = this.controlPoints[0];
-	console.log(this.controlPoints);
 	 var deltaZ = this.controlPoints[1].z - this.controlPoints[0].z;
 	 var deltaX = this.controlPoints[1].x - this.controlPoints[0].x;
    this.angle = Math.atan2(deltaZ, deltaX);
