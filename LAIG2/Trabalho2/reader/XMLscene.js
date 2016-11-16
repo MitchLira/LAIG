@@ -31,10 +31,12 @@ XMLscene.prototype.init = function (application) {
   this.appearance = new CGFappearance(this);
 
   this.anim1 = new CircularAnimation("1", 5, new getXYZ(0, 0, 0), 2.5, 0, 360);
-  this.anim2 = new LinearAnimation("1",10, [new getXYZ(0, 0, 0),
+  this.anim2 = new LinearAnimation("1",5, [new getXYZ(0, 0, 0),
                                             new getXYZ(0,1,0),
                                             new getXYZ(1,0,0)]);
-  this.anims = [/*this.anim1],*/ this.anim2];
+  //this.anims = [this.anim1];
+  this.anims = [this.anim2];
+  //this.anims = [this.anim1, this.anim2];
   this.animated = new Animated(this.tri, this.anims);
 
   //interface
@@ -203,7 +205,7 @@ XMLscene.prototype.display = function () {
   var angle = this.animated.getAnimationAngle();
   //console.log(position);
   this.translate(position.x, position.y, position.z);
-  //this.rotate(angle, 0, 1, 0);
+  this.rotate(angle, 0, 1, 0);
 
   this.tri.display();
 
