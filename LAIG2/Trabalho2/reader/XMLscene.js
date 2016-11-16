@@ -3,7 +3,7 @@ function XMLscene(myInterface) {
   CGFscene.call(this);
 
   this.interface=myInterface;
-  
+
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -26,18 +26,23 @@ XMLscene.prototype.init = function (application) {
   this.gl.depthFunc(this.gl.LEQUAL);
 
   this.axis=new CGFaxis(this);
-  
-  
+
+  this.tri = new MyTriangle(this, new getXYZ(0,0,0), new getXYZ(2,0,0), new getXYZ(1,2,0));
   this.appearance = new CGFappearance(this);
+
+  this.anim1 = new CircularAnimation("1", new getXYZ(0, 0, 0), 2.5, 0, 360, 5);
+  this.anim2 = new LinearAnimation("1", [new getXYZ(0, 0, 0), new getXYZ(0,1,0), new getXYZ(1,0,0)],5);
+  this.anims = [this.anim1, this.anim2];
+  this.animated = new Animated(this.tri, this.anims);
 
   //interface
   this.lightsStatus;
   this.viewIndex=0;
   this.materialIndex=0;
-  
-  
-  
-  
+
+
+
+
   this.setUpdatePeriod(30);
 };
 
@@ -179,17 +184,28 @@ XMLscene.prototype.display = function () {
 
   // Draw axis
   this.axis.display();
- 
+
   this.setDefaultAppearance();
 
 
   // ---- END Background, camera and axis setup
-  
-  if (this.graph.loadedOk)
-  {
-    
-    this.updateLights();
-    
-    this.graph.displayGraph();
-  };
+
+  // if (this.graph.loadedOk)
+  // {
+  //
+  //   this.updateLights();
+  //
+  //   this.graph.displayGraph();
+  // };
+
+  this.pushMatrix();
+
+  var position = this.animated.getAnimationPosition();
+  var angle = this.animated.getAnimationAngle();
+  this.translate(position.x, position.y, position.z);
+  this.rotate(angle, 0, 1, 0);
+
+  this.tri.display();
+
+  this.popMatrix();
 };

@@ -531,7 +531,6 @@ MySceneGraph.prototype.loadAnimations = function(rootElement) {
 		id = this.reader.getString(getAnimation[i], 'id');
 		span = this.reader.getFloat(getAnimation[i], 'span');
 		type = this.reader.getString(getAnimation[i], 'type');
-		var animation = new MyAnimation(id, span, type);
 
 		if(type == "linear")
 		{
@@ -542,7 +541,7 @@ MySceneGraph.prototype.loadAnimations = function(rootElement) {
 			{
 				controlp = new getXYZ(this.reader.getFloat(getcontrolPoint[j],'xx'),this.reader.getFloat(getcontrolPoint[j],'yy'),this.reader.getFloat(getcontrolPoint[j],'zz'));
 				controlPoints.push(controlp);
-				this.animations.push(new LinearAnimation(animation, controlp));
+				this.animations.push(new LinearAnimation(id, span, controlp));
 
 			}
 		}

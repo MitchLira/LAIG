@@ -34,9 +34,13 @@ CircularAnimation.prototype.getPosition = function() {
 
   return this.position;
 }
+CircularAnimation.prototype.getAngle = function(){
+
+  return this.startang;
+}
 
 
-CircularAnimation.prototype.rotateAnimation = function(currTime) {
+CircularAnimation.prototype.setChanges = function(currTime) {
 
 		if(this.angleRotated >= this.rotang)
 		{
