@@ -26,25 +26,15 @@ XMLscene.prototype.init = function (application) {
   this.gl.depthFunc(this.gl.LEQUAL);
 
   this.axis=new CGFaxis(this);
+  
+  
 
-  this.tri = new MyTriangle(this, new getXYZ(0,0,0), new getXYZ(2,0,0), new getXYZ(1,2,0));
   this.appearance = new CGFappearance(this);
-
-  this.anim1 = new CircularAnimation("1", 5, new getXYZ(0, 0, 0), 2.5, 0, 360);
-  this.anim2 = new LinearAnimation("1",5, [new getXYZ(0, 0, 0),
-                                            new getXYZ(0,1,0),
-                                            new getXYZ(1,0,0)]);
-  //this.anims = [this.anim1];
-  this.anims = [this.anim2];
-  //this.anims = [this.anim1, this.anim2];
-  this.animated = new Animated(this.tri, this.anims);
 
   //interface
   this.lightsStatus;
   this.viewIndex=0;
   this.materialIndex=0;
-
-  this.setUpdatePeriod(30);
 };
 
 XMLscene.prototype.initLights = function () {
@@ -162,11 +152,11 @@ XMLscene.prototype.updateMaterial = function () {
     this.materialIndex++;
 }
 
-XMLscene.prototype.update = function(currTime) {
-/*	for(var i=0; i < Animations.length; i++)
-	{
-		Animations.update(seconds);
-	}*/
+XMLscene.prototype.update = function(currTime){
+    if (this.graph.loadedOk){
+    for(var id in this.graph.animations)
+      this.graph.animations[id].update(currTime);
+  }
 }
 
 XMLscene.prototype.display = function () {
@@ -185,37 +175,15 @@ XMLscene.prototype.display = function () {
 
   // Draw axis
   this.axis.display();
-
+  
   this.setDefaultAppearance();
 
-
   // ---- END Background, camera and axis setup
-
-/*   if (this.graph.loadedOk)
-   {
-
-     this.updateLights();
-
-     this.graph.displayGraph();
-   };
-*/
-  this.pushMatrix();
-
-  var position = this.animated.getAnimationPosition();
-  var angle = this.animated.getAnimationAngle();
-  //console.log(position);
-  this.translate(position.x, position.y, position.z);
-  this.rotate(angle, 0, 1, 0);
-
-  this.tri.display();
-
-  this.popMatrix();
+  
+  if (this.graph.loadedOk)
+  {
+    this.updateLights();
+  
+    this.graph.displayGraph();
+  };
 };
-
-
-
-XMLscene.prototype.update = function(currTime){
-  for(var anim of this.anims){
-    anim.update(currTime);
-  }
-}

@@ -12,8 +12,8 @@ function LinearAnimation(id, span, controlPoints) {
    this.id = id;
 
    this.controlPoints = controlPoints;
-   this.position = controlPoints[0];
-	 
+   this.position = this.controlPoints[0];
+	console.log(this.controlPoints);
 	 var deltaZ = this.controlPoints[1].z - this.controlPoints[0].z;
 	 var deltaX = this.controlPoints[1].x - this.controlPoints[0].x;
    this.angle = Math.atan2(deltaZ, deltaX);
@@ -21,7 +21,7 @@ function LinearAnimation(id, span, controlPoints) {
    this.distances2Points = [];
 
    for (var i = 0; i < controlPoints.length-1; i++) {
-    var distance = this.getDistanceBetween2Points(controlPoints[i], controlPoints[i+1]);
+    var distance = this.getDistanceBetween2Points(this.controlPoints[i], this.controlPoints[i+1]);
     this.distances2Points.push(distance);
   }
    this.totalDistance = this.getDistance(this.controlPoints);
@@ -58,7 +58,7 @@ function LinearAnimation(id, span, controlPoints) {
                                 );
       }
    }
-   increment = this.distanceElapsed / this.distances2Points[this.nControlpoints];  //razao entre os tempos dá o que tem que aumentar para x,y,z
+   increment = this.distanceElapsed / this.distances2Points[this.nControlpoints];  //razao entre os tempos dรก o que tem que aumentar para x,y,z
 
    this.position = new getXYZ(
               (increment * this.controlPoints[(this.nControlpoints+1)].x) + ((1-increment)*this.controlPoints[this.nControlpoints].x),

@@ -198,6 +198,7 @@
             <rectangle x1="0" y1="0" x2="1" y2="1" />
         </primitive>
 
+
 		<primitive id="triangle">
             <triangle x1="0" y1="0" z1="0" x2="1" y2="0" z2="0" x3="0.5" y3="1" z3="0" />
         </primitive>
@@ -217,8 +218,7 @@
 		<primitive id="torus">
 			<torus inner="0.5" outer="1" slices="40" loops="40" />
 		</primitive>
-		
-		
+	
     </primitives>
 	
 	<animations>
@@ -229,14 +229,16 @@
     <!-- os angulos sao expressos em graus  -->
 
 		<animation id="a1" span="0.5" type="linear">
-			<controlpoint xx="0.1" yy="0.2" zz="0" />
+			<controlpoint xx="0" yy="0" zz="0" />
+			<controlpoint xx="1" yy="0" zz="0" />
 		</animation>
     
 		<animation id="a2" span="0.5" type="circular"
 			centerx="0" centery="0" centerz="0"
 			radius="0.5" startang="0.3" rotang="0.3" />
+			
 	</animations>
-
+	
     <components>
 
         <component id="root">
@@ -315,11 +317,10 @@
 				<componentref id="sidewalk" />
 				<componentref id="pool" />
 				
-				
             </children>
 
         </component>
-       
+        
 		<component id="grass">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1828,10 +1829,17 @@
             <children>
                 <primitiveref id= "rectangle" />
             </children>
-		</component>	
+		</component>
+		
+	
+		
+		
+		
+	
+				
 	
 	</components>
 
 
-	
+
 </dsx>
