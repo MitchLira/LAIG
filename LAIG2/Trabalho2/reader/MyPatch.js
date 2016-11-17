@@ -3,27 +3,34 @@
  * @constructor
  */
  function MyPatch(scene, orderU, orderV, partsU, partsV, controlpoints) {
- 	CGFobject.call(this,scene);
-    
-    this.orderU = orderU;
-    this.orderV = orderV;
-    this.partsU = partsU;
-    this.partsV = partsV;
-    this.controlpoints = controlpoints;
-	
-	
-	this.initBuffers();
+   var points = [];
+
+   var knots1 = this.getKnotsVector(partsU); // to be built inside webCGF in later versions ()
+   var knots2 = this.getKnotsVector(partsV); // to be built inside webCGF in later versions ()
+
+   for(var nU = 0; nU <= orderU; nU++){
+      var arrayPoint = new Array(orderV + 1);
+
+      for(var nV = 0; nV <= orderV; nV++){
+        var p = controlpoints[nV + (orderV + 1) * nU];
+        arrayPoint.push(p);
+      }
+
+      points.push(arrayPoint);
+    }
  };
 
- MyPatch.prototype = Object.create(CGFobject.prototype);
+ MyPatch.prototype = Object.create(CGFnurbsObject.prototype);
  MyPatch.prototype.constructor = MyPatch;
 
- MyPatch.prototype.initBuffers = function() {
- 	this.vertices = [];
- 	this.indices = [];
- 	this.normals = [];
- 	this.texCoords=[];
+ LightingScene.prototype.getKnotsVector = function(degree) { // TODO (CGF 0.19.3): add to CGFnurbsSurface
+   var v = new Array();
+ 	 for (var i=0; i<=degree; i++) {
+     v.push(0);
+   }
+ 	 for (var i=0; i<=degree; i++) {
+     v.push(1);
+ 	 }
 
-	this.primitiveType = this.scene.gl.TRIANGLES;
- 	this.initGLBuffers();
- };
+   return v;
+};
