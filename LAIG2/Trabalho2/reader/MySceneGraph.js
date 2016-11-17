@@ -414,6 +414,15 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
 
         primitive = new MyTorus(this.scene, inner, outer, slices, loops);
 	 }
+	 else if(primitiveName == 'plane')
+	 {
+	 	var dimX = this.reader.getFloat(primitiveTag, 'dimX');
+	 	var dimY = this.reader.getFloat(primitiveTag, 'dimY');
+	 	var partsX = this.reader.getInteger(primitiveTag, 'partsX');
+	 	var partsY = this.reader.getInteger(primitiveTag, 'partsY');
+
+	 	primitive = new MyPlane(this.scene, dimX, dimY, partsX, partsY);
+	 }
      else{
             this.onXMLError("Primitive is not valid.");
             return null;
