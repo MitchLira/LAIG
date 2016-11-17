@@ -232,6 +232,14 @@
             </patch>
         </primitive>
 
+        <primitive id="chessboard">
+            <chessboard du="ii" dv="ii" textureref="ss" su="ii" sv="ii">
+               <c1 r="ff" g="ff" b="ff" a="ff" />
+               <c2 r="ff" g="ff" b="ff" a="ff" />
+               <cs r="ff" g="ff" b="ff" a="ff" />
+            </chessboard>
+        </primitive>
+
     </primitives>
 
 	<animations>

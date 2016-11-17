@@ -441,6 +441,52 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
 
      primitive = new MyPatch(this.scene, orderU, orderV, partsU, partsV, points);
    }
+   else if(primitiveName == 'chessboard'){
+     var du = this.reader.getInteger(primitiveTag, 'du');
+     var dv = this.reader.getInteger(primitiveTag, 'dv');
+     var texture = this.reader.getString(primitiveTag, 'textureref');
+     var su = this.reader.getInteger(primitiveTag, 'su');
+     var sv = this.reader.getInteger(primitiveTag, 'sv');
+     console.log("chessboard" + du + "--" + dv + "--" + texture + "--" + su + + "--" + sv);
+     var CRGB = [];
+
+     var c1 = primitiveTag.getElementsByTagName('c1');
+     console.log(c1.length); 
+     for(var i=0; i<c1.length; i++){
+       var r = this.reader.getFloat(c1, 'r');
+       var g = this.reader.getFloat(c1, 'g');
+       var b = this.reader.getFloat(c1, 'b');
+       var a = this.reader.getFloat(c1, 'a');
+
+       console.log("c1" + r + "--" + g + "--" + b + "--" + a);
+
+       CRGB.push(new getRGBA(r,g,b,a));
+     }
+
+     var c2 = primitiveTag.getElementsByTagName('c2');
+     for(var i=0; i<c1.length; i++){
+       var r = this.reader.getFloat(c2, 'r');
+       var g = this.reader.getFloat(c2, 'g');
+       var b = this.reader.getFloat(c2, 'b');
+       var a = this.reader.getFloat(c2, 'a');
+
+       console.log("c2" + r + "--" + g + "--" + b + "--" + a);
+
+       CRGB.push(new getRGBA(r,g,b,a));
+     }
+
+     var c3 = primitiveTag.getElementsByTagName('c3');
+     for(var i=0; i<c1.length; i++){
+       var r = this.reader.getFloat(c3, 'r');
+       var g = this.reader.getFloat(c3, 'g');
+       var b = this.reader.getFloat(c3, 'b');
+       var a = this.reader.getFloat(c3, 'a');
+
+       console.log("c3" + r + "--" + g + "--" + b + "--" + a);
+
+       CRGB.push(new getRGBA(r,g,b,a));
+     }
+   }
      else{
             this.onXMLError("Primitive is not valid.");
             return null;
