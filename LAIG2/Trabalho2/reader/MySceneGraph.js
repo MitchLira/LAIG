@@ -17,7 +17,7 @@ function MySceneGraph(filename, scene) {
     this.animations = [];
     this.nodes = {};
 
-    
+
 
 
 
@@ -70,9 +70,9 @@ MySceneGraph.prototype.onXMLReady = function() {
     if(this.loadPrimitives(rootElement))
         return;
 
-	if(this.loadAnimations(rootElement))
-    	return;	
-    
+    if(this.loadAnimations(rootElement))
+    	return;
+
     if(this.loadComponents(rootElement))
         return;
 
@@ -116,7 +116,7 @@ MySceneGraph.prototype.loadScene = function(rootElement) {
 }
 
 MySceneGraph.prototype.loadViews = function(rootElement) {
- var getViews, getPerspective; 
+ var getViews, getPerspective;
 
     getViews = rootElement.getElementsByTagName('views')[0];
     if (getViews == null){
@@ -125,7 +125,7 @@ MySceneGraph.prototype.loadViews = function(rootElement) {
       }
 
     getPerspective = getViews.getElementsByTagName('perspective');
-    
+
     var id, near, far, angle, from, to;
     for (var i=0; i < getPerspective.length;i++) {
         id = this.reader.getString(getPerspective[i], 'id');
@@ -146,9 +146,9 @@ MySceneGraph.prototype.loadViews = function(rootElement) {
 
 
 MySceneGraph.prototype.loadIllumination = function(rootElement) {
-   
+
 	var getillumination = rootElement.getElementsByTagName('illumination')[0];
-	
+
 	if(getillumination == null){
 		this.onXMLError("'illumination' element is missing.");
 		return 1;
@@ -173,10 +173,10 @@ MySceneGraph.prototype.loadLights = function(rootElement) {
         return 1;
     }
 
-  
+
     var omniElements, lightElement, locationElement, location;
     var getOmniLights = getLights.getElementsByTagName('omni');
-    
+
     var light, location;
     for(var i=0; i < getOmniLights.length; i++)
     {
@@ -204,11 +204,11 @@ MySceneGraph.prototype.loadLights = function(rootElement) {
 
         this.spotLights.push(new SpotLight(light, angle*Math.PI/180, exponent, target, location));
     }
-        
+
 
     if (this.omniLights.length == 0 && this.spotLights.length == 0)
         onXMLError("Error No lights defined.");
-    
+
 
 }
 
@@ -224,7 +224,7 @@ MySceneGraph.prototype.loadLightsCommon = function(lights) {
    	diffuse = new getRGBA(this.reader.getFloat(getDiffuse, 'r'),this.reader.getFloat(getDiffuse, 'g'),this.reader.getFloat(getDiffuse, 'b'),this.reader.getFloat(getDiffuse, 'a'));
     var getSpecular = lights.getElementsByTagName('specular')[0];
 	specular = new getRGBA(this.reader.getFloat(getSpecular, 'r'),this.reader.getFloat(getSpecular, 'g'),this.reader.getFloat(getSpecular, 'b'),this.reader.getFloat(getSpecular, 'a'));
- 
+
     return new Lights(id, enabled, ambient, diffuse, specular);
 }
 
@@ -274,7 +274,7 @@ MySceneGraph.prototype.loadMaterials = function(rootElement) {
 
 		var getShininess = getMaterial[i].getElementsByTagName('shininess')[0];
 		shininess = this.reader.getFloat(getShininess, 'value');
-		
+
 		var appearance = new CGFappearance(this.scene);
         appearance.setEmission(emission.r, emission.g, emission.b, emission.a);
         appearance.setAmbient(ambient.r, ambient.g, ambient.b, ambient.a);
@@ -288,7 +288,7 @@ MySceneGraph.prototype.loadMaterials = function(rootElement) {
 
 
 MySceneGraph.prototype.loadTranformations = function(rootElement) {
-	
+
 
     var getTransformations = rootElement.getElementsByTagName('transformations')[0];
     if (getTransformations == null){
@@ -297,7 +297,7 @@ MySceneGraph.prototype.loadTranformations = function(rootElement) {
     }
 
     var getTransformation = getTransformations.getElementsByTagName('transformation');
-    
+
 	var id;
     for(var i=0; i < getTransformation.length; i++)
     {
@@ -399,7 +399,7 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
         var stacks = this.reader.getInteger(primitiveTag, 'stacks');
         primitive = new MyCylinder(this.scene, base, top, height, slices, stacks);
 	}
-     else if(primitiveName == 'sphere'){   
+     else if(primitiveName == 'sphere'){
      	var radius = this.reader.getFloat(primitiveTag, 'radius');
         var slices = this.reader.getInteger(primitiveTag, 'slices');
         var stacks = this.reader.getInteger(primitiveTag, 'stacks');
@@ -423,6 +423,24 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
 
 	 	primitive = new MyPlane(this.scene, dimX, dimY, partsX, partsY);
 	 }
+   else if(primitiveName == 'patch'){
+     var orderU = this.reader.getInteger(primitiveTag, 'orderU');
+     var orderV = this.reader.getInteger(primitiveTag, 'orderV');
+     var partsU = this.reader.getInteger(primitiveTag, 'partsU');
+     var partsV = this.reader.getInteger(primitiveTag, 'partsV');
+     var controlPoints = primitiveTag.getElementsByTagName('controlpoint');
+     var points = new Array(controlPoints.length);
+
+     for(var i=0; i<controlPoints.length; i++){
+       var x = this.reader.getFloat(controlPoints[i], 'x');
+       var y = this.reader.getFloat(controlPoints[i], 'y');
+       var z = this.reader.getFloat(controlPoints[i], 'z');
+
+       points.push(new getXYZ(x,y,z));
+     }
+
+     primitive = new MyPatch(orderU, orderV, partsU, partsV, points);
+   }
      else{
             this.onXMLError("Primitive is not valid.");
             return null;
@@ -457,7 +475,7 @@ MySceneGraph.prototype.loadAnimations = function(rootElement) {
 				controlPoints.push(new getXYZ(this.reader.getFloat(getcontrolPoint[j],'xx'),this.reader.getFloat(getcontrolPoint[j],'yy'),this.reader.getFloat(getcontrolPoint[j],'zz')));
 			}
 			this.animations[id] = new LinearAnimation(id, span, controlPoints);
-			
+
 		}
 		else if(type == "circular")
 		{
@@ -501,12 +519,12 @@ MySceneGraph.prototype.loadComponents = function(rootElement) {
         if (transformationref.length != 0) {
             tranformation = this.reader.getString(transformationref[0], 'id');
 
-        } else { 
+        } else {
             tranformation = id + "texture";
             this.transformations[tranformation] = this.getTranformationMatrix(getTransformation);
         }
 
-       
+
         var getMaterials = getComponent[i].getElementsByTagName('materials')[0];
         var getMaterial = getMaterials.getElementsByTagName('material');
         materials = new Array(getMaterial.length);
@@ -515,17 +533,17 @@ MySceneGraph.prototype.loadComponents = function(rootElement) {
         }
 
 
-  
+
         var getTexture = getComponent[i].getElementsByTagName('texture')[0];
         texture = this.reader.getString(getTexture, 'id');
-		
-		
+
+
 		var getAnimation = getComponent[i].getElementsByTagName('animation');
-		
+
 		if(getAnimation.length > 0)
 		{
 			var getAnimationRef = getAnimation[0].getElementsByTagName('animationref');
-			
+
 
 			if(getAnimationRef.length >0)
 			{
@@ -542,13 +560,13 @@ MySceneGraph.prototype.loadComponents = function(rootElement) {
 			else
 			{
 				animation = null;
-			}	
+			}
 
 		}else
 		{
 			animation = null;
 		}
-		
+
 
         var getChildren = getComponent[i].getElementsByTagName('children')[0];
         var ComponentRef = getChildren.getElementsByTagName('componentref');
@@ -583,7 +601,7 @@ MySceneGraph.prototype.displayGraph = function() {
     var materialStack = new Stack();
     var transformationStack = new Stack();
     transformationStack.push(mat4.create());
-    
+
     this.visitGraph(this.rootID, transformationStack, materialStack, textureStack);
 }
 
@@ -593,14 +611,14 @@ MySceneGraph.prototype.visitGraph = function(root, transformationStack, material
 
     node = this.nodes[root];
 
-    if (!(node instanceof Component)) { 
+    if (!(node instanceof Component)) {
 		this.scene.pushMatrix();
 
-	
-	
+
+
     this.scene.multMatrix(transformationStack.top());
 
-	
+
     if(textureStack.top() != "none")
     	materialStack.top().setTexture(textureStack.top());
 
@@ -609,18 +627,18 @@ MySceneGraph.prototype.visitGraph = function(root, transformationStack, material
     materialStack.top().setTexture(null);
 
    	this.scene.popMatrix();
-        
-    } else { 
+
+    } else {
 
 
 
         currentTransformation = mat4.create();
 
-            		
+
         if(node.animated != null){
         	console.log(node.animated);
     		this.scene.multMatrix(node.animated.getMatrix());
-    		
+
         }
 
         mat4.multiply(currentTransformation, transformationStack.top(),this.transformations[node.transformationID]);
@@ -639,7 +657,7 @@ MySceneGraph.prototype.visitGraph = function(root, transformationStack, material
             textureStack.push("none");
         else
             textureStack.push(this.textures[texture].texture);
-		
+
 
 
         for (var i = 0; i < node.childrenIDs.length; i++) {
