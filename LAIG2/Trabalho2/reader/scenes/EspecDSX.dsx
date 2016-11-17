@@ -32,7 +32,7 @@
             <from x="-30" y="30" z="200" />
             <to x="60" y="20" z="-100" />
         </perspective>
-		
+
         <perspective id="p1" near="0.1" far="500" angle="50">
             <from x="55" y="50" z="70" />
             <to x="15" y="10" z="15" />
@@ -199,32 +199,41 @@
         </primitive>
 
 
-		<primitive id="triangle">
+		    <primitive id="triangle">
             <triangle x1="0" y1="0" z1="0" x2="1" y2="0" z2="0" x3="0.5" y3="1" z3="0" />
         </primitive>
 
-		<primitive id="cylinder">
+		    <primitive id="cylinder">
             <cylinder base="0.5" top="0.5" height="1" slices="50" stacks="20" />
         </primitive>
 
-		<primitive id="cone">
-			<cylinder base="0" top="0.5" height="1" slices="50" stacks="20" />
-		</primitive>
+		    <primitive id="cone">
+			     <cylinder base="0" top="0.5" height="1" slices="50" stacks="20" />
+		    </primitive>
 
-		<primitive id="sphere">
-			<sphere radius="0.5" slices="40" stacks="40" />
-		</primitive>
+		    <primitive id="sphere">
+			     <sphere radius="0.5" slices="40" stacks="40" />
+		    </primitive>
 
-		<primitive id="torus">
-			<torus inner="0.5" outer="1" slices="40" loops="40" />
-		</primitive>
+		    <primitive id="torus">
+			     <torus inner="0.5" outer="1" slices="40" loops="40" />
+		    </primitive>
 
-		<primitive id="plane">
-			<plane dimX="2" dimY="2" partsX="10" partsY="10"/>
-		</primitive>
-	
+		    <primitive id="plane">
+			     <plane dimX="2" dimY="2" partsX="10" partsY="10"/>
+		    </primitive>
+
+        <primitive id="patch">
+            <patch orderU="1" orderV="1" partsU="2" partsV="2" >
+                <controlpoint x="1.0" y="1.0" z="1.0" />
+                <controlpoint x="2.0" y="2.0" z="2.0" />
+                <controlpoint x="3.0" y="3.0" z="3.0" />
+                <controlpoint x="4.0" y="4.0" z="4.0" />
+            </patch>
+        </primitive>
+
     </primitives>
-	
+
 	<animations>
     <!-- podem existir zero ou mais nós "animation"			  -->
     <!-- span é o tempo, em segundos, que a animação deve 	  -->
@@ -239,13 +248,13 @@
 			<controlpoint xx="1" yy="0" zz="0" />
 			<controlpoint xx="0" yy="0" zz="2" />
 		</animation>
-    
+
 		<animation id="a2" span="120" type="circular"
 			centerx="-40" centery="40" centerz="0"
 			radius="0" startang="0" rotang="360" />
-			
+
 	</animations>
-	
+
     <components>
 
         <component id="root">
@@ -296,14 +305,14 @@
             </children>
 
         </component>
-		
+
 		<component id="garden">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			  
+
 			  <translate x="0" y="0" z="0" />
-			  
+
             </transformation>
 
             <materials>
@@ -323,11 +332,11 @@
 				<componentref id="fencefront" />
 				<componentref id="sidewalk" />
 				<componentref id="pool" />
-				
+
             </children>
 
         </component>
-        
+
 		<component id="grass">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -349,12 +358,12 @@
 
 
             <children>
-               
+
                 <primitiveref id="plane" />
             </children>
 
-        </component>	
-		
+        </component>
+
 		<component id="tree">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -383,14 +392,14 @@
             </children>
 
         </component>
-		
+
 		<component id="fencefront">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			
-			 
-			  
+
+
+
 			   <translate x="0" y="0" z="0" />
 
             </transformation>
@@ -428,8 +437,8 @@
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			
-			 
+
+
 			  <translate x="0" y="0" z="50" />
 				<scale x="50" y="1" z="1" />
 			   <translate x="0" y="5" z="0" />
@@ -451,12 +460,12 @@
                 <primitiveref id= "rectangle" />
             </children>
 		</component>
-		
+
 		<component id="fence2">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			
+
 			  <translate x="0" y="0" z="50" />
 				<scale x="50" y="1" z="1" />
 			   <translate x="0" y="3" z="0" />
@@ -476,15 +485,15 @@
 
             <children>
                 <primitiveref id= "rectangle" />
-				
+
             </children>
 		</component>
-		
+
 		<component id="fence3">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			
+
 			  <translate x="-50" y="0" z="50" />
 				<scale x="35" y="1" z="1" />
 			   <translate x="0" y="3" z="0" />
@@ -504,15 +513,15 @@
 
             <children>
                 <primitiveref id= "rectangle" />
-				
+
             </children>
 		</component>
-		
+
 		<component id="fence4">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			
+
 			  <translate x="-50" y="0" z="50" />
 				<scale x="35" y="1" z="1" />
 			   <translate x="0" y="5" z="0" />
@@ -532,10 +541,10 @@
 
             <children>
                 <primitiveref id= "rectangle" />
-				
+
             </children>
 		</component>
-		
+
 		<component id="fencepiece1">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -544,7 +553,7 @@
 				 <scale x="1" y="6" z="1" />
 				 <translate x="0" y="1" z="0" />
 				 <rotate axis="x" angle="90" />
-			   
+
 
             </transformation>
 
@@ -563,7 +572,7 @@
                 <primitiveref id= "cylinder" />
             </children>
 		</component>
-		
+
 		<component id="fencepiece2">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -572,7 +581,7 @@
 				 <scale x="1" y="6" z="1" />
 				 <translate x="0" y="1" z="0" />
 				 <rotate axis="x" angle="90" />
-			   
+
 
             </transformation>
 
@@ -591,7 +600,7 @@
                 <primitiveref id= "cylinder" />
             </children>
 		</component>
-		
+
 		<component id="fencepiece3">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -600,7 +609,7 @@
 				 <scale x="1" y="6" z="1" />
 				 <translate x="0" y="1" z="0" />
 				 <rotate axis="x" angle="90" />
-			   
+
 
             </transformation>
 
@@ -618,8 +627,8 @@
             <children>
                 <primitiveref id= "cylinder" />
             </children>
-		</component>	
-		
+		</component>
+
 		<component id="fencepiece4">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -628,7 +637,7 @@
 				 <scale x="1" y="6" z="1" />
 				 <translate x="0" y="1" z="0" />
 				 <rotate axis="x" angle="90" />
-			   
+
 
             </transformation>
 
@@ -647,7 +656,7 @@
                 <primitiveref id= "cylinder" />
             </children>
 		</component>
-		
+
 		<component id="fencepiece5">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -656,7 +665,7 @@
 				 <scale x="1" y="6" z="1" />
 				 <translate x="0" y="1" z="0" />
 				 <rotate axis="x" angle="90" />
-			   
+
 
             </transformation>
 
@@ -675,7 +684,7 @@
                 <primitiveref id= "cylinder" />
             </children>
 		</component>
-		
+
 		<component id="fencepiece6">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -684,7 +693,7 @@
 				 <scale x="1" y="6" z="1" />
 				 <translate x="0" y="1" z="0" />
 				 <rotate axis="x" angle="90" />
-			   
+
 
             </transformation>
 
@@ -702,8 +711,8 @@
             <children>
                 <primitiveref id= "cylinder" />
             </children>
-		</component>	
-		
+		</component>
+
 		<component id="fencepiece7">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -712,7 +721,7 @@
 				 <scale x="1" y="6" z="1" />
 				 <translate x="0" y="1" z="0" />
 				 <rotate axis="x" angle="90" />
-			   
+
 
             </transformation>
 
@@ -731,7 +740,7 @@
                 <primitiveref id= "cylinder" />
             </children>
 		</component>
-		
+
 		<component id="fencepiece8">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -740,7 +749,7 @@
 				 <scale x="1" y="6" z="1" />
 				 <translate x="0" y="1" z="0" />
 				 <rotate axis="x" angle="90" />
-			   
+
 
             </transformation>
 
@@ -759,7 +768,7 @@
                 <primitiveref id= "cylinder" />
             </children>
 		</component>
-		
+
 		<component id="fencepiece9">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -768,7 +777,7 @@
 				 <scale x="1" y="6" z="1" />
 				 <translate x="0" y="1" z="0" />
 				 <rotate axis="x" angle="90" />
-			   
+
 
             </transformation>
 
@@ -787,7 +796,7 @@
                 <primitiveref id= "cylinder" />
             </children>
 		</component>
-		
+
 		<component id="fencepiece10">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -796,7 +805,7 @@
 				 <scale x="1" y="6" z="1" />
 				 <translate x="0" y="1" z="0" />
 				 <rotate axis="x" angle="90" />
-			   
+
 
             </transformation>
 
@@ -814,8 +823,8 @@
             <children>
                 <primitiveref id= "cylinder" />
             </children>
-		</component>	
-		
+		</component>
+
 		<component id="sidewalk">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -869,7 +878,7 @@
             </children>
 
         </component>
-		
+
 		<component id="water">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -895,7 +904,7 @@
             </children>
 
         </component>
-		
+
 		<component id="border">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -921,7 +930,7 @@
             </children>
 
         </component>
-		
+
 		<component id="floatsphere">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -946,7 +955,7 @@
             </children>
 
         </component>
-		
+
 		<component id="floattorus">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -962,7 +971,7 @@
                 <material id="m1"/>
                 <material id="inherit"  />
             </materials>
-	
+
 
             <texture id="bananas" />
 
@@ -971,15 +980,15 @@
             </children>
 
         </component>
-		
+
 		<component id="casa">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			<translate x="-6" y="0" z="15"/> 
+			<translate x="-6" y="0" z="15"/>
 			<scale x="5" y="5" z="5"/>
 			<translate x="-2" y="0" z="0"/>
-			 
+
             </transformation>
 
             <materials>
@@ -1002,11 +1011,11 @@
 				<componentref id= "parede6" />
 				<componentref id= "telhado1" />
 				<componentref id= "telhado2" />
-				
+
             </children>
 
         </component>
-		
+
 		<component id="parede1">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1026,14 +1035,14 @@
 
             <texture id="inherit" />
 
-			
+
             <children>
                 <primitiveref id= "rectangle" />
 				<componentref id= "window1" />
             </children>
 
         </component>
-		
+
 		<component id="parede2">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1052,14 +1061,14 @@
 
             <texture id="inherit" />
 
-			
+
             <children>
                 <primitiveref id= "rectangle" />
 				<componentref id= "door" />
             </children>
 
         </component>
-		
+
 		<component id="parede3">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1079,13 +1088,13 @@
 
             <texture id="inherit" />
 
-			
+
             <children>
                 <primitiveref id= "rectangle" />
             </children>
 
         </component>
-		
+
 		<component id="parede4">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1106,21 +1115,21 @@
 
             <texture id="inherit" />
 
-			
+
             <children>
                 <primitiveref id= "rectangle" />
 				<componentref id= "window2" />
             </children>
 
-        </component>	
-		
+        </component>
+
 		<component id="parede5">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
 			  <translate x="0" y="5" z="4" />
 			  <scale x="4" y="1" z="1" />
-			 
+
             </transformation>
 
             <materials>
@@ -1133,13 +1142,13 @@
 
             <texture id="inherit" />
 
-			
+
             <children>
                 <primitiveref id= "triangle" />
             </children>
 
-        </component>		
-		
+        </component>
+
 		<component id="parede6">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1147,7 +1156,7 @@
 			  <translate x="4" y="5" z="0" />
 			  <rotate axis="y" angle="180" />
 			  <scale x="4" y="1" z="1" />
-			 
+
             </transformation>
 
             <materials>
@@ -1160,25 +1169,25 @@
 
             <texture id="inherit" />
 
-			
+
             <children>
                 <primitiveref id= "triangle" />
             </children>
 
         </component>
-		
+
 		<component id="telhado1">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			  
+
 			  <translate x="4.5" y="4.8" z="0" />
 			  <rotate axis="z" angle="65" />
 			  <scale  x="1" y="2.75" z="4" />
 			  <translate x="0" y="0" z="1" />
 			  <rotate axis="y" angle="90" />
-			  
-			 
+
+
             </transformation>
 
             <materials>
@@ -1191,26 +1200,26 @@
 
             <texture id="telha" />
 
-			
+
             <children>
                 <primitiveref id= "rectangle" />
             </children>
 
         </component>
-	    
+
 		<component id="telhado2">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			  
-			  
+
+
 			  <translate x="2" y="6" z="0" />
 			  <rotate axis="z" angle="-244" />
 			  <scale  x="1" y="2.75" z="4" />
 			  <translate x="0" y="0" z="1" />
 			  <rotate axis="y" angle="90" />
-			  
-			 
+
+
             </transformation>
 
             <materials>
@@ -1223,13 +1232,13 @@
 
             <texture id="telha" />
 
-			
+
             <children>
                 <primitiveref id= "rectangle" />
             </children>
 
         </component>
-        
+
 		<component id="earth">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1255,7 +1264,7 @@
             </children>
 
         </component>
-		
+
 		<component id="body">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1281,7 +1290,7 @@
             </children>
 
         </component>
-		
+
 		<component id="circle">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1306,7 +1315,7 @@
             </children>
 
         </component>
-		
+
 		<component id="leaves">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1332,14 +1341,14 @@
             </children>
 
         </component>
-		
+
 		<component id="branch">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
 			<rotate axis="z" angle="20" />
 			  <rotate axis="y" angle="35" />
-			  
+
 			  <translate x="0.8" y="2" z="0" />
 			  <scale x="0.5" y="0.5" z="2" />
 
@@ -1361,14 +1370,14 @@
             </children>
 
         </component>
-		
+
 		<component id="sky">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			  
+
 			  <translate x="0" y="0" z="0" />
-			  
+
             </transformation>
 
             <materials>
@@ -1385,19 +1394,19 @@
             <children>
                 <componentref id= "sky1" />
 				<componentref id= "sun" />
-				
 
-				
-				
+
+
+
             </children>
 
-        </component>	
-		
+        </component>
+
 		<component id="sky1">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			  
+
 			  <scale x="100" y="50" z="10" />
 			  <translate x="-0.5" y="0" z="0" />
 
@@ -1418,14 +1427,14 @@
                 <primitiveref id= "rectangle" />
             </children>
 			</component>
-		
+
 		<component id="sun">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
 
 			  <translate x="0" y="0" z="0" />
-			  
+
             </transformation>
 
             <materials>
@@ -1437,7 +1446,7 @@
 
 
             <texture id="relva" />
-            
+
             <animation>
                 <animationref id="a2" />
             </animation>
@@ -1453,7 +1462,7 @@
 				<componentref id= "sunray7" />
 				<componentref id= "sunray8" />
 				<componentref id= "sunray9" />
-				
+
             </children>
 
         </component>
@@ -1462,10 +1471,10 @@
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			  
-			  
+
+
 			  <scale x="10" y="10" z="10" />
-			  
+
             </transformation>
 
             <materials>
@@ -1484,7 +1493,7 @@
             </children>
 
         </component>
-		
+
 		<component id="sunray1">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1493,9 +1502,9 @@
 			  <scale x="4" y="4" z="4" />
 			  <translate x="-0.5" y="0" z="0" />
 			  <rotate axis="y" angle="90" />
-			  
-			  
-			  
+
+
+
             </transformation>
 
             <materials>
@@ -1514,7 +1523,7 @@
             </children>
 
         </component>
-		
+
 		<component id="sunray2">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1524,9 +1533,9 @@
 			  <scale x="4" y="4" z="4" />
 			  <translate x="-0.5" y="0" z="0" />
 			  <rotate axis="y" angle="90" />
-			  
-			  
-			  
+
+
+
             </transformation>
 
             <materials>
@@ -1545,7 +1554,7 @@
             </children>
 
         </component>
-		
+
 		<component id="sunray3">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1555,9 +1564,9 @@
 			  <scale x="4" y="4" z="4" />
 			  <translate x="-0.5" y="0" z="0" />
 			  <rotate axis="y" angle="90" />
-			  
-			  
-			  
+
+
+
             </transformation>
 
             <materials>
@@ -1576,7 +1585,7 @@
             </children>
 
         </component>
-		
+
 		<component id="sunray4">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1586,9 +1595,9 @@
 			  <scale x="4" y="4" z="4" />
 			  <translate x="-0.5" y="0" z="0" />
 			  <rotate axis="y" angle="90" />
-			  
-			  
-			  
+
+
+
             </transformation>
 
             <materials>
@@ -1607,7 +1616,7 @@
             </children>
 
         </component>
-		
+
 		<component id="sunray5">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1617,9 +1626,9 @@
 			  <scale x="4" y="4" z="4" />
 			  <translate x="-0.5" y="0" z="0" />
 			  <rotate axis="y" angle="90" />
-			  
-			  
-			  
+
+
+
             </transformation>
 
             <materials>
@@ -1638,7 +1647,7 @@
             </children>
 
         </component>
-		
+
 		<component id="sunray6">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1648,9 +1657,9 @@
 			  <scale x="4" y="4" z="4" />
 			  <translate x="-0.5" y="0" z="0" />
 			  <rotate axis="y" angle="90" />
-			  
-			  
-			  
+
+
+
             </transformation>
 
             <materials>
@@ -1669,7 +1678,7 @@
             </children>
 
         </component>
-		
+
 		<component id="sunray7">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1679,9 +1688,9 @@
 			  <scale x="4" y="4" z="4" />
 			  <translate x="-0.5" y="0" z="0" />
 			  <rotate axis="y" angle="90" />
-			  
-			  
-			  
+
+
+
             </transformation>
 
             <materials>
@@ -1700,7 +1709,7 @@
             </children>
 
         </component>
-		
+
 		<component id="sunray8">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1710,9 +1719,9 @@
 			  <scale x="4" y="4" z="4" />
 			  <translate x="-0.5" y="0" z="0" />
 			  <rotate axis="y" angle="90" />
-			  
-			  
-			  
+
+
+
             </transformation>
 
             <materials>
@@ -1731,7 +1740,7 @@
             </children>
 
         </component>
-		
+
 		<component id="sunray9">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1741,9 +1750,9 @@
 			  <scale x="4" y="4" z="4" />
 			  <translate x="-0.5" y="0" z="0" />
 			  <rotate axis="y" angle="90" />
-			  
-			  
-			  
+
+
+
             </transformation>
 
             <materials>
@@ -1762,12 +1771,12 @@
             </children>
 
         </component>
-		
+
 		<component id="window1">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			
+
 			  <translate x="0.3" y="0.4" z="0.1" />
  			  <scale x="0.4" y="0.4" z="1" />
 
@@ -1793,7 +1802,7 @@
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			
+
 			  <translate x="0.3" y="0.4" z="0.1" />
  			  <scale x="0.4" y="0.4" z="1" />
 
@@ -1814,12 +1823,12 @@
                 <primitiveref id= "rectangle" />
             </children>
 		</component>
-		
+
 		<component id="door">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			
+
 			  <translate x="0.2" y="0" z="0.1" />
  			  <scale x="0.5" y="0.7" z="1" />
 
@@ -1840,14 +1849,14 @@
                 <primitiveref id= "rectangle" />
             </children>
 		</component>
-		
-	
-		
-		
-		
-	
-				
-	
+
+
+
+
+
+
+
+
 	</components>
 
 

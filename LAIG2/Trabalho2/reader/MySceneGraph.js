@@ -439,7 +439,7 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
        points.push(new getXYZ(x,y,z));
      }
 
-     primitive = new MyPatch(orderU, orderV, partsU, partsV, points);
+     primitive = new MyPatch(this.scene, orderU, orderV, partsU, partsV, points);
    }
      else{
             this.onXMLError("Primitive is not valid.");
