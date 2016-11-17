@@ -2,27 +2,40 @@
  * MyPlane
  * @constructor
  */
- function MyPlane(scene, dimX, dimY,partsX, partsY) {
- 	CGFobject.call(this,scene);
-    
-    this.dimX = dimX;
-    this.dimY = dimY;
-    this.partsX = partsX;
-    this.partsY = partsY;
 
-	this.initBuffers();
- };
-
- MyPlane.prototype = Object.create(CGFobject.prototype);
+ MyPlane.prototype = Object.create(CGFnurbsObject.prototype);
  MyPlane.prototype.constructor = MyPlane;
 
- MyPlane.prototype.initBuffers = function() {
- 	 	this.vertices = [];
- 	this.indices = [];
- 	this.normals = [];
- 	this.texCoords=[];
+ function MyPlane(scene, dimX, dimY,partsX, partsY) {
 
-	this.primitiveType = this.scene.gl.TRIANGLES;
- 	this.initGLBuffers();
+	 var knots1 = this.getKnotsVector(1)
+ 	 var knots2 = this.getKnotsVector(1);
+ 	 
+  	 var controlPoints=[[    		 [-dimX/2, -dimY/2, 0.0, 1 ],
+          							 [-dimX/2,  dimY/2, 0.0, 1 ]],
+          			    [            [ dimX/2, -dimY/2, 0.0, 1 ],
+                                     [ dimX/2,  dimY/2, 0.0, 1 ]]];
 
+  	var nurbsSurface = new CGFnurbsSurface(1, 1, knots1, knots2, controlPoints);
+
+  	getSurfacePoint = function(u, v) {
+    return nurbsSurface.getPoint(u, v);
+  };
+
+  CGFnurbsObject.call(this, scene, getSurfacePoint, partsX, partsY);
  };
+
+
+
+
+ MyPlane.prototype.getKnotsVector = function(degree) { // TODO (CGF 0.19.3): add to CGFnurbsSurface
+	
+	var v = new Array();
+	for (var i=0; i<=degree; i++) {
+		v.push(0);
+	}
+	for (var i=0; i<=degree; i++) {
+		v.push(1);
+	}
+	return v;
+}	
