@@ -447,45 +447,23 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
      var texture = this.reader.getString(primitiveTag, 'textureref');
      var su = this.reader.getInteger(primitiveTag, 'su');
      var sv = this.reader.getInteger(primitiveTag, 'sv');
-     console.log("chessboard" + du + "--" + dv + "--" + texture + "--" + su + + "--" + sv);
-     var CRGB = [];
+    
+	 CRGBA = [];
 
-     var c1 = primitiveTag.getElementsByTagName('c1');
-     console.log(c1.length); 
-     for(var i=0; i<c1.length; i++){
-       var r = this.reader.getFloat(c1, 'r');
-       var g = this.reader.getFloat(c1, 'g');
-       var b = this.reader.getFloat(c1, 'b');
-       var a = this.reader.getFloat(c1, 'a');
+     var getC1 = primitiveTag.getElementsByTagName('c1')[0];
+	 var c1 = new getRGBA(this.reader.getFloat(getC1, 'r'),this.reader.getFloat(getC1, 'g'),this.reader.getFloat(getC1, 'b'),this.reader.getFloat(getC1, 'a'));
+	 CRGBA.push(c1);
 
-       console.log("c1" + r + "--" + g + "--" + b + "--" + a);
+	 var getC2 = primitiveTag.getElementsByTagName('c2')[0];
+	  var c2 = new getRGBA(this.reader.getFloat(getC2, 'r'),this.reader.getFloat(getC2, 'g'),this.reader.getFloat(getC2, 'b'),this.reader.getFloat(getC2, 'a'));
+	 CRGBA.push(c2);
 
-       CRGB.push(new getRGBA(r,g,b,a));
-     }
+	 var getCs = primitiveTag.getElementsByTagName('cs')[0];
+	  var cs = new getRGBA(this.reader.getFloat(getCs, 'r'),this.reader.getFloat(getCs, 'g'),this.reader.getFloat(getCs, 'b'),this.reader.getFloat(getCs, 'a'));
+	 CRGBA.push(cs);
 
-     var c2 = primitiveTag.getElementsByTagName('c2');
-     for(var i=0; i<c1.length; i++){
-       var r = this.reader.getFloat(c2, 'r');
-       var g = this.reader.getFloat(c2, 'g');
-       var b = this.reader.getFloat(c2, 'b');
-       var a = this.reader.getFloat(c2, 'a');
+	 primitive = new MyChessBoard(this.scene,du, dv,texture, su, sv, CRGBA);
 
-       console.log("c2" + r + "--" + g + "--" + b + "--" + a);
-
-       CRGB.push(new getRGBA(r,g,b,a));
-     }
-
-     var c3 = primitiveTag.getElementsByTagName('c3');
-     for(var i=0; i<c1.length; i++){
-       var r = this.reader.getFloat(c3, 'r');
-       var g = this.reader.getFloat(c3, 'g');
-       var b = this.reader.getFloat(c3, 'b');
-       var a = this.reader.getFloat(c3, 'a');
-
-       console.log("c3" + r + "--" + g + "--" + b + "--" + a);
-
-       CRGB.push(new getRGBA(r,g,b,a));
-     }
    }
      else{
             this.onXMLError("Primitive is not valid.");

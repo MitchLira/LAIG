@@ -233,10 +233,10 @@
         </primitive>
 
         <primitive id="chessboard">
-            <chessboard du="ii" dv="ii" textureref="ss" su="ii" sv="ii">
-               <c1 r="ff" g="ff" b="ff" a="ff" />
-               <c2 r="ff" g="ff" b="ff" a="ff" />
-               <cs r="ff" g="ff" b="ff" a="ff" />
+            <chessboard du="12" dv="12" textureref="agua" su="1" sv="1">
+               <c1 r="0" g="0" b="0" a="1" />
+               <c2 r="0.2" g="0.4" b="0.5" a="0.2" />
+               <cs r="0.5" g="0.8" b="0.1" a="0.3" />
             </chessboard>
         </primitive>
 
@@ -257,7 +257,7 @@
 			<controlpoint xx="0" yy="0" zz="2" />
 		</animation>
 
-		<animation id="a2" span="120" type="circular"
+		<animation id="a2" span="30" type="circular"
 			centerx="-40" centery="40" centerz="0"
 			radius="0" startang="0" rotang="360" />
 
