@@ -16,7 +16,7 @@ MyChessBoard.prototype.constructor = MyChessBoard;
 
 
     this.shader = new CGFshader(scene.gl, "shaders\\text.vert", "shaders\\text.frag");
-    this.plane = new MyPlane(this.scene,10 ,10 ,100 ,100);
+    this.plane = new MyPlane(this.scene,10 ,10 ,50 ,50);
     this.texture = this.scene.graph.textures[textureref].texture;
 
     this.shader.setUniformsValues({ uSampler : 0,
