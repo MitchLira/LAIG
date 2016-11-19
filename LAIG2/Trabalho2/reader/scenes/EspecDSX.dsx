@@ -112,7 +112,7 @@
 		<texture id="telha" file="resources\\images\\telhado.png" length_s="1.0" length_t="1.0" />
 		<texture id="madeira" file="resources\\images\\madeira.png" length_s="1.0" length_t="1.0" />
 		<texture id="arvore" file="resources\\images\\arvore.png" length_s="1.0" length_t="1.0" />
-		<texture id="folhas" file="resources\\images\\folhas.png" length_s="0.1" length_t="0.2" />
+		<texture id="folhas" file="resources\\images\\folhas.png" length_s="8.0" length_t="8.0" />
 		<texture id="janela" file="resources\\images\\janela.png" length_s="1.0" length_t="1.0" />
 		<texture id="porta" file="resources\\images\\porta.png" length_s="1.0" length_t="1.0" />
 		<texture id="stone" file="resources\\images\\sidewalk.png" length_s="1.0" length_t="1.0" />
