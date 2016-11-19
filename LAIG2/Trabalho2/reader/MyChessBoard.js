@@ -14,4 +14,26 @@ MyChessBoard.prototype.constructor = MyChessBoard;
     this.c2 = CRGBA[1];
     this.cs = CRGBA[2];
 
- };
+
+    this.shader = new CGFshader(scene.gl, "shaders\\text.vert", "shaders\\text.frag");
+    this.plane = new MyPlane(this.scene,10 ,10 ,100 ,100);
+    this.texture = this.scene.graph.textures[textureref].texture;
+
+    this.shader.setUniformsValues({ uSampler : 0,
+                                    color1 : [this.c1.r, this.c1.g, this.c1.b, this.c1.a],
+                                    color2 : [this.c2.r, this.c2.g, this.c2.b, this.c2.a],
+                                    colorMark : [this.cs.r, this.cs.g, this.cs.b, this.cs.a],
+                                    divU:parseInt(this.du)*1.0,
+                                    divV:parseInt(this.dv)*1.0,
+                                    sU:parseInt(this.su)*1.0,
+                                    sV:parseInt(this.sv)*1.0});
+
+};
+
+MyChessBoard.prototype.display = function() {
+  this.texture.bind(0);
+
+  this.scene.setActiveShader(this.shader);
+  this.plane.display();
+  this.scene.setActiveShader(this.scene.defaultShader);
+};

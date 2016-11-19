@@ -121,6 +121,7 @@
 		<texture id="terra" file="resources\\images\\terra.png" length_s="1.0" length_t="1.0" />
 		<texture id="stripes" file="resources\\images\\boiaesfera.png" length_s="1.0" length_t="1.0" />
 		<texture id="bananas" file="resources\\images\\boiatorus.png" length_s="1.0" length_t="1.0" />
+    <texture id="black" file="resources\\images\\black.png" length_s="2.0" length_t="2.0" />
     </textures>
 
 
@@ -233,9 +234,9 @@
         </primitive>
 
         <primitive id="chessboard">
-            <chessboard du="12" dv="12" textureref="agua" su="1" sv="1">
-               <c1 r="0" g="0" b="0" a="1" />
-               <c2 r="0.2" g="0.4" b="0.5" a="0.2" />
+            <chessboard du="12" dv="12" textureref="black" su="1" sv="1">
+               <c1 r="0" g="0" b="0" a="0" />
+               <c2 r="1" g="1" b="1" a="1" />
                <cs r="0.5" g="0.8" b="0.1" a="0.3" />
             </chessboard>
         </primitive>
@@ -252,16 +253,14 @@
 		<animation id="a1" span="30" type="linear">
 			<controlpoint xx="0" yy="0" zz="0" />
 			<controlpoint xx="1" yy="0" zz="0" />
-			<controlpoint xx="0" yy="0" zz="2" />
-			<controlpoint xx="1" yy="0" zz="0" />
-			<controlpoint xx="0" yy="0" zz="2" />
 		</animation>
 
-		<animation id="a2" span="30" type="circular"
-			centerx="-40" centery="40" centerz="0"
-			radius="0" startang="0" rotang="360" />
-
+		<animation id="a2" span="30" type="circular" 
+		centerx="-40" centery="40" centerz="0" 
+		radius="0" startang="0" rotang="360" />
+	
 	</animations>
+
 
     <components>
 
@@ -306,14 +305,43 @@
                 <!-- deve existir uma ou mais tags "componentref" e/ou -->
                 <!-- "primitiveref", identificando outros -->
                 <!-- componentes ou primitivas -->
+
+				
 				<componentref id="casa" />
                 <componentref id="garden" />
 				<componentref id="sky" />
+				<componentref id="boardgame" />
+				
 
             </children>
 
         </component>
+        <component id="boardgame">
 
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			  <translate x="20" y="1" z="75" />
+			  <rotate axis="x" angle="-90" />
+			  <scale x="3" y="3" z="1" />
+
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="relva" />
+
+            <children>
+                <primitiveref id= "chessboard" />
+            </children>
+
+        </component>
+		
 		<component id="garden">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -1008,6 +1036,7 @@
 
 
             <texture id="tinta" />
+			
 
 
             <children>
@@ -1402,10 +1431,6 @@
             <children>
                 <componentref id= "sky1" />
 				<componentref id= "sun" />
-
-
-
-
             </children>
 
         </component>
@@ -1429,7 +1454,7 @@
 
 
             <texture id="ceu" />
-
+			
 
             <children>
                 <primitiveref id= "rectangle" />
@@ -1494,6 +1519,7 @@
 
 
             <texture id="sunny" />
+		
 
 
             <children>

@@ -579,7 +579,6 @@ MySceneGraph.prototype.loadComponents = function(rootElement) {
 					tmpanimations[k] = this.animations[IDanimation];
 				}
 				animation = new Animated(tmpanimations);
-				console.log(animation);
 			}
 			else
 			{
@@ -653,19 +652,14 @@ MySceneGraph.prototype.visitGraph = function(root, transformationStack, material
    	this.scene.popMatrix();
 
     } else {
-
-
-
         currentTransformation = mat4.create();
-
-
+		var animationMatrix = mat4.create();
         if(node.animated != null){
-        	console.log(node.animated);
-    		this.scene.multMatrix(node.animated.getMatrix());
-
+    		 mat4.multiply(animationMatrix, animationMatrix,node.animated.getMatrix());
         }
 
         mat4.multiply(currentTransformation, transformationStack.top(),this.transformations[node.transformationID]);
+        mat4.multiply(currentTransformation, animationMatrix, currentTransformation);
         transformationStack.push(currentTransformation);
 
         var material = node.materialIDs[this.scene.materialIndex % node.materialIDs.length];
@@ -691,6 +685,7 @@ MySceneGraph.prototype.visitGraph = function(root, transformationStack, material
         transformationStack.pop();
         materialStack.pop();
         textureStack.pop();
+
 
       }
 
