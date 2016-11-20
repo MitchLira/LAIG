@@ -27,8 +27,8 @@ function MyVehicle(scene){
 
     new getXYZ(0.000,	-1.000,	1.200),
     new getXYZ(-1.000,	-1.000,	1.200),
-    new getXYZ(-1.000, 1.000,	1.200),
-    new getXYZ(1.000,	1.000,	1.200),
+    new getXYZ(-1.000,   1.000,	1.200),
+    new getXYZ(1.000,	 1.000,	1.200),
     new getXYZ(1.000,	-1.000,	1.200),
     new getXYZ(0.000,	-1.000,	1.200),
 
@@ -46,7 +46,8 @@ function MyVehicle(scene){
     new getXYZ(-0.048,	-0.491,	2.000),
     new getXYZ(-0.048,	-0.491,	2.000)
   ];
-  this.balloon = new MyPatch(this.scene, 6, 6, 10, 10, controlPoints);
+  
+  this.balloon = new MyPatch(this.scene, 5, 5, 10, 10, controlPoints);
 
   this.braco1 = new MyCylinder(this.scene, 0.5, 0.5, 6, 50, 20);
   this.braco2 = new MyCylinder(this.scene, 0.5, 0.5, 6, 50, 20);
