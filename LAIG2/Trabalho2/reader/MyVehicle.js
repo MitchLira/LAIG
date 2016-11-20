@@ -108,26 +108,30 @@ MyVehicle.prototype.display = function(){
   this.scene.pushMatrix();
   this.scene.translate(4,0,4);
   this.scene.rotate(Math.PI,0,1,0);
-//  this.cesta3.display();
+  this.cesta3.display();
+  this.scene.translate(4,0,0);
+  this.scene.rotate(Math.PI,0,1,0);
+  this.cesta3.display();
   this.scene.popMatrix();
 
   this.scene.pushMatrix();
   this.scene.translate(0,0,4);
   this.scene.rotate(Math.PI/2,0,1,0);
   this.cesta4.display();
-  //this.scene.translate(0,10,0);
-  //this.cesta4.display();
+  this.scene.translate(4,0,0);
+  this.scene.rotate(Math.PI,0,1,0);
+  this.cesta4.display();
   this.scene.popMatrix();
 
   this.scene.pushMatrix();
   this.scene.translate(2,0,2);
   this.scene.rotate(-Math.PI/2,1,0,0);
-//  this.cestaBase.display();
+  this.cestaBase.display();
+  this.scene.rotate(Math.PI,1,0,0);
+  this.cestaBase.display();
   this.scene.popMatrix();
 
   this.scene.pushMatrix();
-  this.scene.translate(2,0,2);
-  this.scene.rotate(Math.PI/2,1,0,0);
-  //this.cestaBase.display();
+  this.balloon.display();
   this.scene.popMatrix();
 };

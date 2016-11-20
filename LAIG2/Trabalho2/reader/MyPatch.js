@@ -34,3 +34,5 @@
 
    return v;
 };
+
+MyPatch.prototype.display = function(){};
