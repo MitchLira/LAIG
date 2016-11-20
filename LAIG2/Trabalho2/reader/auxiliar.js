@@ -13,7 +13,7 @@ class getXYZ{
 	}
 };
 
-class getXYZW{ 
+class getXYZW{
 	constructor(x,y,z,w){
 		this.x = x;
 		this.y = y;

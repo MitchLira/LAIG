@@ -3,8 +3,8 @@ function XMLscene(myInterface) {
   CGFscene.call(this);
 
   this.interface=myInterface;
-  
- 
+
+
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -27,14 +27,15 @@ XMLscene.prototype.init = function (application) {
   this.gl.depthFunc(this.gl.LEQUAL);
 
   this.axis=new CGFaxis(this);
-  
   this.appearance = new CGFappearance(this);
+
+  this.pat = new MyVehicle(this);
 
   //interface
   this.lightsStatus;
   this.viewIndex=0;
   this.materialIndex=0;
-  
+
    this.setUpdatePeriod(30);
 
 };
@@ -177,15 +178,17 @@ XMLscene.prototype.display = function () {
 
   // Draw axis
   this.axis.display();
-  
+
   this.setDefaultAppearance();
 
+  this.pat.display();
+
   // ---- END Background, camera and axis setup
-  
+  /*
   if (this.graph.loadedOk)
   {
     this.updateLights();
-  
+
     this.graph.displayGraph();
-  };
+  };*/
 };

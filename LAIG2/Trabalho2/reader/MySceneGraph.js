@@ -447,7 +447,7 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
      var texture = this.reader.getString(primitiveTag, 'textureref');
      var su = this.reader.getInteger(primitiveTag, 'su');
      var sv = this.reader.getInteger(primitiveTag, 'sv');
-    
+
 	 CRGBA = [];
 
      var getC1 = primitiveTag.getElementsByTagName('c1')[0];
@@ -464,6 +464,9 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
 
 	 primitive = new MyChessBoard(this.scene,du, dv,texture, su, sv, CRGBA);
 
+   }
+   else if(primitiveName == 'vehicle'){
+     primitive = new MyVehicle(this.scene);
    }
      else{
             this.onXMLError("Primitive is not valid.");
