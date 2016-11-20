@@ -255,10 +255,10 @@
 			<controlpoint xx="1" yy="0" zz="0" />
 		</animation>
 
-		<animation id="a2" span="30" type="circular" 
-		centerx="-40" centery="40" centerz="0" 
+		<animation id="a2" span="30" type="circular"
+		centerx="-40" centery="40" centerz="0"
 		radius="0" startang="0" rotang="360" />
-	
+
 	</animations>
 
 
@@ -306,12 +306,12 @@
                 <!-- "primitiveref", identificando outros -->
                 <!-- componentes ou primitivas -->
 
-				
+
 				<componentref id="casa" />
                 <componentref id="garden" />
 				<componentref id="sky" />
 				<componentref id="boardgame" />
-				
+
 
             </children>
 
@@ -341,7 +341,7 @@
             </children>
 
         </component>
-		
+
 		<component id="garden">
 
             <!-- bloco "transformation" obrigatorio -->
@@ -394,7 +394,6 @@
 
 
             <children>
-
                 <primitiveref id="plane" />
             </children>
 
@@ -1036,7 +1035,7 @@
 
 
             <texture id="tinta" />
-			
+
 
 
             <children>
@@ -1454,7 +1453,7 @@
 
 
             <texture id="ceu" />
-			
+
 
             <children>
                 <primitiveref id= "rectangle" />
@@ -1519,7 +1518,7 @@
 
 
             <texture id="sunny" />
-		
+
 
 
             <children>
