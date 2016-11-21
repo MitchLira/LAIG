@@ -470,9 +470,9 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
    else if(primitiveName == 'vehicle'){
      primitive = new MyVehicle(this.scene);
    }
-     else{
-            this.onXMLError("Primitive is not valid.");
-            return null;
+   else{
+     this.onXMLError("Primitive is not valid.");
+     return null;
     }
 
     return primitive;

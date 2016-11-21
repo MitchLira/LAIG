@@ -254,9 +254,10 @@
                <c2 r="1" g="1" b="1" a="1" />
                <cs r="0.5" g="0.8" b="0.1" a="0.3" />
             </chessboard>
+    
         </primitive>
-
-        <primitive id="vehicle">
+			<primitive id="vehicle">
+        <vehicle />
         </primitive>
 
     </primitives>
@@ -326,7 +327,7 @@
 
 
 				<componentref id="casa" />
-        <componentref id="garden" />
+        		<componentref id="garden" />
 				<componentref id="sky" />
 				<componentref id="boardgame" />
 				<componentref id="balloon" />
@@ -340,7 +341,9 @@
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			         <translate x="0" y="0" z="0" />
+			  <translate x="0" y="0" z="0" />
+
+
             </transformation>
 
             <materials>
