@@ -29,8 +29,6 @@ XMLscene.prototype.init = function (application) {
   this.axis=new CGFaxis(this);
   this.appearance = new CGFappearance(this);
 
-  this.pat = new MyVehicle(this);
-
   //interface
   this.lightsStatus;
   this.viewIndex=0;
@@ -181,14 +179,12 @@ XMLscene.prototype.display = function () {
 
   this.setDefaultAppearance();
 
-  this.pat.display();
-
   // ---- END Background, camera and axis setup
-  /*
+
   if (this.graph.loadedOk)
   {
     this.updateLights();
 
     this.graph.displayGraph();
-  };*/
+  };
 };

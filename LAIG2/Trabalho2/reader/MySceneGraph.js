@@ -430,7 +430,7 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
      var partsV = this.reader.getInteger(primitiveTag, 'partsV');
      var controlPoints = primitiveTag.getElementsByTagName('controlpoint');
      var points = [];
-	
+
      for(var i=0; i<controlPoints.length; i++){
        var x = this.reader.getFloat(controlPoints[i], 'x');
        var y = this.reader.getFloat(controlPoints[i], 'y');

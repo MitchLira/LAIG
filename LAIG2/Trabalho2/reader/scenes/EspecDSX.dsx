@@ -256,6 +256,9 @@
             </chessboard>
         </primitive>
 
+        <primitive id="vehicle">
+        </primitive>
+
     </primitives>
 
 	<animations>
@@ -323,14 +326,39 @@
 
 
 				<componentref id="casa" />
-                <componentref id="garden" />
+        <componentref id="garden" />
 				<componentref id="sky" />
 				<componentref id="boardgame" />
+				<componentref id="balloon" />
 
 
             </children>
 
         </component>
+
+        <component id="balloon">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+			         <translate x="0" y="0" z="0" />
+            </transformation>
+
+            <materials>
+                <material id="inherit"  />
+                <material id="m2"/>
+                <material id="m1"/>
+                <material id="inherit"  />
+            </materials>
+
+
+            <texture id="relva" />
+
+            <children>
+                <primitiveref id= "vehicle" />
+            </children>
+
+        </component>
+
         <component id="boardgame">
 
             <!-- bloco "transformation" obrigatorio -->
