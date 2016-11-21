@@ -7,10 +7,9 @@ LinearAnimation.prototype = Object.create(MyAnimation.prototype);
 LinearAnimation.prototype.constructor = LinearAnimation;
 
 function LinearAnimation(id, span, controlPoints) {
- 	 MyAnimation.call(this, id);
-
+   MyAnimation.call(this, id);
+   
    this.id = id;
-
    this.controlPoints = controlPoints;
    this.position = this.controlPoints[0];
 	 var deltaZ = this.controlPoints[1].z - this.controlPoints[0].z;
@@ -24,7 +23,6 @@ function LinearAnimation(id, span, controlPoints) {
     this.distances2Points.push(distance);
   }
    this.totalDistance = this.getDistance(this.controlPoints);
-
    this.velocity = this.totalDistance/span;
    this.secondsElapsed = 0;
    this.distanceElapsed = 0;
@@ -69,7 +67,7 @@ function LinearAnimation(id, span, controlPoints) {
 
  LinearAnimation.prototype.getDistance = function(controlPoints) {
 	 var distance = 0;
-	 for(var i= 0; i < controlPoints.length - 2; i++)
+	 for(var i= 0; i <= (controlPoints.length - 2); i++)
 	 {
 		 var x2 = controlPoints[i+1].x;
 		 var x1 = controlPoints[i].x;
@@ -82,12 +80,11 @@ function LinearAnimation(id, span, controlPoints) {
 		 var powY = Math.pow(y2-y1, 2);
 		 var powZ = Math.pow(z2-z1, 2);
 		 var subdistance = Math.sqrt(powX + powY + powZ);
-
-     distance += subdistance;
+     	 distance+= subdistance;
      this.distances2Points.push(subdistance);
 	 }
-
 	 return distance;
+
  };
 
  LinearAnimation.prototype.getDistanceBetween2Points = function(P1,P2) {
