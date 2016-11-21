@@ -46,7 +46,7 @@ function MyVehicle(scene){
     new getXYZ(-0.048,	-0.491,	2.000),
     new getXYZ(-0.048,	-0.491,	2.000)
   ];
-  
+
   this.balloon = new MyPatch(this.scene, 5, 5, 10, 10, controlPoints);
 
   this.braco1 = new MyCylinder(this.scene, 0.5, 0.5, 6, 50, 20);
@@ -59,12 +59,21 @@ function MyVehicle(scene){
   this.cesta3 = new MyRectangle(this.scene, new getXYZ(0,2,0), new getXYZ(4,0,0));
   this.cesta4 = new MyRectangle(this.scene, new getXYZ(0,2,0), new getXYZ(4,0,0));
   this.cestaBase = new MyPlane(this.scene, 4, 4, 1, 1);
+
+  this.balaoTexture = new CGFappearance(this.scene);
+  this.balaoTexture.loadTexture("resources\\images\\balao.png");
+
+  this.cestaTexture = new CGFappearance(this.scene);
+  this.cestaTexture.loadTexture("resources\\images\\cesta.png");
 };
 
 MyVehicle.prototype = Object.create(CGFobject.prototype);
 MyVehicle.prototype.constructor = MyVehicle;
 
 MyVehicle.prototype.display = function(){
+
+  this.cestaTexture.apply();
+
   this.scene.pushMatrix();
   this.scene.scale(0.5,1,0.5);
   this.scene.rotate(-Math.PI/2,1,0,0);
@@ -134,7 +143,11 @@ MyVehicle.prototype.display = function(){
   this.cestaBase.display();
   this.scene.popMatrix();
 
+  this.balaoTexture.apply();
+
   this.scene.pushMatrix();
+  this.scene.translate(2,14,-8);
+  this.scene.scale(10,10,10);
   this.balloon.display();
   this.scene.popMatrix();
 };

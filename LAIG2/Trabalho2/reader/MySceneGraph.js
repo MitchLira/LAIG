@@ -439,7 +439,9 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
        points.push(new getXYZ(x,y,z));
      }
 
-     //primitive = new 	MyPatch(this.scene, orderU, orderV, partsU, partsV, points);
+     console.log(controlPoints);
+
+     primitive = new 	MyPatch(this.scene, orderU, orderV, partsU, partsV, points);
    }
    else if(primitiveName == 'chessboard'){
      var du = this.reader.getInteger(primitiveTag, 'du');
