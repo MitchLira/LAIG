@@ -254,11 +254,11 @@
                <c2 r="1" g="1" b="1" a="1" />
                <cs r="0.5" g="0.8" b="0.1" a="0.3" />
             </chessboard>
-    
         </primitive>
+
 			<primitive id="vehicle">
-        <vehicle />
-        </primitive>
+          <vehicle />
+      </primitive>
 
     </primitives>
 
@@ -269,14 +269,18 @@
     <!-- o valor "linear" ou "circular"; na animacao circular -->
     <!-- os angulos sao expressos em graus  -->
 
-		<animation id="a1" span="30" type="linear">
+		<animation id="a1" span="10" type="linear">
 			<controlpoint xx="0" yy="0" zz="0" />
-			<controlpoint xx="1" yy="0" zz="0" />
+			<controlpoint xx="0" yy="20" zz="0" />
 		</animation>
 
 		<animation id="a2" span="30" type="circular"
 		centerx="-40" centery="40" centerz="0"
 		radius="0" startang="0" rotang="360" />
+
+    <animation id="a3" span="30" type="circular"
+		centerx="-40" centery="0" centerz="60"
+		radius="15" startang="0" rotang="360" />
 
 	</animations>
 
@@ -341,9 +345,7 @@
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-			  <translate x="0" y="0" z="0" />
-
-
+			           <translate x="0" y="0" z="0" />
             </transformation>
 
             <materials>
@@ -353,8 +355,11 @@
                 <material id="inherit"  />
             </materials>
 
-
             <texture id="relva" />
+
+            <animation>
+                <animationref id="a1" />
+            </animation>
 
             <children>
                 <primitiveref id= "vehicle" />

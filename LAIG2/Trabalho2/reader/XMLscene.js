@@ -29,6 +29,8 @@ XMLscene.prototype.init = function (application) {
   this.axis=new CGFaxis(this);
   this.appearance = new CGFappearance(this);
 
+  this.anim1 = MyLinearAnimation()
+
   //interface
   this.lightsStatus;
   this.viewIndex=0;
@@ -153,12 +155,6 @@ XMLscene.prototype.updateMaterial = function () {
     this.materialIndex++;
 }
 
-XMLscene.prototype.update = function(currTime){
-    if (this.graph.loadedOk){
-    for(var id in this.graph.animations)
-      this.graph.animations[id].update(currTime);
-  }
-}
 
 XMLscene.prototype.display = function () {
   // ---- BEGIN Background, camera and axis setup
@@ -187,4 +183,12 @@ XMLscene.prototype.display = function () {
 
     this.graph.displayGraph();
   };
+};
+
+
+XMLscene.prototype.update = function(currTime){
+    if (this.graph.loadedOk){
+    for(var id in this.graph.animations)
+      this.graph.animations[id].update(currTime);
+  }
 };
