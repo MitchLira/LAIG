@@ -29,8 +29,8 @@
         <!-- a vista muda para a proxima da lista; da -->
         <!-- ultima vista da lista volta 'a primeira -->
 
-		<perspective id="p2" near="0.1" far="120" angle="20">
-            <from x="30" y="30" z="30" />
+		<perspective id="p2" near="0.1" far="120" angle="30">
+            <from x="40" y="30" z="40" />
             <to x="0" y="0" z="0" />
         </perspective>
 		
@@ -185,7 +185,7 @@
 		    </primitive>
 
 		    <primitive id="plane">
-			     <plane dimX="9" dimY="9" partsX="9" partsY="9"/>
+			     <plane dimX="18" dimY="18" partsX="9" partsY="9"/>
 		    </primitive>
 
         <primitive id="patch">
@@ -218,6 +218,10 @@
                <c2 r="1" g="1" b="1" a="1" />
                <cs r="0.5" g="0.8" b="0.1" a="0.3" />
             </chessboard>
+        </primitive>
+
+        <primitive id="boardcomponent1">
+        	<boardcomponent1 />
         </primitive>
 
 
@@ -311,12 +315,14 @@
             <texture id="purple" />
 
             <children>
-                <componentref id= "boardplane" />
+                <componentref id= "boardplanetop" />
+                <componentref id= "boardplanebottom" />
+               	<primitiveref id= "boardcomponent1" />
             </children>
 
         </component>
 
-        <component id="boardplane">
+        <component id="boardplanetop">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
@@ -335,7 +341,27 @@
             <children>
                 <primitiveref id= "plane" />
             </children>
+        </component>
 
+ 		<component id="boardplanebottom">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+                <translate x="0" y="0" z="0" />
+			  	<rotate axis="x" angle="90" />
+        	</transformation>
+
+
+            <materials>
+                <material id="m1"/>
+            </materials>
+
+
+            <texture id="purple" />
+
+            <children>
+                <primitiveref id= "plane" />
+            </children>
         </component>
 
 	

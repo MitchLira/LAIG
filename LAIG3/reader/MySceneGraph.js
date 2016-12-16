@@ -465,6 +465,10 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
 	 primitive = new MyChessBoard(this.scene,du, dv,texture, su, sv, CRGBA);
 
    }
+   else if(primitiveName == 'boardcomponent1'){
+   	primitive = new MyBoardCylinder(this.scene);
+
+   }
    else{
      this.onXMLError("Primitive is not valid.");
      return null;

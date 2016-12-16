@@ -8,8 +8,8 @@
 	this.surface = new MyCylinderBody(scene, base, top, height, slices, stacks);
 	this.base = new MyCylinderBase(scene, base, slices);
 	this.top = new MyCylinderBase(scene, top, slices);
+	
 
- 	this.initBuffers();
  };
 
  MyCylinder.prototype = Object.create(CGFobject.prototype);
