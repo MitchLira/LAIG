@@ -28,19 +28,22 @@
         <!-- primeira vista; de cada vez que se pressione a tecla v/V, -->
         <!-- a vista muda para a proxima da lista; da -->
         <!-- ultima vista da lista volta 'a primeira -->
-		<perspective id="p3" near="0.5" far="1200" angle="30">
-            <from x="-30" y="30" z="200" />
-            <to x="60" y="20" z="-100" />
-        </perspective>
 
-        <perspective id="p1" near="0.1" far="500" angle="50">
+		<perspective id="p2" near="0.1" far="120" angle="20">
+            <from x="30" y="30" z="30" />
+            <to x="0" y="0" z="0" />
+        </perspective>
+		
+        <perspective id="p1" near="0.1" far="120" angle="10">
             <from x="55" y="50" z="70" />
             <to x="15" y="10" z="15" />
         </perspective>
 
-        <perspective id="p2" near="0.1" far="500" angle="100">
-            <from x="50" y="50" z="70" />
-            <to x="0" y="0" z="0" />
+
+      	
+      	<perspective id="p3" near="0.5" far="10" angle="0">
+            <from x="0" y="30" z="200" />
+            <to x="30" y="20" z="-100" />
         </perspective>
 
 
@@ -123,30 +126,6 @@
             <shininess value="0.8" />
         </material>
 
-        <material id="m2" >
-          <emission r="0.2" g="0.2" b="0.2" a="0.2" />
-          <ambient r="0.3" g="0.3" b="0.3" a="0.3" />
-          <diffuse r="0" g="0" b="0" a="0" />
-          <specular r="0" g="1.0" b="0" a="0" />
-          <shininess value="0.8" />
-        </material>
-
-        <material id="m3" >
-          <emission r="0.2" g="0.2" b="0.2" a="0.2" />
-          <ambient r="0.3" g="0.3" b="0.3" a="0.3" />
-          <diffuse r="0" g="0" b="0" a="0" />
-          <specular r="1.0" g="0" b="0" a="0" />
-          <shininess value="0.8" />
-        </material>
-
-        <material id="m4" >
-          <emission r="0.2" g="0.2" b="0.2" a="0.2" />
-          <ambient r="0.3" g="0.3" b="0.3" a="0.3" />
-          <diffuse r="0" g="0" b="0" a="0" />
-          <specular r="1.0" g="1.0" b="0" a="0" />
-          <shininess value="0.8" />
-        </material>
-
     </materials>
 
 
@@ -157,7 +136,6 @@
         <transformation id="t1">
            <!-- instrucoes a usar sem limite nem ordem -->
            <!-- deve existir pelo menos uma transformacao -->
-
          		<translate x="0" y="0" z="0" />
 			  	<rotate axis="x" angle="-90" />
         </transformation>
@@ -305,7 +283,6 @@
 
             <!-- bloco "children" obrigatorio num "component" -->
             <children>
-
                 <!-- deve existir uma ou mais tags "componentref" e/ou -->
                 <!-- "primitiveref", identificando outros -->
                 <!-- componentes ou primitivas -->
@@ -313,15 +290,33 @@
 
 
 				<componentref id="boardgame" />
-
-
-
             </children>
 
         </component>
 
 
         <component id="boardgame">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+                <translate x="0" y="0" z="0" />
+        	</transformation>
+
+
+            <materials>
+                <material id="m1"/>
+            </materials>
+
+
+            <texture id="purple" />
+
+            <children>
+                <componentref id= "boardplane" />
+            </children>
+
+        </component>
+
+        <component id="boardplane">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
