@@ -21,6 +21,19 @@ class getXYZW{
 		this.w = w;
 	}
 };
+
+class getIndicators {
+	constructor(no, n, ne, o, e, so, s, se){
+	this.no = no;
+	this.n = n;
+	this.ne = ne;
+	this.o = o;
+	this.e = e;
+	this.so = so;
+	this.s = s;
+	this.se = se;
+	}
+};
 class getRGBA{
 	constructor(r,g,b,a){
 		this.r = r;

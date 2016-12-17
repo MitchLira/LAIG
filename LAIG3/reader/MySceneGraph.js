@@ -72,7 +72,10 @@ MySceneGraph.prototype.onXMLReady = function() {
 
     if(this.loadAnimations(rootElement))
     	return;
-
+	
+	if(this.loadBoard(rootElement))
+		return;
+		
     if(this.loadComponents(rootElement))
         return;
 		
@@ -85,11 +88,11 @@ MySceneGraph.prototype.onXMLReady = function() {
 
 MySceneGraph.prototype.chekDSXOrder = function(rootElement) {
     var childs = rootElement.children;
-    if (childs.length != 10) {
+    if (childs.length != 11) {
         console.error("Missing Tag");
         return 1;
     }
-    var rightOrder = ["scene","views","illumination","lights","textures","materials","transformations","primitives","animations","components"];
+    var rightOrder = ["scene","views","illumination","lights","textures","materials","transformations","primitives","animations","board","components"];
 	var i;
 	for(i = 0; i< rightOrder.length; i++)
 	{
@@ -522,19 +525,34 @@ MySceneGraph.prototype.loadAnimations = function(rootElement) {
 	}
 }
 
-MySceneGraph.prototype.loadAnimations = function(rootElement) {
+MySceneGraph.prototype.loadBoard = function(rootElement) {
 	var getBoard = rootElement.getElementsByTagName('board')[0];
 	if(getBoard == null){
 		this.onXMLError("Error loading animations. No board Tag");
 		return 1;
 	}
-	
-	var board = new MyBoardGame(this.scene);
-	var getPiece = getAnimations.getElementsByTagName('piece');
+
+	var getPiece = getBoard.getElementsByTagName('piece');
 	var id, line, column, player, nrindicators;
 
 	for(var i = 0; i < getPiece.length; i++){
-		
+		id = this.reader.getString(getPiece[i], 'id');
+		line = this.reader.getInteger(getPiece[i], 'line');
+		column = this.reader.getInteger(getPiece[i], 'column');
+		player = this.reader.getInteger(getPiece[i], 'player');
+		nrindicators = this.reader.getInteger(getPiece[i], 'nrindicators');
+
+		var indicators = [];
+		var getindicators = getPiece[i].getElementsByTagName('indicators')[0];
+				
+		indicators.push(new getIndicators(this.reader.getBoolean(getindicators,'no'),
+										  this.reader.getBoolean(getindicators,'n'),
+										  this.reader.getBoolean(getindicators,'ne'),
+										  this.reader.getBoolean(getindicators,'o'),
+										  this.reader.getBoolean(getindicators,'e'),
+										  this.reader.getBoolean(getindicators,'so'),
+										  this.reader.getBoolean(getindicators,'s'),
+										  this.reader.getBoolean(getindicators,'se')));		
 	}
 	
 

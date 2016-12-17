@@ -14,6 +14,7 @@ MyBoardGame.prototype.display = function(){
 
 	
 	this.scene.pushMatrix();
+		this.scene.translate(0,-0.5,0);
 		this.cylinders.display();
 		this.bridges.display();
 		this.crosses.display();

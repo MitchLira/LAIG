@@ -242,7 +242,7 @@
 
 	<board>
 		<piece id="commander" line="0" column="5" player="1" nrindicators="4">
-			<indicators no="1" n="0" ne="1" o="0" e="0" so="1" se="1" />
+			<indicators no="1" n="0" ne="1" o="0" e="0" so="1" s="0" se="1" />
 		</piece>
 	</board>
 

@@ -29,7 +29,7 @@ XMLscene.prototype.init = function (application) {
   this.axis=new CGFaxis(this);
   this.appearance = new CGFappearance(this);
 
-  
+  this.board = new MyBoardGame(this);
 
   //interface
   this.lightsStatus;
@@ -210,7 +210,7 @@ XMLscene.prototype.display = function () {
   if (this.graph.loadedOk)
   {
     this.updateLights();
-
+	this.board.display();
     this.graph.displayGraph();
   };
 
