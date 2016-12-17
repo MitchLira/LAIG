@@ -466,7 +466,7 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
 
    }
    else if(primitiveName == 'boardcomponent1'){
-   	primitive = new MyBoardCylinder(this.scene);
+   	primitive = new MyBoardGame(this.scene);
 
    }
    else{

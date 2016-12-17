@@ -110,7 +110,8 @@
         <!-- Nao necessario aplicar fatores de escala em  -->
         <!-- quadricas (esfera, ciclindro...) -->
 		<texture id="purple" file="resources\\images\\purple.jpg" length_s="1.0" length_t="1.0" />
-    	<texture id="black" file="resources\\images\\black.png" length_s="2.0" length_t="2.0" />
+    	<texture id="black" file="resources\\images\\black.png" length_s="1.0" length_t="1.0" />
+    	<texture id="darkpurple" file="resources\\images\\darkpurple.jpg" length_s="1.0" length_t="1.0" />
     </textures>
 
 
@@ -317,7 +318,7 @@
             <children>
                 <componentref id= "boardplanetop" />
                 <componentref id= "boardplanebottom" />
-               	<primitiveref id= "boardcomponent1" />
+               	<componentref id= "boardcomponents" />
             </children>
 
         </component>
@@ -361,6 +362,26 @@
 
             <children>
                 <primitiveref id= "plane" />
+            </children>
+        </component>
+        <component id="boardcomponents">
+
+            <!-- bloco "transformation" obrigatorio -->
+            <transformation>
+                <translate x="0" y="0" z="0" />
+
+        	</transformation>
+
+
+            <materials>
+                <material id="m1"/>
+            </materials>
+
+
+            <texture id="darkpurple" />
+
+            <children>
+                <primitiveref id= "boardcomponent1" />
             </children>
         </component>
 
