@@ -315,7 +315,7 @@
 
             <children>
                 <componentref id= "boardplanetop" />
-                <componentref id= "boardplanebottom" />
+               
             </children>
 
         </component>
@@ -325,7 +325,6 @@
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
                 <translate x="0" y="0" z="0" />
-			  	<rotate axis="x" angle="-90" />
         	</transformation>
 
 
@@ -337,30 +336,10 @@
             <texture id="purple" />
 
             <children>
-                <primitiveref id= "plane" />
+                <primitiveref id= "triangle" />
             </children>
         </component>
 
- 		<component id="boardplanebottom">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-                <translate x="0" y="0" z="0" />
-			  	<rotate axis="x" angle="90" />
-        	</transformation>
-
-
-            <materials>
-                <material id="m1"/>
-            </materials>
-
-
-            <texture id="purple" />
-
-            <children>
-                <primitiveref id= "plane" />
-            </children>
-        </component>
 	</components>
 
 

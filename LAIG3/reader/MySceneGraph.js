@@ -16,6 +16,7 @@ function MySceneGraph(filename, scene) {
     this.transformations = {};
     this.animations = [];
     this.nodes = {};
+    this.pieces = [];
 
 
 
@@ -553,6 +554,7 @@ MySceneGraph.prototype.loadBoard = function(rootElement) {
 										  this.reader.getBoolean(getindicators,'so'),
 										  this.reader.getBoolean(getindicators,'s'),
 										  this.reader.getBoolean(getindicators,'se')));		
+		//adicionar ao this.pieces a peça criada 
 	}
 	
 
