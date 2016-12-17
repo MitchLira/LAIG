@@ -75,7 +75,7 @@ MySceneGraph.prototype.onXMLReady = function() {
 
     if(this.loadComponents(rootElement))
         return;
-
+		
 
 
     // As the graph loaded ok, signal the scene so that any additional initialization depending on the graph can take place
@@ -465,10 +465,7 @@ MySceneGraph.prototype.createPrimitive = function(primitiveName, primitiveTag) {
 	 primitive = new MyChessBoard(this.scene,du, dv,texture, su, sv, CRGBA);
 
    }
-   else if(primitiveName == 'boardcomponent1'){
-   	primitive = new MyBoardGame(this.scene);
 
-   }
    else{
      this.onXMLError("Primitive is not valid.");
      return null;
@@ -523,6 +520,24 @@ MySceneGraph.prototype.loadAnimations = function(rootElement) {
              return 1;
    			}
 	}
+}
+
+MySceneGraph.prototype.loadAnimations = function(rootElement) {
+	var getBoard = rootElement.getElementsByTagName('board')[0];
+	if(getBoard == null){
+		this.onXMLError("Error loading animations. No board Tag");
+		return 1;
+	}
+	
+	var board = new MyBoardGame(this.scene);
+	var getPiece = getAnimations.getElementsByTagName('piece');
+	var id, line, column, player, nrindicators;
+
+	for(var i = 0; i < getPiece.length; i++){
+		
+	}
+	
+
 }
 
 

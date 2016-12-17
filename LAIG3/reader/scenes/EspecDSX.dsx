@@ -220,13 +220,6 @@
                <cs r="0.5" g="0.8" b="0.1" a="0.3" />
             </chessboard>
         </primitive>
-
-        <primitive id="boardcomponent1">
-        	<boardcomponent1 />
-        </primitive>
-
-
-
     </primitives>
 
 	<animations>
@@ -245,8 +238,13 @@
 		<animation id="a2" span="30" type="circular"
 			centerx="-40" centery="40" centerz="0"
 			radius="0" startang="0" rotang="360" />
-
 	</animations>
+
+	<board>
+		<piece id="commander" line="0" column="5" player="1" nrindicators="4">
+			<indicators no="1" n="0" ne="1" o="0" e="0" so="1" se="1" />
+		</piece>
+	</board>
 
 
     <components>
@@ -304,7 +302,7 @@
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-                <translate x="0" y="0" z="0" />
+                <translate x="0" y="-0.5" z="0" />
         	</transformation>
 
 
@@ -318,7 +316,6 @@
             <children>
                 <componentref id= "boardplanetop" />
                 <componentref id= "boardplanebottom" />
-               	<componentref id= "boardcomponents" />
             </children>
 
         </component>
@@ -364,30 +361,9 @@
                 <primitiveref id= "plane" />
             </children>
         </component>
-        <component id="boardcomponents">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-                <translate x="0" y="0" z="0" />
-
-        	</transformation>
-
-
-            <materials>
-                <material id="m1"/>
-            </materials>
-
-
-            <texture id="darkpurple" />
-
-            <children>
-                <primitiveref id= "boardcomponent1" />
-            </children>
-        </component>
-
-	
 	</components>
 
 
 
 </dsx>
+

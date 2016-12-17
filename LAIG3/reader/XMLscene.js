@@ -36,7 +36,16 @@ XMLscene.prototype.init = function (application) {
   this.viewIndex=0;
   this.materialIndex=0;
 
-   this.setUpdatePeriod(30);
+  this.setUpdatePeriod(30);
+
+  this.objects= [
+		new CGFplane(this),
+		new CGFplane(this),
+		new CGFplane(this),
+		new CGFplane(this)
+	];
+
+	this.setPickEnabled(true);
 
 };
 
@@ -50,6 +59,24 @@ XMLscene.prototype.initLights = function () {
   this.lights[0].enable();
   this.lights[0].update();
 };
+
+XMLscene.prototype.logPicking = function ()
+{
+	if (this.pickMode == false) {
+		if (this.pickResults != null && this.pickResults.length > 0) {
+			for (var i=0; i< this.pickResults.length; i++) {
+				var obj = this.pickResults[i][0];
+				if (obj)
+				{
+					var customId = this.pickResults[i][1];				
+					console.log("Picked object: " + obj + ", with pick id " + customId);
+				}
+			}
+			this.pickResults.splice(0,this.pickResults.length);
+		}		
+	}
+}
+
 
 XMLscene.prototype.initCameras = function () {
   this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
@@ -157,6 +184,9 @@ XMLscene.prototype.updateMaterial = function () {
 
 
 XMLscene.prototype.display = function () {
+
+  this.logPicking();
+  this.clearPickRegistration();
   // ---- BEGIN Background, camera and axis setup
 
   // Clear image and depth buffer everytime we update the scene
@@ -183,6 +213,17 @@ XMLscene.prototype.display = function () {
 
     this.graph.displayGraph();
   };
+
+  // draw objects
+	/*for (i =0; i<this.objects.length; i++) {
+		this.pushMatrix();
+	
+		this.translate(i*2, 0, 0);
+		this.registerForPick(i+1, this.objects[i]);
+		
+		this.objects[i].display();
+		this.popMatrix();
+	}*/
 };
 
 

@@ -15,6 +15,9 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js','auxiliar.js', 
     'MyCylinder.js', 'MyCylinderBody.js', 'MyCylinderBase.js', 'MyTorus.js','MyInterface.js','MyAnimation.js',
     'Animated.js','MyCircularAnimation.js', 'MyLinearAnimation.js','MyPlane.js', 'MyPatch.js','MyChessBoard.js' , 'MyBoardCylinders.js',
 	'MyBoardBridges.js','MyBoardCrossBridges.js','MyBoardGame.js','MyCrossBridge.js',
+
+
+
 main=function()
 {
 	// Standard application, scene and interface setup
