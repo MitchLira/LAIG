@@ -70,20 +70,7 @@
             <specular r="1" g="1" b="1" a="1" />
         </omni>
 
-        <omni id="omni2" enabled="0" >
-            <location x="0" y="100" z="100" w="0.2" />
-            <ambient r="0" g="0" b="0" a="1" />
-            <diffuse r="1" g="1" b="1" a="1" />
-            <specular r="1" g="1" b="1" a="1" />
-        </omni>
-
-        <omni id="omni3" enabled="1" >
-            <location x="-26" y="26" z="56" w="0.2" />
-            <ambient r="0" g="0" b="0" a="1" />
-            <diffuse r="1" g="1" b="1" a="1" />
-            <specular r="1" g="1" b="1" a="1" />
-        </omni>
-
+        
         <spot id="spot1" enabled="0" angle="40" exponent="0.5">
             <!-- atencao, "target" e' diferente de "direction" -->
             <target x="3" y="3" z="0.5" />
@@ -220,6 +207,10 @@
                <cs r="0.5" g="0.8" b="0.1" a="0.3" />
             </chessboard>
         </primitive>
+
+        <primitive id="board">
+        	<board />
+        </primitive>
     </primitives>
 
 	<animations>
@@ -292,17 +283,17 @@
 
 
 
-				<componentref id="boardgame" />
+				<componentref id="boardGame" />
             </children>
 
         </component>
 
 
-        <component id="boardgame">
+        <component id="boardGame">
 
             <!-- bloco "transformation" obrigatorio -->
             <transformation>
-                <translate x="0" y="-0.5" z="0" />
+                <translate x="8" y="0" z="8" />
         	</transformation>
 
 
@@ -311,32 +302,10 @@
             </materials>
 
 
-            <texture id="purple" />
+            <texture id="none" />
 
             <children>
-                <componentref id= "boardplanetop" />
-               
-            </children>
-
-        </component>
-
-        <component id="boardplanetop">
-
-            <!-- bloco "transformation" obrigatorio -->
-            <transformation>
-                <translate x="0" y="0" z="0" />
-        	</transformation>
-
-
-            <materials>
-                <material id="m1"/>
-            </materials>
-
-
-            <texture id="purple" />
-
-            <children>
-                <primitiveref id= "triangle" />
+                <primitiveref id= "board" />
             </children>
         </component>
 

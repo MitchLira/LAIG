@@ -29,8 +29,6 @@ XMLscene.prototype.init = function (application) {
   this.axis=new CGFaxis(this);
   this.appearance = new CGFappearance(this);
 
-  this.board = new MyBoardGame(this);
-
   //interface
   this.lightsStatus;
   this.viewIndex=0;
@@ -45,7 +43,7 @@ XMLscene.prototype.init = function (application) {
 		new CGFplane(this)
 	];
 
-	this.setPickEnabled(true);
+   this.setPickEnabled(true);
 
 };
 
@@ -206,12 +204,11 @@ XMLscene.prototype.display = function () {
   this.setDefaultAppearance();
 
   // ---- END Background, camera and axis setup
-
+	
   if (this.graph.loadedOk)
   {
     this.updateLights();
-	this.board.display();
-    this.graph.displayGraph();
+	this.graph.displayGraph();
   };
 
   // draw objects

@@ -1,10 +1,13 @@
 /**
- * MyAnimation
+ * MyPieces
  * @constructor
  */
 
-function MyPieces(scene, id, type) {
+function MyPieces(scene, id, line, column, player, nrindicators, indicators) {
 
   this.id = id;
-  this.type = type;
+  this.line = line;
+  this.column =  column;
+  this.player = player;
+  this.nrindicators = nrindicators;
 };
