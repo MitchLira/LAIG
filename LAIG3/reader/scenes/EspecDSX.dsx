@@ -21,7 +21,7 @@
 
 
 
-    <views default="p1" >
+    <views default="p2" >
 
         <!-- declaracao obrigatoria de pelo menos uma vista; -->
         <!-- se varias vistas declaradas, o default e' a -->
@@ -29,19 +29,19 @@
         <!-- a vista muda para a proxima da lista; da -->
         <!-- ultima vista da lista volta 'a primeira -->
 
-		<perspective id="p2" near="0.1" far="120" angle="30">
+		<perspective id="p2" near="0.1" far="500" angle="30">
             <from x="40" y="30" z="40" />
             <to x="0" y="0" z="0" />
         </perspective>
 		
-        <perspective id="p1" near="0.1" far="120" angle="10">
+        <perspective id="p1" near="0.1" far="500" angle="10">
             <from x="55" y="50" z="70" />
             <to x="15" y="10" z="15" />
         </perspective>
 
 
       	
-      	<perspective id="p3" near="0.5" far="10" angle="0">
+      	<perspective id="p3" near="0.5" far="500" angle="0">
             <from x="0" y="30" z="200" />
             <to x="30" y="20" z="-100" />
         </perspective>
@@ -308,6 +308,10 @@
                 <primitiveref id= "board" />
             </children>
         </component>
+
+
+		
+		
 
 	</components>
 

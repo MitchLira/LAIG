@@ -16,7 +16,8 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js','auxiliar.js', 
     'Animated.js','MyCircularAnimation.js', 'MyLinearAnimation.js','MyPlane.js', 'MyPatch.js','MyChessBoard.js' , 'MyBoardCylinders.js',
 	'MyBoardBridges.js','MyBoardCrossBridges.js','MyBoardGame.js','MyCrossBridge.js',
 	'MyPieces.js','MyCommanderPiece.js','MyPieceIndicator.js',
-
+	'Scene1.js','MyTable.js','MyTableTop.js','MyTableLegs.js',
+	'MyChair.js',
 
 
 main=function()
