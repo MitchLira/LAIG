@@ -28,7 +28,7 @@ XMLscene.prototype.init = function (application) {
 
   this.axis=new CGFaxis(this);
   this.appearance = new CGFappearance(this);
-  this.scene1 = new Scene1(this);
+  this.scene2 = new Scene2(this);
 
   //interface
   this.lightsStatus;
@@ -210,7 +210,8 @@ XMLscene.prototype.display = function () {
   {
     this.updateLights();
 	this.graph.displayGraph();
-	this.scene1.display();
+	this.scene2.display();
+
   };
 
   // draw objects
