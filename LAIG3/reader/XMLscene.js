@@ -28,12 +28,18 @@ XMLscene.prototype.init = function (application) {
 
   this.axis=new CGFaxis(this);
   this.appearance = new CGFappearance(this);
-  this.scene2 = new Scene2(this);
-
+  
+  this.scenes = [
+  		new Scene1(this),
+  		new Scene2(this),
+  		new Scene3(this)
+  ];
+  this.scenario = new Scene1(this);
   //interface
   this.lightsStatus;
   this.viewIndex=0;
   this.materialIndex=0;
+  this.sceneIndex=0;
 
   this.setUpdatePeriod(30);
 
@@ -182,6 +188,13 @@ XMLscene.prototype.updateMaterial = function () {
 }
 
 
+XMLscene.prototype.updateScene = function() {
+		this.sceneIndex++;
+		var index = (this.sceneIndex % this.scenes.length); 
+		this.scenario = this.scenes[index];
+	
+}
+
 XMLscene.prototype.display = function () {
 
   this.logPicking();
@@ -210,7 +223,8 @@ XMLscene.prototype.display = function () {
   {
     this.updateLights();
 	this.graph.displayGraph();
-	this.scene2.display();
+	this.scenario.display();
+	
 
   };
 

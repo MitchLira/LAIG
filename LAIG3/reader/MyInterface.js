@@ -40,6 +40,7 @@ MyInterface.prototype.processKeyDown = function(event) {
 
 
     switch (event.keyCode) {
+        case (77):
         case (109): //M
             this.scene.updateMaterial();
             break;
@@ -47,7 +48,12 @@ MyInterface.prototype.processKeyDown = function(event) {
         case (118): //V
             this.scene.updateView();
             break;
-        case (77):
+        case (80)://P
+        case (112):
+            this.scene.updateScene();
+            break;
+                 
+        
         
     };
 };
